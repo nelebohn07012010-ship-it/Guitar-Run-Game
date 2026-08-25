@@ -1,8 +1,16 @@
-const Obstacle = ({ position }: { position: number }) => {
+const Obstacle = ({
+  position,
+  width,
+  height
+}: {
+  position: number
+  width: number
+  height: number
+}) => {
   return (
     <div
       className="obstacle"
-      style={{ left: position }}></div>
+      style={{ left: position, width: width, height: height }}></div>
   )
 }
 

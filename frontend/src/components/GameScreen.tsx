@@ -3,8 +3,11 @@ import "./GameScreen.css"
 import Obstacle from "./Obstacle"
 import { useEffect, useState, useRef } from "react"
 
-const obstacles = [300, 500, 800, 1200, 1500, 1800, 2100]
-
+const obstacles = [
+  { position: 300, width: 40, height: 50 },
+  { position: 500, width: 60, height: 80 },
+  { position: 800, width: 40, height: 50 },
+]
 
 
 const GameScreen = () => {
@@ -13,8 +16,39 @@ const GameScreen = () => {
   const movementRef = useRef(0)
   const animationRef = useRef<number | null>(null)
   const lastObstacle = obstacles[obstacles.length - 1]
+  const [playerY, setPlayerY] = useState(50)
+  const [gameOver, setGameOver] = useState(false)
 
+  const handlePlayerPosition = (yPosition: number) => {
+    setPlayerY(yPosition)
+  }
+  const playerLeft = 20
+  const playerRight = playerLeft + 50
+  const playerBottom = playerY
+  const playerTop = playerBottom + 50
 
+  const checkCollision = (
+    playerLeft: number,
+    playerRight: number,
+    playerBottom: number,
+    playerTop: number,
+    obstacleLeft: number,
+    obstacleRight: number,
+    obstacleBottom: number,
+    obstacleTop: number
+  ) => {
+    if (
+      playerRight > obstacleLeft &&
+      playerLeft < obstacleRight &&
+      playerTop > obstacleBottom &&
+      playerBottom < obstacleTop
+    ) {
+      return true
+    }
+
+    return false
+
+  }
 
   useEffect(() => {
     const animate = (time: number) => {
@@ -33,29 +67,58 @@ const GameScreen = () => {
       }
 
       lastTime.current = time
-
-      if (lastObstacle - newMovement > -50) {
-        animationRef.current = requestAnimationFrame(animate)
+      if (!gameOver) {
+        if (lastObstacle.position - newMovement > -50) {
+          animationRef.current = requestAnimationFrame(animate)
+        }
       }
     }
-
-    animationRef.current = requestAnimationFrame(animate)
+    if (!gameOver) {
+      animationRef.current = requestAnimationFrame(animate)
+    }
     return () => {
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current)
       }
     }
 
-  }, [])
+  }, [gameOver])
 
   return (<section id="game-screen">
     <h1>Guitar Run Game</h1>
-    <Player />
+    <Player onPositionChange={handlePlayerPosition} gameOver={gameOver} />
     <div id="ground"></div>
-    {obstacles.map(
-      (obstacle) =>
-        (<Obstacle key={obstacle} position={obstacle - movement} />))}
-  </section>)
+    {obstacles.map((obstacle) => {
+      const obstacleLeft = obstacle.position - movement
+      const obstacleRight = obstacleLeft + obstacle.width
+      const obstacleBottom = 50
+      const obstacleTop = obstacleBottom + obstacle.height
+
+      const collision = checkCollision(
+        playerLeft,
+        playerRight,
+        playerBottom,
+        playerTop,
+        obstacleLeft,
+        obstacleRight,
+        obstacleBottom,
+        obstacleTop
+      )
+      if (collision && !gameOver) {
+        console.log("Kollision!")
+        setGameOver(true)
+      }
+
+      return (
+        <Obstacle
+          key={obstacle.position}
+          position={obstacleLeft}
+          width={obstacle.width}
+          height={obstacle.height}
+        />
+      )
+    })}</section>)
+
 }
 
 export default GameScreen
