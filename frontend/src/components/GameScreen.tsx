@@ -18,6 +18,7 @@ const GameScreen = () => {
   const lastObstacle = obstacles[obstacles.length - 1]
   const [playerY, setPlayerY] = useState(50)
   const [gameOver, setGameOver] = useState(false)
+  const [restartKey, setRestartKey] = useState(0)
 
   const handlePlayerPosition = (yPosition: number) => {
     setPlayerY(yPosition)
@@ -86,7 +87,7 @@ const GameScreen = () => {
 
   return (<section id="game-screen">
     <h1>Guitar Run Game</h1>
-    <Player onPositionChange={handlePlayerPosition} gameOver={gameOver} />
+    <Player key={restartKey} onPositionChange={handlePlayerPosition} gameOver={gameOver} />
     <div id="ground"></div>
     {obstacles.map((obstacle) => {
       const obstacleLeft = obstacle.position - movement
@@ -107,6 +108,14 @@ const GameScreen = () => {
       if (collision && !gameOver) {
         console.log("Kollision!")
         setGameOver(true)
+
+        setTimeout(() => {
+          movementRef.current = 0
+          setMovement(0)
+          lastTime.current = 0
+          setGameOver(false)
+          setRestartKey((key) => key + 1)
+        }, 2000)
       }
 
       return (
