@@ -85,6 +85,26 @@ const GameScreen = () => {
 
   }, [gameOver])
 
+  useEffect(() => {
+    if (!gameOver) {
+      return
+    }
+
+    const restartTimer = setTimeout(() => {
+      movementRef.current = 0
+      setMovement(0)
+
+      lastTime.current = 0
+
+      setGameOver(false)
+      setRestartKey(key => key + 1)
+    }, 2000)
+
+    return () => {
+      clearTimeout(restartTimer)
+    }
+  }, [gameOver])
+
   return (<section id="game-screen">
     <h1>Guitar Run Game</h1>
     <Player key={restartKey} onPositionChange={handlePlayerPosition} gameOver={gameOver} />
@@ -108,14 +128,6 @@ const GameScreen = () => {
       if (collision && !gameOver) {
         console.log("Kollision!")
         setGameOver(true)
-
-        setTimeout(() => {
-          movementRef.current = 0
-          setMovement(0)
-          lastTime.current = 0
-          setGameOver(false)
-          setRestartKey((key) => key + 1)
-        }, 2000)
       }
 
       return (
