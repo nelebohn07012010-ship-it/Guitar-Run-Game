@@ -22,18 +22,6 @@ class GuitarAudioService {
     return stream
   }
 
-  getAudioData() {
-    if (!this.analyser) {
-      return null
-    }
-
-    const data = new Uint8Array(this.analyser.fftSize)
-
-    this.analyser.getByteTimeDomainData(data)
-
-    return data
-  }
-
   getFrequencyData() {
     if (!this.analyser) {
       return null
@@ -45,19 +33,9 @@ class GuitarAudioService {
     return data
   }
 
-  getSampleRate() {
-    if (!this.audioContext) {
-      return null
-    }
 
-    return this.audioContext.sampleRate
-  }
 
-  getStringIntensity(
-    data: Uint8Array,
-    targetFrequency: number,
-    range: number = 10
-  ) {
+  getFundamentalFrequency(data: Uint8Array) {
     if (
       this.analyser === null ||
       this.audioContext === null
@@ -68,40 +46,113 @@ class GuitarAudioService {
     const sampleRate = this.audioContext.sampleRate
     const fftSize = this.analyser.fftSize
 
-    const startFrequency = targetFrequency - range
-    const endFrequency = targetFrequency + range
+    let bestFrequency = 0
+    let bestScore = 0
 
-    const startBin = Math.floor(
-      startFrequency * fftSize / sampleRate
-    )
+    const getIntensity = (frequency: number) => {
+      const targetBin = Math.round(
+        frequency * fftSize / sampleRate
+      )
 
-    const endBin = Math.ceil(
-      endFrequency * fftSize / sampleRate
-    )
+      let maxIntensity = 0
 
-    let maxIntensity = 0
-    let strongestBin = startBin
+      for (let offset = -2; offset <= 2; offset++) {
+        const bin = targetBin + offset
 
-    for (let bin = startBin; bin <= endBin; bin++) {
-      if (bin < 0 || bin >= data.length) {
-        continue
+        if (bin < 0 || bin >= data.length) {
+          continue
+        }
+
+        const intensity = data[bin]
+
+        if (intensity > maxIntensity) {
+          maxIntensity = intensity
+        }
       }
 
-      const intensity = data[bin]
+      return maxIntensity
+    }
 
-      if (intensity > maxIntensity) {
-        maxIntensity = intensity
-        strongestBin = bin
+    for (
+      let frequency = 70;
+      frequency <= 350;
+      frequency += 1
+    ) {
+      const fundamentalIntensity =
+        getIntensity(frequency)
+
+      const secondHarmonicIntensity =
+        getIntensity(frequency * 2)
+
+      const thirdHarmonicIntensity =
+        getIntensity(frequency * 3)
+
+      const fourthHarmonicIntensity =
+        getIntensity(frequency * 4)
+
+      const score =
+        fundamentalIntensity +
+        secondHarmonicIntensity * 0.7 +
+        thirdHarmonicIntensity * 0.5 +
+        fourthHarmonicIntensity * 0.3
+
+      if (score > bestScore) {
+        bestScore = score
+        bestFrequency = frequency
       }
     }
 
-    const detectedFrequency =
-      strongestBin * sampleRate / fftSize
+    if (bestScore < 100) {
+      return null
+    }
 
     return {
-      frequency: detectedFrequency,
-      intensity: maxIntensity,
+      frequency: bestFrequency,
+      score: bestScore,
     }
+  }
+
+
+  getClosestNote(frequency: number) {
+    const strings = [
+      { name: "Tiefe E", frequency: 82.41 },
+      { name: "A", frequency: 110.0 },
+      { name: "D", frequency: 146.83 },
+      { name: "G", frequency: 196.0 },
+      { name: "H", frequency: 246.94 },
+      { name: "Hohe E", frequency: 329.63 },
+    ]
+
+    const matches = []
+
+    for (const string of strings) {
+      for (let fret = 0; fret <= 12; fret++) {
+        const targetFrequency =
+          string.frequency * Math.pow(2, fret / 12)
+
+        const differenceInSemitones =
+          Math.abs(
+            12 * Math.log2(
+              frequency / targetFrequency
+            )
+          )
+
+        if (differenceInSemitones <= 0.5) {
+          matches.push({
+            name: string.name,
+            fret,
+            targetFrequency,
+            differenceInSemitones,
+          })
+        }
+      }
+    }
+
+    if (matches.length === 0) {
+      return null
+    }
+
+    return matches
   }
 
   async calibrateNoiseFloor() {
@@ -148,31 +199,6 @@ class GuitarAudioService {
 
     return this.noiseFloor
   }
-
-  getStrongestFrequencies(data: Uint8Array) {
-    if (!this.analyser || !this.audioContext) {
-      return null
-    }
-
-    const frequencies = []
-
-    for (let i = 0; i < data.length; i++) {
-      if (data[i] > 100) {
-        const frequency =
-          i * this.audioContext.sampleRate / this.analyser.fftSize
-
-        frequencies.push({
-          frequency: Math.round(frequency),
-          intensity: data[i]
-        })
-      }
-    }
-
-    return frequencies
-  }
-
-
-
 }
 
 export default GuitarAudioService

@@ -27,66 +27,22 @@ const GuitarAudioTest = () => {
       return
     }
 
+    const fundamentalFrequency = service.getFundamentalFrequency(data)
 
-    const strings = [
-      {
-        name: "Tiefe E",
-        targetFrequency: 82.41,
-        result: service.getStringIntensity(data, 82.41),
-      },
-      {
-        name: "A",
-        targetFrequency: 110,
-        result: service.getStringIntensity(data, 110),
-      },
-      {
-        name: "D",
-        targetFrequency: 146.83,
-        result: service.getStringIntensity(data, 146.83),
-      },
-      {
-        name: "G",
-        targetFrequency: 196,
-        result: service.getStringIntensity(data, 196),
-      },
-      {
-        name: "H",
-        targetFrequency: 246.94,
-        result: service.getStringIntensity(data, 246.94),
-      },
-      {
-        name: "Hohe E",
-        targetFrequency: 329.63,
-        result: service.getStringIntensity(data, 329.63),
-      },
-    ]
+    console.log("Grundfrequenz:", fundamentalFrequency)
 
-    const frequencyTolerance = 10
+    if (fundamentalFrequency === null) {
+      return
+    }
 
-    const possibleStrings = strings.filter((string) => {
-      if (string.result === null) {
-        return false
-      }
-
-      const frequencyDifference = Math.abs(
-        string.result.frequency - string.targetFrequency
+    const matchingNotes =
+      service.getClosestNote(
+        fundamentalFrequency.frequency
       )
 
-      return frequencyDifference <= frequencyTolerance
-    })
-
-
-    const detectedString = possibleStrings
-      .sort((a, b) => {
-        return (
-          b.result!.intensity -
-          a.result!.intensity
-        )
-      })[0]
-
-    console.log("Mögliche Saiten:", possibleStrings)
-    console.log("Erkannte Saite:", detectedString)
+    console.log("Mögliche Positionen:", matchingNotes)
   }
+
 
 
   const handleCalibration = async () => {
