@@ -15,7 +15,7 @@ class GuitarAudioService {
     this.source = this.audioContext.createMediaStreamSource(stream)
 
     this.analyser = this.audioContext.createAnalyser()
-    this.analyser.fftSize = 2048
+    this.analyser.fftSize = 16384
     this.analyser.smoothingTimeConstant = 0
 
     this.source.connect(this.analyser)
@@ -53,23 +53,55 @@ class GuitarAudioService {
     return this.audioContext.sampleRate
   }
 
-  getHighEIntensity(data: Uint8Array) {
-    if (this.analyser === null || this.audioContext === null) {
+  getStringIntensity(
+    data: Uint8Array,
+    targetFrequency: number,
+    range: number = 10
+  ) {
+    if (
+      this.analyser === null ||
+      this.audioContext === null
+    ) {
       return null
     }
 
     const sampleRate = this.audioContext.sampleRate
     const fftSize = this.analyser.fftSize
 
-    const targetFrequency = 329.6
+    const startFrequency = targetFrequency - range
+    const endFrequency = targetFrequency + range
 
-    const bin = Math.round(
-      targetFrequency * fftSize / sampleRate
+    const startBin = Math.floor(
+      startFrequency * fftSize / sampleRate
     )
 
-    const intensity = data[bin]
+    const endBin = Math.ceil(
+      endFrequency * fftSize / sampleRate
+    )
 
-    return intensity ?? null
+    let maxIntensity = 0
+    let strongestBin = startBin
+
+    for (let bin = startBin; bin <= endBin; bin++) {
+      if (bin < 0 || bin >= data.length) {
+        continue
+      }
+
+      const intensity = data[bin]
+
+      if (intensity > maxIntensity) {
+        maxIntensity = intensity
+        strongestBin = bin
+      }
+    }
+
+    const detectedFrequency =
+      strongestBin * sampleRate / fftSize
+
+    return {
+      frequency: detectedFrequency,
+      intensity: maxIntensity,
+    }
   }
 
   async calibrateNoiseFloor() {
@@ -86,20 +118,31 @@ class GuitarAudioService {
         continue
       }
 
-      const intensity = this.getHighEIntensity(data)
+      let totalIntensity = 0
 
-      if (intensity !== null) {
-        samples.push(intensity)
+      for (let j = 0; j < data.length; j++) {
+        totalIntensity += data[j]
       }
 
-      await new Promise(resolve => setTimeout(resolve, 50))
+      const averageIntensity =
+        totalIntensity / data.length
+
+      samples.push(averageIntensity)
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 50)
+      )
     }
 
     if (samples.length === 0) {
       return null
     }
 
-    const average = samples.reduce((sum, value) => sum + value, 0) / samples.length
+    const average =
+      samples.reduce(
+        (sum, value) => sum + value,
+        0
+      ) / samples.length
 
     this.noiseFloor = average
 

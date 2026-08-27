@@ -4,7 +4,6 @@ import { useRef } from "react"
 
 const GuitarAudioTest = () => {
   const guitarAudioService = useRef<GuitarAudioService | null>(null)
-  const data = guitarAudioService.current?.getFrequencyData()
   const handleStart = async () => {
     guitarAudioService.current = new GuitarAudioService()
 
@@ -28,26 +27,67 @@ const GuitarAudioTest = () => {
       return
     }
 
-    const intensity = service.getHighEIntensity(data)
 
-    if (intensity === null) {
-      console.log("Keine hohe E-Intensität")
-      return
-    }
+    const strings = [
+      {
+        name: "Tiefe E",
+        targetFrequency: 82.41,
+        result: service.getStringIntensity(data, 82.41),
+      },
+      {
+        name: "A",
+        targetFrequency: 110,
+        result: service.getStringIntensity(data, 110),
+      },
+      {
+        name: "D",
+        targetFrequency: 146.83,
+        result: service.getStringIntensity(data, 146.83),
+      },
+      {
+        name: "G",
+        targetFrequency: 196,
+        result: service.getStringIntensity(data, 196),
+      },
+      {
+        name: "H",
+        targetFrequency: 246.94,
+        result: service.getStringIntensity(data, 246.94),
+      },
+      {
+        name: "Hohe E",
+        targetFrequency: 329.63,
+        result: service.getStringIntensity(data, 329.63),
+      },
+    ]
 
-    console.log("Hohe E-Saite Intensität:", intensity)
+    const frequencyTolerance = 10
 
-    const strongestFrequencies =
-      service.getStrongestFrequencies(data)
+    const possibleStrings = strings.filter((string) => {
+      if (string.result === null) {
+        return false
+      }
 
-    console.log("Starke Frequenzen:", strongestFrequencies)
+      const frequencyDifference = Math.abs(
+        string.result.frequency - string.targetFrequency
+      )
 
-    if (intensity > 100) {
-      console.log("HOHE E-SAITEN ERKANNT!")
-    } else {
-      console.log("Kein Gitarrenton")
-    }
+      return frequencyDifference <= frequencyTolerance
+    })
+
+
+    const detectedString = possibleStrings
+      .sort((a, b) => {
+        return (
+          b.result!.intensity -
+          a.result!.intensity
+        )
+      })[0]
+
+    console.log("Mögliche Saiten:", possibleStrings)
+    console.log("Erkannte Saite:", detectedString)
   }
+
 
   const handleCalibration = async () => {
     if (!guitarAudioService.current) {

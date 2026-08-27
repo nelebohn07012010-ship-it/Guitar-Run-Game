@@ -4,9 +4,11 @@ import { useState, useRef, useEffect } from "react"
 const Player = ({
   onPositionChange,
   gameOver,
+  shouldJump,
 }: {
   onPositionChange: (yPosition: number) => void
   gameOver: boolean
+  shouldJump: boolean
 }) => {
   const [yPosition, setYPosition] = useState(50)
   const [verticalSpeed, setVerticalSpeed] = useState(0)
@@ -14,12 +16,21 @@ const Player = ({
   const verticalSpeedRef = useRef(0)
   const lastTime = useRef(0)
   const animationRef = useRef<number | null>(null)
-
+  const jump = () => {
+    if (yPositionRef.current <= 50) {
+      verticalSpeedRef.current = 600
+      setVerticalSpeed(600)
+    }
+  }
+  useEffect(() => {
+    if (shouldJump) {
+      jump()
+    }
+  }, [shouldJump])
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowUp" && yPositionRef.current <= 50) {
-        verticalSpeedRef.current = 600
-        setVerticalSpeed(600)
+        jump()
       }
     }
 
