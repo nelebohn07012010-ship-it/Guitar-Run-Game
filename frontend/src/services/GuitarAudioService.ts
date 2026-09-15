@@ -33,9 +33,7 @@ class GuitarAudioService {
     return data
   }
 
-
-
-  getFundamentalFrequency(data: Uint8Array) {
+  private getBestFrequencyScore(data: Uint8Array) {
     if (
       this.analyser === null ||
       this.audioContext === null
@@ -102,14 +100,30 @@ class GuitarAudioService {
       }
     }
 
-    if (bestScore < 100) {
-      return null
-    }
-
     return {
       frequency: bestFrequency,
       score: bestScore,
     }
+  }
+
+
+
+  getFundamentalFrequency(data: Uint8Array) {
+    const result = this.getBestFrequencyScore(data)
+
+    if (result === null) {
+      return null
+    }
+
+    if (this.noiseFloor !== null) {
+      const minimumScore = this.noiseFloor * 2.5
+
+      if (result.score < minimumScore) {
+        return null
+      }
+    }
+
+    return result
   }
 
 
@@ -126,7 +140,7 @@ class GuitarAudioService {
     const matches = []
 
     for (const string of strings) {
-      for (let fret = 0; fret <= 12; fret++) {
+      for (let fret = 0; fret <= 24; fret++) {
         const targetFrequency =
           string.frequency * Math.pow(2, fret / 12)
 
@@ -169,16 +183,11 @@ class GuitarAudioService {
         continue
       }
 
-      let totalIntensity = 0
+      const result = this.getBestFrequencyScore(data)
 
-      for (let j = 0; j < data.length; j++) {
-        totalIntensity += data[j]
+      if (result !== null) {
+        samples.push(result.score)
       }
-
-      const averageIntensity =
-        totalIntensity / data.length
-
-      samples.push(averageIntensity)
 
       await new Promise(resolve =>
         setTimeout(resolve, 50)
@@ -196,6 +205,8 @@ class GuitarAudioService {
       ) / samples.length
 
     this.noiseFloor = average
+
+    console.log("Noise Floor:", this.noiseFloor)
 
     return this.noiseFloor
   }

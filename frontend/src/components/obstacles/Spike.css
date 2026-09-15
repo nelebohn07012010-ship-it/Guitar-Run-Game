@@ -1,0 +1,34 @@
+.spike {
+  position: absolute;
+}
+
+.spike-shape {
+  width: 100%;
+  height: 100%;
+
+  clip-path: polygon(50% 0%,
+      100% 100%,
+      0% 100%);
+}
+
+.spike-note {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  white-space: nowrap;
+}
+
+.spike-note strong {
+  font-size: var(--note-small);
+}
+
+.spike-note span {
+  font-size: var(--note-large);
+}

@@ -1,0 +1,24 @@
+.obstacle {
+  position: absolute;
+}
+
+.obstacle-note {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  white-space: nowrap;
+}
+
+.obstacle-note strong {
+  font-size: var(--note-small);
+}
+
+.obstacle-note span {
+  font-size: var(--note-large);
+}

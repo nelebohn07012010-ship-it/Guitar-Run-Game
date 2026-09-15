@@ -1,0 +1,163 @@
+/* =========================
+   NEON ARCADE - LEVEL 1
+   ========================= */
+
+.neon-arcade {
+  position: relative;
+  overflow: hidden;
+  container-type: size;
+
+  /* Colors */
+  --background: #0a0014;
+  --background-glow: rgba(0, 229, 255, 0.5);
+  --ground: #18002e;
+  --primary: #00e5ff;
+  --secondary: #8a2be2;
+  --secondary-glow: rgba(138, 43, 226, 0.5);
+  --accent: #ff2bd6;
+  --text: #ffffff;
+
+  /* Glow */
+  --glow-small: 0 0 0.75cqw var(--primary);
+  --glow-medium: 0 0 1.4cqw var(--primary);
+  --glow-large: 0 0 2.8cqw var(--primary);
+
+  /* Game */
+  --note-small: clamp(0.8rem, 2.2cqw, 1.8rem);
+  --note-large: clamp(1rem, 2.5cqw, 2rem);
+
+  /* Background */
+
+  --background-scroll-speed: 30s;
+  --background-image: url("../assets/arcade_backgrnd.png");
+
+  width: 100%;
+
+  background-color: var(--ground);
+
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* BACKGROUND IMAGE */
+
+.neon-arcade #background-layer {
+  background-image: var(--background-image);
+}
+
+/* BACKGROUND COLOR ANIMATION */
+
+.neon-arcade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #8a2be2;
+  opacity: 0.4;
+
+  animation: glass-color-shift 155s linear infinite;
+
+  pointer-events: none;
+  z-index: 3;
+}
+
+
+@keyframes glass-color-shift {
+  0% {
+    background: #8a2be2;
+  }
+
+  20% {
+    background: #8a2be2;
+  }
+
+  23% {
+    background: #ff00cc;
+  }
+
+  43% {
+    background: #ff00cc;
+  }
+
+  46% {
+    background: #0066ff;
+  }
+
+  66% {
+    background: #0066ff;
+  }
+
+  69% {
+    background: #00e5ff;
+  }
+
+  89% {
+    background: #00e5ff;
+  }
+
+  92% {
+    background: #8a2be2;
+  }
+
+  100% {
+    background: #8a2be2;
+  }
+}
+
+/* GROUND DESING */
+
+.neon-arcade #ground::before {
+  background-image: url("../assets/arcade_floor.png");
+}
+
+
+/* OBSTACLE DESIGN */
+
+.neon-arcade .obstacle {
+  background-image: url("../assets/platform_img.png");
+  background-size: 100% 100%;
+  box-shadow: var(--glow-medium);
+}
+
+.neon-arcade .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: var(--glow-small);
+}
+
+.neon-arcade .obstacle-note span {
+  color: var(--text);
+}
+
+/* CROUCH DESIGN */
+
+.neon-arcade .crouch {
+  background-image: url("../assets/crouch_img.png");
+  background-size: 100% 100%;
+  box-shadow: var(--glow-medium);
+}
+
+.neon-arcade .crouch-note strong {
+  color: var(--text);
+  text-shadow: var(--glow-small);
+}
+
+.neon-arcade .crouch-note span {
+  color: var(--text);
+}
+
+/* SPIKE DESIGN */
+
+.neon-arcade .spike-shape {
+  background-color: #ff00cc;
+}
+
+.neon-arcade .spike-note strong {
+  color: var(--accent);
+  text-shadow: var(--glow-small);
+}
+
+.neon-arcade .spike-note span {
+  color: var(--text);
+}

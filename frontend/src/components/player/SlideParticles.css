@@ -1,0 +1,181 @@
+#slide-particles {
+  position: absolute;
+  left: -20%;
+  bottom: -10%;
+  width: 30%;
+  height: 30%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#slide-particles span {
+  position: absolute;
+  width: 0.9cqw;
+  height: 0.9cqw;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0.5cqw #ffffff,
+    0 0 1cqw var(--primary),
+    0 0 2cqw var(--primary);
+
+
+  animation: slide-particle 0.7s linear infinite;
+}
+
+#slide-particles.paused span {
+  animation-play-state: paused;
+  opacity: 0 !important;
+}
+
+#slide-particles.crouching span {
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0.5cqw #ffffff,
+    0 0 1cqw #ff4de8,
+    0 0 2cqw #ff00cc,
+    0 0 3cqw rgba(255, 0, 204, 0.7);
+}
+
+#slide-particles span:nth-child(1) {
+  left: 70%;
+  bottom: 10%;
+}
+
+#slide-particles span:nth-child(2) {
+  left: 60%;
+  bottom: 20%;
+  animation-delay: 0.1s;
+}
+
+#slide-particles span:nth-child(3) {
+  left: 80%;
+  bottom: 15%;
+  animation-delay: 0.2s;
+}
+
+#slide-particles span:nth-child(4) {
+  left: 50%;
+  bottom: 5%;
+  animation-delay: 0.3s;
+}
+
+#slide-particles span:nth-child(5) {
+  left: 90%;
+  bottom: 25%;
+  animation-delay: 0.4s;
+}
+
+#slide-particles span:nth-child(6) {
+  left: 65%;
+  bottom: 30%;
+  animation-delay: 0.5s;
+}
+
+@keyframes slide-particle {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  25% {
+    transform: translateX(-6.5cqw) translateY(-0.8cqw) scale(0.8);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(-11cqw) translateY(0cqw) scale(0.5);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(-15cqw) translateY(-0.5cqw) scale(0);
+    opacity: 0;
+  }
+}
+
+#landing-burst {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}
+
+#landing-burst span {
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  width: 0.9cqw;
+  height: 0.9cqw;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0.5cqw #ffffff,
+    0 0 1cqw var(--primary),
+    0 0 2cqw var(--primary);
+
+  animation: landing-burst 0.45s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+#landing-burst span:nth-child(1) {
+  --burst-x: -8cqw;
+  --burst-y: 0cqw;
+}
+
+#landing-burst span:nth-child(2) {
+  --burst-x: -6cqw;
+  --burst-y: -4cqw;
+}
+
+#landing-burst span:nth-child(3) {
+  --burst-x: -2cqw;
+  --burst-y: -6cqw;
+}
+
+#landing-burst span:nth-child(4) {
+  --burst-x: 3cqw;
+  --burst-y: -6cqw;
+}
+
+#landing-burst span:nth-child(5) {
+  --burst-x: 8cqw;
+  --burst-y: 0cqw;
+}
+
+#landing-burst span:nth-child(6) {
+  --burst-x: 6cqw;
+  --burst-y: -4cqw;
+}
+
+#landing-burst span:nth-child(7) {
+  --burst-x: 3cqw;
+  --burst-y: -1cqw;
+}
+
+#landing-burst span:nth-child(8) {
+  --burst-x: -3cqw;
+  --burst-y: -1cqw;
+}
+
+@keyframes landing-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--burst-x), var(--burst-y)) scale(0);
+    opacity: 0;
+  }
+}
+
+#slide-particles.landing span {
+  opacity: 0 !important;
+  animation-play-state: paused;
+}

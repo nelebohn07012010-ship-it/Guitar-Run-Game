@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import GameScreen from './components/GameScreen'
 import StartScreen from './components/StartScreen'
-import GuitarAudioTest from "./components/GuitarAudioTest"
+import "./App.css"
 
 
 function App() {
@@ -9,8 +9,7 @@ function App() {
 
   return (
     <>
-      {isPlaying ? <GameScreen /> : <StartScreen startGame={setIsPlaying} />}
-      <GuitarAudioTest />
+      {isPlaying ? <GameScreen playing={isPlaying} /> : <StartScreen startGame={setIsPlaying} />}
     </>
   )
 }
