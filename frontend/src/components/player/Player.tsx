@@ -1,6 +1,6 @@
 import "./Player.css"
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react"
-import { GAME_CONFIG } from "../gameConfig"
+import { GAME_CONFIG } from "../../gameConfig"
 import SlideParticles from "./SlideParticles"
 
 export type PlayerHandle = {
