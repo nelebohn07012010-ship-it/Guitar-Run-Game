@@ -3,3 +3,4 @@ export type ObstacleType =
   | "spike"
   | "crouch"
   | "text"
+  | "coin"

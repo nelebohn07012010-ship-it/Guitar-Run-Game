@@ -2,10 +2,10 @@ import type { Level } from "./levelTypes";
 import backgroundImage from "../assets/tutorial_preview.png"
 import music from "../assets/Arcade Tutorial.mp3"
 
-const tutorial: Level = {
+const tutorialArr: Level = {
   music,
   backgroundImage,
-  name: "Tutorial (Guitar)",
+  name: "Tutorial (Arrows)",
   style: "neon-arcade",
   obstacles: [
     {
@@ -96,7 +96,7 @@ const tutorial: Level = {
       positionY: 60,
       width: 150,
       height: 10,
-      text: "BTW IF YOU WANT TO PLAY USING ARROW KEYS CHANAGE THAT IN THE SETTINGS AT THE HOMESCREEN MENU"
+      text: "BTW IF YOU WANT TO PLAY USING GUITAR YOU HAVE TO CHANGE THAT IN THE SETTINGS AT THE HOME SCREEN"
     },
     {
       id: 11,
@@ -152,7 +152,7 @@ const tutorial: Level = {
       positionY: 90,
       width: 70,
       height: 10,
-      text: "YOU HAVE TO PLAY THE OPEN LOW E STRING"
+      text: "PRESS ARROW UP TO JUMP!"
     },
     {
       id: 18,
@@ -199,7 +199,7 @@ const tutorial: Level = {
       positionY: 90,
       width: 70,
       height: 10,
-      text: "YOU HAVE TO PLAY THE A STRING AT FRET 4"
+      text: "YOU CAN IGNORE THE NOTE CARD BTW"
     },
     {
       id: 23,
@@ -232,11 +232,11 @@ const tutorial: Level = {
     }, {
       id: 26,
       type: "text",
-      positionX: 1480,
+      positionX: 1505,
       positionY: 90,
-      width: 50,
+      width: 20,
       height: 10,
-      text: "AGAIN THE OPEN LOW E STRING!"
+      text: "ARROW DOWN!"
     }, {
       id: 27,
       type: "text",
@@ -268,7 +268,7 @@ const tutorial: Level = {
       id: 30,
       type: "text",
       positionX: 1660,
-      positionY: 60,
+      positionY: 70,
       width: 30,
       height: 10,
       text: "CONGRATULATIONS!!"
@@ -340,4 +340,4 @@ const tutorial: Level = {
   ]
 }
 
-export default tutorial
+export default tutorialArr

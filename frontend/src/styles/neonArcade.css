@@ -155,9 +155,10 @@
 
 /* SPIKE DESIGN */
 
+
+
 .neon-arcade .spike-shape {
   background-image: url("../assets/spike_img.jpeg");
-
 }
 
 .neon-arcade .obstacle-note.spike {

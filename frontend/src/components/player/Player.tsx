@@ -19,6 +19,7 @@ type PlayerProps = {
   jumpTrigger: number
   groundY: number
   isPaused: boolean
+  controlMode: "guitar" | "arrows"
 }
 
 const Player = forwardRef<PlayerHandle, PlayerProps>(({
@@ -27,6 +28,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
   jumpTrigger,
   groundY,
   isPaused,
+  controlMode,
 }, ref) => {
 
   // ====================
@@ -112,6 +114,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (controlMode !== "arrows") return
       if (event.key === "ArrowUp" && yPositionRef.current <= currentGroundYRef.current + 0.5) {
         jump()
       }
@@ -122,6 +125,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
     }
 
     const handleKeyUp = (event: KeyboardEvent) => {
+      if (controlMode !== "arrows") return
       if (event.key === "ArrowDown") {
         console.log("ARROW DOWN LOSGELASSEN")
         setIsCrouching(false)
@@ -195,7 +199,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
       window.removeEventListener("keyup", handleKeyUp)
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [gameOver, onPositionChange])
+  }, [gameOver, onPositionChange, controlMode])
 
 
   // ====================

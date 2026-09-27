@@ -1,13 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
 import GameScreen from './components/GameScreen'
 import StartScreen from './components/StartScreen'
+import LandingScreen from "./components/LandingScreen"
 import "./App.css"
 import GuitarAudioService from './services/GuitarAudioService'
 import levelOne from "./levels/levelOne"
 import tutorial from './levels/tutorial'
+import tutorialArr from './levels/tutorial2'
 
 const levels = [
   tutorial,
+  tutorialArr,
   levelOne
 ]
 
@@ -18,8 +21,8 @@ function App() {
   const [isCalibrating, setIsCalibrating] = useState(false)
   const [calibrationCount, setCalibrationCount] = useState(7)
   const previewAudioRef = useRef<HTMLAudioElement | null>(null)
-
-
+  const [controlMode, setControlMode] = useState<"guitar" | "arrows">("guitar")
+  const [showLanding, setShowLanding] = useState(true)
 
   useEffect(() => {
     if (!isCalibrating) return
@@ -40,15 +43,21 @@ function App() {
 
 
   const startGame = async (level: typeof levelOne) => {
-    setIsCalibrating(true)
+    setCurrentLevel(level)
+    setIsPlaying(true)
 
+    if (controlMode === "arrows") {
+      previewAudioRef.current?.pause()
+      previewAudioRef.current = null
+      setIsCalibrating(false)
+      setNoiseFloor(0)
+      return
+    }
+
+    setIsCalibrating(true)
     setCalibrationCount(7)
 
-    setCurrentLevel(level)
-
-    setIsPlaying(true)
     const service = new GuitarAudioService()
-
     await service.start()
 
     const calibrateNoiseFloor = await service.calibrateNoiseFloor()
@@ -58,7 +67,6 @@ function App() {
 
     setNoiseFloor(calibrateNoiseFloor)
     setIsCalibrating(false)
-
   }
 
   return (
@@ -71,9 +79,20 @@ function App() {
           currentLevel={currentLevel}
           isCalibrating={isCalibrating}
           calibrationCount={calibrationCount}
+          controlMode={controlMode}
+        />
+      ) : showLanding ? (
+        <LandingScreen
+          onStart={() => setShowLanding(false)}
         />
       ) : (
-        <StartScreen startGame={startGame} levels={levels} previewAudioRef={previewAudioRef} />
+        <StartScreen
+          startGame={startGame}
+          levels={levels}
+          previewAudioRef={previewAudioRef}
+          controlMode={controlMode}
+          setControlMode={setControlMode}
+        />
       )}
     </>
   )
