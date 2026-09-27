@@ -4,20 +4,120 @@ import "./GameScreen.css"
 import Spike from "./obstacles/Spike"
 import Crouch from "./obstacles/Crouch"
 import Obstacle from "./obstacles/Platform"
+import Text from "./obstacles/Text"
 import type { GameObjectHandle } from "./obstacles/GameObject"
-import { useEffect, useState, useRef } from "react"
+import { memo, useEffect, useState, useRef } from "react"
+import type { MutableRefObject } from "react"
 import levelOne from "../levels/levelOne"
+import tutorial from "../levels/tutorial"
 import GuitarAudioService from "../services/GuitarAudioService"
 import "../styles/neonArcade.css"
 import { GAME_CONFIG } from "../gameConfig"
-import beatAudioFile from "../assets/Neon Run.mp3"
+import PauseMenu from "./PauseMenu.tsx"
 
-const GameScreen = ({ playing }: { playing: boolean }) => {
+
+
+const ObstacleLayer = memo(function ObstacleLayer({
+  obstacles,
+  gameObjRef,
+}: {
+  obstacles: typeof levelOne.obstacles
+  gameObjRef: MutableRefObject<Record<number, GameObjectHandle | null>>
+}) {
+  return (
+    <div id="obstacle-layer">
+      {obstacles.map((obstacle) => {
+        if (obstacle.type === "spike") {
+          return (
+            <Spike
+              key={obstacle.id}
+              ref={(ref) => {
+                gameObjRef.current[obstacle.id] = ref
+              }}
+              positionX={obstacle.positionX}
+              positionY={obstacle.positionY}
+              width={obstacle.width}
+              height={obstacle.height}
+              note={obstacle.note}
+              string={obstacle.string}
+              fret={obstacle.fret}
+            />
+          )
+        }
+
+        if (obstacle.type === "crouch") {
+          return (
+            <Crouch
+              key={obstacle.id}
+              ref={(ref) => {
+                gameObjRef.current[obstacle.id] = ref
+              }}
+              positionX={obstacle.positionX}
+              positionY={obstacle.positionY}
+              width={obstacle.width}
+              height={obstacle.height}
+              note={obstacle.note}
+              string={obstacle.string}
+              fret={obstacle.fret}
+            />
+          )
+        }
+
+        if (obstacle.type === "text") {
+          return (
+            <Text
+              key={obstacle.id}
+              ref={(ref) => {
+                gameObjRef.current[obstacle.id] = ref
+              }}
+              positionX={obstacle.positionX}
+              positionY={obstacle.positionY}
+              width={obstacle.width}
+              height={obstacle.height}
+              text={obstacle.text}
+            />
+          )
+        }
+
+        return (
+          <Obstacle
+            key={obstacle.id}
+            ref={(ref) => {
+              gameObjRef.current[obstacle.id] = ref
+            }}
+            positionX={obstacle.positionX}
+            positionY={obstacle.positionY}
+            width={obstacle.width}
+            height={obstacle.height}
+            note={obstacle.note}
+            string={obstacle.string}
+            fret={obstacle.fret}
+          />
+        )
+      })}
+    </div>
+  )
+})
+const GameScreen = ({
+  playing,
+  noiseFloor,
+  onHome,
+  currentLevel,
+  isCalibrating,
+  calibrationCount, }: {
+    playing: boolean
+    noiseFloor: number
+    onHome: () => void
+    currentLevel: typeof levelOne
+    isCalibrating: boolean
+    calibrationCount: number
+  }) => {
 
   // ====================
   // STATE & REFS
   // ====================
   const gameScreenRef = useRef<HTMLElement | null>(null)
+  const gameAreaRef = useRef<HTMLDivElement>(null)
   const [gameSize, setGameSize] = useState({
     width: 0,
     height: 0,
@@ -39,6 +139,7 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
   const [landY, setLandY] = useState<number | null>(null)
 
   const gameObjRef = useRef<Record<number, GameObjectHandle | null>>({})
+  const obstacleLayerRef = useRef<HTMLDivElement>(null)
 
   const [gameOver, setGameOver] = useState(false)
   const [jumpTrigger, setJumpTrigger] = useState(0)
@@ -46,14 +147,35 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
   const hitObstacleRef = useRef<number | null>(null)
   const activeObstacleRef = useRef<number | null>(null)
-  const activeObstacleDataRef = useRef<typeof levelOne.obstacles[number] | null>(null)
+  const activeObstacleDataRef = useRef<typeof currentLevel.obstacles[number] | null>(null)
 
   const guitarAudioService = useRef<GuitarAudioService | null>(null)
   const beatAudioRef = useRef<HTMLAudioElement | null>(null)
+  const lastDetectedNoteRef = useRef<string | null>(null)
+  const detectedNoteCountRef = useRef(0)
+  const lastLoggedStableNoteRef = useRef<string | null>(null)
 
   const [isPaused, setIsPaused] = useState(false)
+  const [levelProgress, setLevelProgress] = useState(0)
+  const levelProgressRef = useRef(0)
+  const [restartAnimation, setRestartAnimation] = useState(false)
+  const [cameraY, setCameraY] = useState(0)
+  const lastObstacle = currentLevel.obstacles[currentLevel.obstacles.length - 1]
 
-  const lastObstacle = levelOne.obstacles[levelOne.obstacles.length - 1]
+  //=================================
+  //CALIBRATING PAUSE
+  //=================================
+
+  useEffect(() => {
+    if (!isCalibrating) return
+
+    currentLevel.obstacles.forEach((obstacle) => {
+      const object = gameObjRef.current[obstacle.id]
+      if (!object) return
+
+      object.setVisualPosition(obstacle.positionX, 1)
+    })
+  }, [isCalibrating, currentLevel])
 
   //=====================
   // GAME SIZE
@@ -65,13 +187,18 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
         return
       }
 
-      const rect = gameScreenRef.current.getBoundingClientRect()
+      const gameArea = gameScreenRef.current.querySelector("#game-area")
+
+      if (!gameArea) {
+        return
+      }
+
+      const rect = gameArea.getBoundingClientRect()
 
       setGameSize({
         width: rect.width,
         height: rect.height,
       })
-
     }
 
     updateGameSize()
@@ -87,19 +214,19 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
   // AUDIO PLAYER
   // ===================
   useEffect(() => {
-    if (!playing) {
+    if (!playing || isCalibrating) {
       return
     }
 
     if (!beatAudioRef.current) {
-      beatAudioRef.current = new Audio(beatAudioFile)
+      beatAudioRef.current = new Audio(currentLevel.music)
     }
 
     const audio = beatAudioRef.current
 
     audio.currentTime = 0
     audio.play()
-  }, [playing])
+  }, [playing, isCalibrating])
 
   useEffect(() => {
     const audio = beatAudioRef.current
@@ -137,20 +264,11 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
       await service.start()
 
-      console.log("Gitarren-Mikrofon gestartet 🎤")
-
-      console.log(
-        "Kalibrierung startet – bitte kurz nicht spielen!"
-      )
-
-      const noiseFloor =
-        await service.calibrateNoiseFloor()
+      service.setNoiseFloor(noiseFloor)
 
       console.log("Noise Floor:", noiseFloor)
 
       audioReadyRef.current = true
-
-      console.log("Gitarren-Mikrofon ist bereit! 🎸")
 
       const startDetection = () => {
         detectionInterval = window.setInterval(() => {
@@ -173,44 +291,88 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
               fundamentalFrequency.frequency
             )
 
+
           if (!detectedPositions) {
+            playerRef.current?.setIsCrouching(false)
             return
           }
+
+          const detectedPosition = detectedPositions[0]
+
+          const detectedNoteKey =
+            `${detectedPosition.name}-${detectedPosition.fret}`
+
+          if (lastDetectedNoteRef.current === detectedNoteKey) {
+            detectedNoteCountRef.current += 1
+          } else {
+            lastDetectedNoteRef.current = detectedNoteKey
+            detectedNoteCountRef.current = 1
+          }
+
+          if (detectedNoteCountRef.current < 2) {
+            return
+          }
+
+
 
           const activeObstacle =
             activeObstacleDataRef.current
 
           if (!activeObstacle) {
+            playerRef.current?.setIsCrouching(false)
             return
           }
+          if (
+            activeObstacle.string === undefined ||
+            activeObstacle.fret === undefined
+          ) {
+            playerRef.current?.setIsCrouching(false)
+            return
+          }
+
+
+
+
+
+          let correctCrouchTone = false
 
           for (const position of detectedPositions) {
 
             const playerCanJump =
               playerYRef.current <=
               playerGroundYRef.current + 0.5
+            if (activeObstacle.type === "crouch" && position.name === activeObstacle.string && position.fret === activeObstacle.fret) {
+              correctCrouchTone = true
+            }
+
+
 
             if (
               position.name === activeObstacle.string &&
-              position.fret === activeObstacle.fret &&
-              playerCanJump &&
-              hitObstacleRef.current !== activeObstacle.id
+              position.fret === activeObstacle.fret
             ) {
-              console.log("RICHTIGER GRIFF!")
-
-              hitObstacleRef.current =
-                activeObstacle.id
-
               if (activeObstacle.type === "crouch") {
-                playerRef.current?.crouch()
-              } else {
+                playerRef.current?.setIsCrouching(true)
+                break
+              }
+
+
+              if (
+                playerCanJump &&
+                hitObstacleRef.current !== activeObstacle.id
+              ) {
+                hitObstacleRef.current = activeObstacle.id
+
                 setJumpTrigger(
                   trigger => trigger + 1
                 )
-              }
 
-              break
+                break
+              }
             }
+          }
+          if (activeObstacle.type === "crouch") {
+            playerRef.current?.setIsCrouching(correctCrouchTone)
           }
 
         }, 50)
@@ -322,11 +484,12 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
   useEffect(() => {
     const animate = (time: number) => {
-      if (isPaused) {
+      if (isPaused || isCalibrating) {
         lastTime.current = time
         animationRef.current = requestAnimationFrame(animate)
         return
       }
+
       const speed = 30
 
       let newMovement = movementRef.current
@@ -339,6 +502,70 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
         movementRef.current = newMovement
         setMovement(newMovement)
+        const playerRect = playerRef.current?.getScreenRect()
+        const gameAreaRect = gameAreaRef.current?.getBoundingClientRect()
+
+        if (playerRect && gameAreaRect) {
+          const playerBottomY = playerRect.bottom
+
+          const gameAreaCenterY =
+            gameAreaRect.top + gameAreaRect.height / 2
+
+          if (playerBottomY < gameAreaCenterY) {
+            const cameraOffsetY =
+              gameAreaCenterY - playerBottomY
+
+            setCameraY(cameraOffsetY)
+            console.log("CAMERA Y:", cameraOffsetY)
+          } else {
+            setCameraY(0)
+          }
+        }
+
+        if (
+          playerGroundYRef.current !== GAME_CONFIG.ground.height &&
+          !playerIsOnObstacleRef.current
+        ) {
+          playerGroundYRef.current = GAME_CONFIG.ground.height
+          playerRef.current?.fallToGround()
+        }
+        const allObstacles = levelOne.obstacles
+        const passedObstacles = allObstacles.filter(obstacle => obstacle.positionX - newMovement + obstacle.width <= 0)
+
+        const newProgress = allObstacles.length === 0 ? 0 : Math.round((passedObstacles.length / allObstacles.length) * 100)
+
+        if (newProgress !== levelProgressRef.current) {
+          levelProgressRef.current = newProgress
+          setLevelProgress(newProgress)
+        }
+        currentLevel.obstacles.forEach((obstacle) => {
+          const object = gameObjRef.current[obstacle.id]
+
+          if (!object) return
+
+          const obstacleLeft = obstacle.positionX - newMovement
+          const obstacleRight = obstacleLeft + obstacle.width
+
+          const fadeDistance = 24
+
+          const fadeIn = Math.min(
+            1,
+            Math.max(0, (100 - obstacleLeft) / fadeDistance)
+          )
+
+          const fadeOut = Math.min(
+            1,
+            Math.max(0, obstacleRight / fadeDistance)
+          )
+
+          const obstacleOpacity = Math.min(fadeIn, fadeOut)
+
+          object.setVisualPosition(
+            obstacleLeft,
+            obstacleOpacity,
+            cameraY
+          )
+        })
       }
 
       lastTime.current = time
@@ -357,7 +584,9 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
       }
     }
 
-  }, [gameOver, isPaused])
+  }, [gameOver, isPaused, isCalibrating])
+
+
 
   // ====================
   // GAME OVER & RESTART
@@ -389,6 +618,15 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
       setJumpTrigger(0)
 
       setGameOver(false)
+      setRestartAnimation(false)
+
+      requestAnimationFrame(() => {
+        setRestartAnimation(true)
+
+        requestAnimationFrame(() => {
+          setRestartAnimation(false)
+        })
+      })
 
       if (beatAudioRef.current) {
         beatAudioRef.current.play()
@@ -415,9 +653,12 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
     playerIsOnObstacleRef.current = false
 
-    for (const obstacle of levelOne.obstacles) {
+    for (const obstacle of currentLevel.obstacles) {
+      if (obstacle.type === "text") {
+        continue
+      }
 
-      const obstacleLeft = obstacle.positionX - movement
+      const obstacleLeft = obstacle.positionX - movementRef.current
       const obstacleRight = obstacleLeft + obstacle.width
 
       const obstacleBottom = obstacle.positionY
@@ -439,7 +680,6 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
         )
 
         if (collision) {
-          console.log("CROUCH GETROFFEN")
           setGameOver(true)
         }
 
@@ -459,7 +699,6 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
         )
 
         if (collision) {
-          console.log("SPIKE GETROFFEN")
           setGameOver(true)
         }
 
@@ -481,11 +720,7 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
         falling
 
       if (landing) {
-        console.log("🟢 LANDING", {
-          obstacleTop,
-          playerBottom,
-          previousBottom: previousPlayerBottomRef.current,
-        })
+
 
         playerGroundYRef.current = obstacleTop
         setPlayerGroundY(obstacleTop)
@@ -529,7 +764,7 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
           continue
         }
 
-        console.log("Seitliche Kollision")
+        ("Seitliche Kollision")
         setGameOver(true)
       }
 
@@ -549,82 +784,65 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
 
     previousPlayerBottomRef.current = playerBottom
 
-  }, [movement, playerY, gameOver])
+  }, [playerY, gameOver, movement])
 
   // ====================
   // ACTIVE OBSTACLE
   // ====================
 
   useEffect(() => {
-    if (gameOver) {
-      return
-    }
-    const hitZoneRect = playerRef.current?.getHitZoneRect()
+    let nextObstacle = null
 
-    if (!hitZoneRect) {
-      return
-    }
+    for (const obstacle of currentLevel.obstacles) {
+      const obstacleRight = obstacle.positionX + obstacle.width
 
-    const hitZoneLeft = (hitZoneRect.left / gameSize.width) * 100
+      const obstacleHasBeenPassed = obstacleRight - movementRef.current <= GAME_CONFIG.player.left
 
-    const hitZoneRight = (hitZoneRect.right / gameSize.width) * 100
-
-    const hitZoneBottom =
-      ((gameSize.height - hitZoneRect.bottom) / gameSize.height) * 100
-
-    const hitZoneTop =
-      ((gameSize.height - hitZoneRect.top) / gameSize.height) * 100
-
-    let obstacleFound = false
-
-    for (const obstacle of levelOne.obstacles) {
-      const obstacleLeft = obstacle.positionX - movement
-      const obstacleRight = obstacleLeft + obstacle.width
-
-      const obstacleBottom = obstacle.positionY
-
-      const obstacleHeight = gameSize.height > 0 ? (obstacle.width / 100 * gameSize.width) / gameSize.height * 100 / (obstacle.width / obstacle.height) : 0
-      const obstacleTop = obstacleBottom + obstacleHeight
-
-      const isInHitZone = checkCollision(
-        hitZoneLeft,
-        hitZoneRight,
-        hitZoneBottom,
-        hitZoneTop,
-        obstacleLeft,
-        obstacleRight,
-        obstacleBottom,
-        obstacleTop
-      )
-
-      if (isInHitZone) {
-        if (activeObstacleRef.current !== obstacle.id) {
-          hitObstacleRef.current = null
-        }
-
-        activeObstacleRef.current = obstacle.id
-        activeObstacleDataRef.current = obstacle
-        obstacleFound = true
+      if (!obstacleHasBeenPassed) {
+        nextObstacle = obstacle
         break
       }
     }
 
-    if (!obstacleFound) {
-      activeObstacleRef.current = null
-      activeObstacleDataRef.current = null
+    activeObstacleDataRef.current = nextObstacle
 
-    }
-  }, [movement, playerY, gameOver])
-
+  }, [movement])
   // ====================
   // RENDERING
   // ====================
 
 
   return (<section ref={gameScreenRef} id="game-screen">
-    <div id="game-area" className={levelOne.style}>
-      <div id="background-layer" className={gameOver || isPaused ? "paused" : ""}></div>
-      <button id="pause-button" onClick={() => setIsPaused(prev => !prev)}>{isPaused ? "▶" : "Ⅱ"}</button>
+
+    <div
+      ref={gameAreaRef}
+      id="game-area"
+      className={`${currentLevel.style} ${restartAnimation ? "restart-animation" : ""}`}
+    >
+      {isCalibrating && (
+        <div id="calibration-overlay">
+          <div id="calibration-text">
+            CALIBRATING...
+          </div>
+
+          <div id="calibration-countdown">
+            {calibrationCount}
+          </div>
+          <div id="calibration-warning">
+            ...DON'T PLAY
+          </div>
+        </div>
+      )}
+      {isPaused && (
+        <PauseMenu
+          onResume={() => setIsPaused(false)}
+          onRestart={() => { setIsPaused(false); setRestartAnimation(true); setGameOver(true) }}
+          onHome={onHome}
+          levelProgress={levelProgress}
+          levelName={currentLevel.name}
+        />)}
+      <div id="background-layer" className={gameOver || isPaused || isCalibrating ? "paused" : ""}></div>
+      <button id="pause-button" onClick={() => setIsPaused(prev => !prev)}></button>
       <Player
         key={restartKey}
         onPositionChange={handlePlayerPosition}
@@ -632,85 +850,15 @@ const GameScreen = ({ playing }: { playing: boolean }) => {
         jumpTrigger={jumpTrigger}
         groundY={GAME_CONFIG.ground.height}
         ref={playerRef}
-        isPaused={isPaused}
+        isPaused={isPaused || isCalibrating}
       />
-      <div id="ground" className={isPaused || gameOver ? "paused" : ""} style={{ height: `${GAME_CONFIG.ground.height}%` }}>
-        <div id="ground-shadow" ></div>
+      <div id="game-world"  >
+        <div id="ground" className={isPaused || gameOver || isCalibrating ? "paused" : ""} style={{ height: `${GAME_CONFIG.ground.height}%` }}>
+          <div id="ground-shadow" ></div>
+        </div>
+        <ObstacleLayer obstacles={currentLevel.obstacles} gameObjRef={gameObjRef} />
       </div>
-      {levelOne.obstacles.map((obstacle) => {
-        const obstacleLeft = obstacle.positionX - movement
-        const obstacleRight = obstacleLeft + obstacle.width
-        const fadeDistance = 24
-
-        const fadeIn = Math.min(
-          1,
-          Math.max(0, (100 - obstacleLeft) / fadeDistance)
-        )
-
-        const fadeOut = Math.min(
-          1,
-          Math.max(0, obstacleRight / fadeDistance)
-        )
-
-        const obstacleOpacity = Math.min(fadeIn, fadeOut)
-
-        if (obstacle.type === "spike") {
-          return (
-            <div key={obstacle.id} style={{ opacity: obstacleOpacity, }}>
-              <Spike
-                key={obstacle.id}
-                ref={(ref) => {
-                  gameObjRef.current[obstacle.id] = ref
-                }}
-                positionX={obstacleLeft}
-                positionY={obstacle.positionY}
-                width={obstacle.width}
-                height={obstacle.height}
-                note={obstacle.note}
-                string={obstacle.string}
-                fret={obstacle.fret}
-              />
-            </div>
-          )
-        }
-
-        if (obstacle.type === "crouch") {
-          return (
-            <div key={obstacle.id} style={{ opacity: obstacleOpacity }}>
-              <Crouch
-                key={obstacle.id}
-                ref={(ref) => {
-                  gameObjRef.current[obstacle.id] = ref
-                }}
-                positionX={obstacleLeft}
-                positionY={obstacle.positionY}
-                width={obstacle.width}
-                height={obstacle.height}
-                note={obstacle.note}
-                string={obstacle.string}
-                fret={obstacle.fret}
-              />
-            </div>
-          )
-        }
-
-        return (
-          <div key={obstacle.id} style={{ opacity: obstacleOpacity }}>
-            <Obstacle
-              key={obstacle.id}
-              ref={(element) => {
-                gameObjRef.current[obstacle.id] = element
-              }}
-              positionX={obstacleLeft}
-              positionY={obstacle.positionY}
-              width={obstacle.width}
-              height={obstacle.height}
-              note={obstacle.note}
-              string={obstacle.string}
-              fret={obstacle.fret}
-            /></div>
-        )
-      })}</div></section>)
+    </div></section >)
 
 }
 

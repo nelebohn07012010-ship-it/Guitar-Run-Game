@@ -1,5 +1,8 @@
 .spike {
   position: absolute;
+  background-size: 100% 100%;
+
+  z-index: 5;
 }
 
 .spike-shape {
@@ -9,26 +12,5 @@
   clip-path: polygon(50% 0%,
       100% 100%,
       0% 100%);
-}
-
-.spike-note {
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-
-  transform: translateX(-50%);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  white-space: nowrap;
-}
-
-.spike-note strong {
-  font-size: var(--note-small);
-}
-
-.spike-note span {
-  font-size: var(--note-large);
+  background-size: 100%;
 }

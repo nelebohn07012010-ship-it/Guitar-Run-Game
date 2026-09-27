@@ -1,7 +1,9 @@
 import { forwardRef, useImperativeHandle, useRef } from "react"
+import "./Note.css"
 
 export type GameObjectHandle = {
   getRect: () => DOMRect | null
+  setVisualPosition: (positionX: number, opacity?: number, cameraY?: number) => void
 }
 
 export type GameObjectProps = {
@@ -9,15 +11,14 @@ export type GameObjectProps = {
   positionY: number
   width: number
   height: number
-  note: string
-  string: string
-  fret: number
+  note?: string
+  string?: string
+  fret?: number
   className: string
   children?: React.ReactNode
 }
 
 const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
-  positionX,
   positionY,
   width,
   height,
@@ -31,7 +32,20 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
 
   useImperativeHandle(ref, () => ({
     getRect: () => objectRef.current?.getBoundingClientRect() ?? null,
+    setVisualPosition: (newPositionX: number, opacity = 1, cameraY = 0) => {
+      const element = objectRef.current
+      if (!element) return
+      const gameAreaWidth =
+        element.closest("#game-area")?.getBoundingClientRect().width ?? 0
+      const positionPx =
+        (newPositionX / 100) * gameAreaWidth
+
+      element.style.transform =
+        `translate3d(${positionPx}px, ${-cameraY}px, 0)`
+      element.style.opacity = String(opacity)
+    },
   }))
+
 
   return (
     <div
@@ -39,7 +53,7 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
       className={className}
       style={{
         position: "absolute",
-        left: `${positionX}%`,
+        left: 0,
         bottom: `${positionY}%`,
         width: `${width}%`,
         height: `${height}%`,
@@ -47,10 +61,12 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
     >
       {children}
 
-      <div className={`${className}-note`}>
-        <strong>{string}</strong>
-        <span>Bund {fret}</span>
-      </div>
+      {string && fret !== undefined && (
+        <div className={`obstacle-note ${className}`}>
+          <strong>{string}-string</strong>
+          <span>fret {fret}</span>
+        </div>
+      )}
     </div>
   )
 })

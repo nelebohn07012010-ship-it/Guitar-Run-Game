@@ -1,14 +1,10 @@
-.obstacle {
+.obstacle-note.obstacle-note {
   position: absolute;
-  background-size: 100% 100%;
+  left: -20%;
+  bottom: 250%;
 
-  z-index: 5;
-}
+  padding: 0.5cqw 1cqw;
 
-.obstacle-note {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
   transform: translateX(-50%);
 
   display: flex;

@@ -8,7 +8,9 @@ export type PlayerHandle = {
   fallToGround: () => void
   isCrouching: () => boolean
   crouch: () => void
-  getHitZoneRect: () => DOMRect | null
+  setIsCrouching: (crouhing: boolean) => void
+  getYPosition: () => number
+  getScreenRect: () => DOMRect | null
 }
 
 type PlayerProps = {
@@ -42,8 +44,6 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
   const lastTime = useRef(0)
   const animationRef = useRef<number | null>(null)
   const currentGroundYRef = useRef(groundY)
-  const hitZoneRef = useRef<HTMLDivElement>(null)
-
   // ====================
   // JUMP LOGIC
   // ====================
@@ -67,10 +67,6 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
 
   const crouch = () => {
     setIsCrouching(true)
-
-    setTimeout(() => {
-      setIsCrouching(false)
-    }, 500)
   }
 
   // ===================
@@ -91,8 +87,12 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
     landOn,
     fallToGround,
     isCrouching: () => isCrouching,
+    setIsCrouching: (crouching) => { setIsCrouching(crouching) },
     crouch,
-    getHitZoneRect: () => hitZoneRef.current?.getBoundingClientRect() ?? null,
+    getYPosition: () => yPositionRef.current,
+    getScreenRect: () => {
+      return document.getElementById("player")?.getBoundingClientRect() ?? null
+    },
   }))
 
   // ====================
@@ -216,7 +216,6 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
         style={{ transform: `rotate(${rotation}deg)` }}
       ></div>
       <SlideParticles isCrouching={isCrouching} isLanding={isLanding} isPaused={isPaused || gameOver || isJumping} />
-      <div ref={hitZoneRef} id="hit-zone"></div>
     </div>
   )
 })

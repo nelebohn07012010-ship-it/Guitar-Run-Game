@@ -7,9 +7,9 @@ type ObstacleProps = {
   positionY: number
   width: number
   height: number
-  note: string
-  string: string
-  fret: number
+  note?: string
+  string?: string
+  fret?: number
 }
 
 const Obstacle = forwardRef<GameObjectHandle, ObstacleProps>((props, ref) => {

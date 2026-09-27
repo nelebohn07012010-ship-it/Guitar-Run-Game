@@ -60,7 +60,7 @@
   animation: glass-color-shift 155s linear infinite;
 
   pointer-events: none;
-  z-index: 3;
+  z-index: 1;
 }
 
 
@@ -106,6 +106,14 @@
   }
 }
 
+.restart-animation::before {
+  animation: none;
+}
+
+#game-area:not(.restart-animation)::before {
+  animation: glass-color-shift 155s lineaar infinite;
+}
+
 /* GROUND DESING */
 
 .neon-arcade #ground::before {
@@ -117,7 +125,6 @@
 
 .neon-arcade .obstacle {
   background-image: url("../assets/platform_img.png");
-  background-size: 100% 100%;
   box-shadow: var(--glow-medium);
 }
 
@@ -134,7 +141,6 @@
 
 .neon-arcade .crouch {
   background-image: url("../assets/crouch_img.png");
-  background-size: 100% 100%;
   box-shadow: var(--glow-medium);
 }
 
@@ -150,14 +156,36 @@
 /* SPIKE DESIGN */
 
 .neon-arcade .spike-shape {
-  background-color: #ff00cc;
+  background-image: url("../assets/spike_img.jpeg");
+
 }
 
-.neon-arcade .spike-note strong {
-  color: var(--accent);
-  text-shadow: var(--glow-small);
+.neon-arcade .obstacle-note.spike {
+  color: #ff00cc;
+}
+
+.neon-arcade .obstacle-note.obstacle {
+  color: #00e5ff;
+}
+
+.neon-arcade .obstacle-note.crouch {
+  color: #8a2be2;
 }
 
 .neon-arcade .spike-note span {
   color: var(--text);
+}
+
+/* NOTE DESIGN */
+
+.neon-arcade .obstacle-note {
+  background: rgba(5, 10, 20, 0.9);
+  border: 0.05cqw solid currentColor;
+
+  color: #ffffff;
+
+  box-shadow: 0 0 0.3cqw currentColor,
+    0 0 0.8cqw color-mix(in srgb, currentColor 35%, transparent);
+
+  text-shadow: 0 0 0.4cqw #ffffff, 0 0 0.8cqw currentColor;
 }

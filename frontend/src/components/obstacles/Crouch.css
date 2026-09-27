@@ -1,5 +1,8 @@
 .crouch {
   position: absolute;
+  background-size: 100% 100%;
+
+  z-index: 5;
 }
 
 .crouch-note {

@@ -33,6 +33,20 @@ class GuitarAudioService {
     return data
   }
 
+  getSignalLevel(data: Uint8Array) {
+    let sum = 0
+
+    for (const value of data) {
+      sum += value
+    }
+
+    return sum / data.length
+  }
+
+  setNoiseFloor(noiseFloor: number) {
+    this.noiseFloor = noiseFloor
+  }
+
   private getBestFrequencyScore(data: Uint8Array) {
     if (
       this.analyser === null ||
@@ -72,7 +86,7 @@ class GuitarAudioService {
     }
 
     for (
-      let frequency = 70;
+      let frequency = 80;
       frequency <= 350;
       frequency += 1
     ) {
@@ -103,6 +117,10 @@ class GuitarAudioService {
     return {
       frequency: bestFrequency,
       score: bestScore,
+      fundamentalIntensity: getIntensity(bestFrequency),
+      secondHarmonicIntensity: getIntensity(bestFrequency * 2),
+      thirdHarmonicIntensity: getIntensity(bestFrequency * 3),
+      fourthHarmonicIntensity: getIntensity(bestFrequency * 4),
     }
   }
 
@@ -115,15 +133,26 @@ class GuitarAudioService {
       return null
     }
 
-    if (this.noiseFloor !== null) {
-      const minimumScore = this.noiseFloor * 2.5
+    const signalLevel = this.getSignalLevel(data)
+    let minimumScore: number | null = null
 
-      if (result.score < minimumScore) {
-        return null
+    if (this.noiseFloor !== null) {
+      if (this.noiseFloor !== null) {
+
+        minimumScore =
+          this.noiseFloor * 2
+
+        if (result.score < minimumScore) {
+          return null
+        }
       }
     }
 
-    return result
+    return {
+      ...result,
+      signalLevel,
+      minimumScore,
+    }
   }
 
 
@@ -176,7 +205,7 @@ class GuitarAudioService {
 
     const samples: number[] = []
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 100; i++) {
       const data = this.getFrequencyData()
 
       if (data === null) {
@@ -198,17 +227,20 @@ class GuitarAudioService {
       return null
     }
 
-    const average =
-      samples.reduce(
-        (sum, value) => sum + value,
-        0
-      ) / samples.length
+    samples.sort((a, b) => a - b)
 
-    this.noiseFloor = average
+    const middle = Math.floor(samples.length / 2)
 
-    console.log("Noise Floor:", this.noiseFloor)
+    const noiseFloor =
+      samples.length % 2 === 0
+        ? (samples[middle - 1] + samples[middle]) / 2
+        : samples[middle]
 
-    return this.noiseFloor
+    this.noiseFloor = noiseFloor
+
+    console.log("Score Noise Floor:", noiseFloor)
+
+    return noiseFloor
   }
 }
 

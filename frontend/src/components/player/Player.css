@@ -1,19 +1,6 @@
 #player {
   position: absolute;
-}
-
-#hit-zone {
-  position: absolute;
-
-  left: 100%;
-  bottom: 0;
-
-  width: 400%;
-  height: 100vh;
-
-
-  pointer-events: none;
-  z-index: 10;
+  z-index: 5;
 }
 
 #player-visual {

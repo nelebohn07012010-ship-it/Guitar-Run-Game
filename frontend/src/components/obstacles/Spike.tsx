@@ -7,9 +7,9 @@ type SpikeProps = {
   positionY: number
   width: number
   height: number
-  note: string
-  string: string
-  fret: number
+  note?: string
+  string?: string
+  fret?: number
 }
 
 const Spike = forwardRef<GameObjectHandle, SpikeProps>((props, ref) => {

@@ -7,9 +7,9 @@ type CrouchProps = {
   positionY: number
   width: number
   height: number
-  note: string
-  string: string
-  fret: number
+  note?: string
+  string?: string
+  fret?: number
 }
 
 const Crouch = forwardRef<GameObjectHandle, CrouchProps>((props, ref) => {

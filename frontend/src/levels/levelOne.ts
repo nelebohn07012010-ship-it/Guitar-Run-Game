@@ -1,11 +1,16 @@
 import type { Level } from "./levelTypes"
+import backgroundImage from "../assets/arcade_bckgrnd_startscreen.png"
+import music from "../assets/Neon Run.mp3"
 
 const levelOne: Level = {
+  backgroundImage,
+  music,
+  name: "Neon Highway",
   style: "neon-arcade",
   obstacles: [
     {
       id: 1,
-      type: "spike",
+      type: "obstacle",
       note: "A#",
       string: "A",
       fret: 1,
@@ -16,23 +21,20 @@ const levelOne: Level = {
     },
     {
       id: 2,
-      type: "spike",
-      note: "G#",
-      string: "G",
-      fret: 1,
-      positionX: 177.8,
-      positionY: 20,
+      type: "obstacle",
+      positionX: 120,
+      positionY: 30,
       width: 5,
       height: 8,
     },
     {
       id: 3,
-      type: "spike",
+      type: "obstacle",
       note: "C#",
       string: "A",
       fret: 4,
-      positionX: 259.4,
-      positionY: 20,
+      positionX: 140,
+      positionY: 40,
       width: 5,
       height: 8,
     },
