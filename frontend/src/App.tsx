@@ -66,8 +66,10 @@ function App() {
     if (controlMode === "arrows") {
       previewAudioRef.current?.pause()
       previewAudioRef.current = null
+
       setIsCalibrating(false)
       setNoiseFloor(0)
+
       return
     }
 
@@ -75,9 +77,11 @@ function App() {
     setCalibrationCount(7)
 
     const service = new GuitarAudioService()
+
     await service.start()
 
-    const calibrateNoiseFloor = await service.calibrateNoiseFloor()
+    const calibrateNoiseFloor =
+      await service.calibrateNoiseFloor()
 
     previewAudioRef.current?.pause()
     previewAudioRef.current = null

@@ -294,7 +294,7 @@ const GameScreen = ({
   useEffect(() => {
     let detectionInterval: number | null = null
 
-    if (controlMode !== "guitar") return
+    if (controlMode !== "guitar" || isCalibrating) return
 
     const startMicrophone = async () => {
       if (microphoneStartedRef.current) {
@@ -434,7 +434,7 @@ const GameScreen = ({
       }
     }
 
-  }, [controlMode])
+  }, [controlMode, isCalibrating])
 
   // ====================
   // PLAYER
