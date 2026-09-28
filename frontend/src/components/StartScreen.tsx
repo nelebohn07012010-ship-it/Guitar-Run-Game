@@ -4,7 +4,11 @@ import { useState, useRef, useEffect } from "react"
 import playButton from "../assets/play_button.png"
 import rankingButton from "../assets/ranking_button.png"
 import Settings from "../assets/setting.png"
-import { getLevelStats, type LevelStat } from "../levels/levelStats"
+import {
+  getLevelStats,
+  clearLevelStats,
+  type LevelStat
+} from "../levels/levelStats"
 
 const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setControlMode }: {
   startGame: (level: typeof levelOne) => void
@@ -149,7 +153,9 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
       </div>
       {showLeaderboard && (
         <div id="leaderboard-menu">
-          <h2>LEADERBOARD</h2>
+          <h2>
+            LEADERBOARD ({controlMode === "guitar" ? "GUITAR" : "ARROWS"})
+          </h2>
 
           {levelStats.length === 0 ? (
             <p>NO STATS YET</p>
@@ -163,7 +169,11 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
                 <span>ATTEMPTS</span>
               </div>
               {levelStats
-                .filter(stat => stat.levelName === currentLevel.name)
+                .filter(
+                  stat =>
+                    stat.levelName === currentLevel.name &&
+                    stat.controlMode === controlMode
+                )
                 .sort((a, b) => {
                   if (b.progress !== a.progress) {
                     return b.progress - a.progress
@@ -193,12 +203,24 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
             </div>
           )}
 
-          <button
-            id="leaderboard-close"
-            onClick={() => setShowLeaderboard(false)}
-          >
-            CLOSE
-          </button>
+          <div id="leaderboard-actions">
+            <button
+              id="leaderboard-reset"
+              onClick={() => {
+                clearLevelStats()
+                setLevelStats([])
+              }}
+            >
+              RESET STATS
+            </button>
+
+            <button
+              id="leaderboard-close"
+              onClick={() => setShowLeaderboard(false)}
+            >
+              CLOSE
+            </button>
+          </div>
         </div>
       )}
 

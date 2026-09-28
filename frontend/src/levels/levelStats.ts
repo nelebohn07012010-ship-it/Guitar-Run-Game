@@ -5,6 +5,7 @@ export type LevelStat = {
   coins: number
   totalCoins: number
   attempts: number
+  controlMode: "guitar" | "arrows"
 }
 
 const STORAGE_KEY = "guitar-run-level-stats"
@@ -27,7 +28,9 @@ export const saveLevelStat = (newStat: LevelStat) => {
   const stats = getLevelStats()
 
   const levelStats = stats.filter(
-    stat => stat.levelName === newStat.levelName
+    stat =>
+      stat.levelName === newStat.levelName &&
+      stat.controlMode === newStat.controlMode
   )
 
   const bestProgress =
@@ -61,4 +64,8 @@ export const saveLevelStat = (newStat: LevelStat) => {
     STORAGE_KEY,
     JSON.stringify(stats)
   )
+}
+
+export const clearLevelStats = () => {
+  localStorage.removeItem(STORAGE_KEY)
 }

@@ -146,6 +146,7 @@ const GameScreen = ({
         obstacle => obstacle.type === "coin"
       ).length,
       attempts,
+      controlMode,
     })
 
     onHome()
@@ -402,12 +403,7 @@ const GameScreen = ({
               }
 
 
-              if (
-                playerCanJump &&
-                hitObstacleRef.current !== activeObstacle.id
-              ) {
-                hitObstacleRef.current = activeObstacle.id
-
+              if (playerCanJump) {
                 setJumpTrigger(
                   trigger => trigger + 1
                 )
@@ -891,9 +887,22 @@ const GameScreen = ({
     let nextObstacle = null
 
     for (const obstacle of currentLevel.obstacles) {
-      const obstacleRight = obstacle.positionX + obstacle.width
+      if (
+        obstacle.string === undefined ||
+        obstacle.fret === undefined
+      ) {
+        continue
+      }
 
-      const obstacleHasBeenPassed = obstacleRight - movementRef.current <= GAME_CONFIG.player.left
+      const obstacleHasBeenPassed =
+        obstacle.type === "crouch"
+          ? obstacle.positionX +
+          obstacle.width -
+          movementRef.current <=
+          GAME_CONFIG.player.left
+          : obstacle.positionX -
+          movementRef.current <=
+          GAME_CONFIG.player.left
 
       if (!obstacleHasBeenPassed) {
         nextObstacle = obstacle

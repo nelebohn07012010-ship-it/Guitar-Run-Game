@@ -408,8 +408,17 @@
   font-size: 1.2vw;
 }
 
-#leaderboard-close {
+#leaderboard-actions {
   margin-top: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+}
+
+#leaderboard-close {
+  margin-top: 0;
 
   padding: 1% 4%;
 
@@ -445,4 +454,27 @@
   font-size: 0.8vw;
   font-weight: 800;
   letter-spacing: 0.1vw;
+}
+
+#leaderboard-reset {
+  margin-top: 0;
+
+  padding: 1% 4%;
+
+  border: 0.15vw solid rgba(255, 255, 255, 0.6);
+  border-radius: 0.6vw;
+
+  background: rgba(10, 20, 50, 0.8);
+
+  color: white;
+  white-space: nowrap;
+
+  font-size: 1vw;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+#leaderboard-reset:hover {
+  background: rgba(30, 50, 90, 0.9);
 }
