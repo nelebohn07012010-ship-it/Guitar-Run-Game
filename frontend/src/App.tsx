@@ -7,6 +7,8 @@ import GuitarAudioService from './services/GuitarAudioService'
 import levelOne from "./levels/levelOne"
 import tutorial from './levels/tutorial'
 import tutorialArr from './levels/tutorial2'
+import LoadingScreen from './components/LoadingSreen'
+import { preloadAssets } from './assetPreloader'
 
 const levels = [
   tutorial,
@@ -23,6 +25,20 @@ function App() {
   const previewAudioRef = useRef<HTMLAudioElement | null>(null)
   const [controlMode, setControlMode] = useState<"guitar" | "arrows">("guitar")
   const [showLanding, setShowLanding] = useState(true)
+  const [assetsLoaded, setAssetsLoaded] = useState(false)
+
+  const startLoading = async () => {
+    setShowLanding(false)
+    setAssetsLoaded(false)
+
+    try {
+      await preloadAssets()
+    } catch (error) {
+      console.error("Failed to preload assets:", error)
+    }
+
+    setAssetsLoaded(true)
+  }
 
   useEffect(() => {
     if (!isCalibrating) return
@@ -40,6 +56,7 @@ function App() {
 
     return () => clearInterval(countdown)
   }, [isCalibrating])
+
 
 
   const startGame = async (level: typeof levelOne) => {
@@ -69,6 +86,10 @@ function App() {
     setIsCalibrating(false)
   }
 
+  if (!assetsLoaded && !showLanding) {
+    return <LoadingScreen />
+  }
+
   return (
     <>
       {isPlaying ? (
@@ -83,7 +104,7 @@ function App() {
         />
       ) : showLanding ? (
         <LandingScreen
-          onStart={() => setShowLanding(false)}
+          onStart={startLoading}
         />
       ) : (
         <StartScreen
