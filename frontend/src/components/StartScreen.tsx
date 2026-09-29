@@ -19,11 +19,30 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   controlMode: "guitar" | "arrows"
   setControlMode: React.Dispatch<React.SetStateAction<"guitar" | "arrows">>
 }) => {
-  const [selectedLevel, setSelectedLevel] = useState(0)
+  const [selectedLevel, setSelectedLevel] = useState(() => {
+    const saved = localStorage.getItem("guitar-run-selected-level")
+
+    if (saved === null) {
+      return 0
+    }
+
+    const parsed = Number(saved)
+
+    return Number.isInteger(parsed) && parsed >= 0 && parsed < levels.length
+      ? parsed
+      : 0
+  })
   const [showSettings, setShowSettings] = useState(false)
   const [levelStats, setLevelStats] = useState<LevelStat[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [showAchievements, setShowAchievements] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem(
+      "guitar-run-selected-level",
+      String(selectedLevel)
+    )
+  }, [selectedLevel])
 
   useEffect(() => {
     const audio = previewAudioRef.current

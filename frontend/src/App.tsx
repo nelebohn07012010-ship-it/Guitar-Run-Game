@@ -23,7 +23,11 @@ function App() {
   const [isCalibrating, setIsCalibrating] = useState(false)
   const [calibrationCount, setCalibrationCount] = useState(7)
   const previewAudioRef = useRef<HTMLAudioElement | null>(null)
-  const [controlMode, setControlMode] = useState<"guitar" | "arrows">("guitar")
+  const [controlMode, setControlMode] = useState<"guitar" | "arrows">(() => {
+    const saved = localStorage.getItem("guitar-run-control-mode")
+
+    return saved === "arrows" ? "arrows" : "guitar"
+  })
   const [showLanding, setShowLanding] = useState(true)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
 
@@ -39,6 +43,10 @@ function App() {
 
     setAssetsLoaded(true)
   }
+
+  useEffect(() => {
+    localStorage.setItem("guitar-run-control-mode", controlMode)
+  }, [controlMode])
 
   useEffect(() => {
     if (!isCalibrating) return

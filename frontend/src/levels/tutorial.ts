@@ -142,7 +142,7 @@ const tutorial: Level = {
       width: 5,
       height: 8,
       note: "E",
-      string: "Tiefe E",
+      string: "Low E",
       fret: 0,
     },
     {
@@ -223,7 +223,7 @@ const tutorial: Level = {
       id: 25,
       type: "crouch",
       note: "E",
-      string: "Tiefe E",
+      string: "Low E",
       fret: 0,
       positionX: 1500,
       positionY: 30,

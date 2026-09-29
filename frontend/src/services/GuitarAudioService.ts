@@ -158,12 +158,12 @@ class GuitarAudioService {
 
   getClosestNote(frequency: number) {
     const strings = [
-      { name: "Tiefe E", frequency: 82.41 },
+      { name: "Low E", frequency: 82.41 },
       { name: "A", frequency: 110.0 },
       { name: "D", frequency: 146.83 },
       { name: "G", frequency: 196.0 },
       { name: "H", frequency: 246.94 },
-      { name: "Hohe E", frequency: 329.63 },
+      { name: "High E", frequency: 329.63 },
     ]
 
     const matches = []
