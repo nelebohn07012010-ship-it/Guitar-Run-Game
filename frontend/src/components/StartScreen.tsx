@@ -9,6 +9,8 @@ import {
   clearLevelStats,
   type LevelStat
 } from "../levels/levelStats"
+import Achievements from "./Achievements.tsx"
+
 
 const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setControlMode }: {
   startGame: (level: typeof levelOne) => void
@@ -21,6 +23,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   const [showSettings, setShowSettings] = useState(false)
   const [levelStats, setLevelStats] = useState<LevelStat[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
+  const [showAchievements, setShowAchievements] = useState(false)
 
   useEffect(() => {
     const audio = previewAudioRef.current
@@ -132,7 +135,10 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
 
       <div id="level-actions">
 
-        <button id="achievements-button">
+        <button
+          id="achievements-button"
+          onClick={() => setShowAchievements(true)}
+        >
           <img src={rankingButton} alt="Achievments" />
         </button>
 
@@ -151,6 +157,13 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
         </button>
 
       </div>
+      {showAchievements && (
+        <Achievements
+          controlMode={controlMode}
+          levelName={currentLevel.name}
+          onClose={() => setShowAchievements(false)}
+        />
+      )}
       {showLeaderboard && (
         <div id="leaderboard-menu">
           <h2>

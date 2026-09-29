@@ -1,0 +1,15 @@
+.death-particles {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.death-particle {
+  position: absolute;
+  background: white;
+  box-shadow:
+    0 0 0.3vw white,
+    0 0 0.6vw #00e5ff;
+  pointer-events: none;
+}

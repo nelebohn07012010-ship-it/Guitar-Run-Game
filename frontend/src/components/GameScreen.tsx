@@ -17,8 +17,8 @@ import { GAME_CONFIG } from "../gameConfig"
 import PauseMenu from "./PauseMenu.tsx"
 import EndScreen from "./EndScreen.tsx"
 import { saveLevelStat } from "../levels/levelStats.ts"
-
-
+import DeathAnimation from "../components/player/DeathAnimation"
+import { saveAchievement } from "../levels/achievementStats.ts"
 
 const ObstacleLayer = memo(function ObstacleLayer({
   obstacles,
@@ -149,6 +149,32 @@ const GameScreen = ({
       controlMode,
     })
 
+    if (levelProgress >= 100) {
+      saveAchievement(
+        currentLevel.name,
+        "100%",
+        controlMode
+      )
+    }
+
+    if (coins >= currentLevel.obstacles.filter(
+      obstacle => obstacle.type === "coin"
+    ).length) {
+      saveAchievement(
+        currentLevel.name,
+        "coin-master",
+        controlMode
+      )
+    }
+
+    if (levelProgress >= 100 && !diedThisRunRef.current) {
+      saveAchievement(
+        currentLevel.name,
+        "first-try",
+        controlMode
+      )
+    }
+
     onHome()
   }
 
@@ -204,6 +230,8 @@ const GameScreen = ({
   const [restartAnimation, setRestartAnimation] = useState(false)
   const [cameraY, setCameraY] = useState(0)
   const lastObstacle = currentLevel.obstacles[currentLevel.obstacles.length - 1]
+
+  const diedThisRunRef = useRef(false)
 
   const attemptPositionX = 40
   //=================================
@@ -659,6 +687,8 @@ const GameScreen = ({
       return
     }
 
+    diedThisRunRef.current = true
+
 
     if (beatAudioRef.current) {
       beatAudioRef.current.pause()
@@ -683,6 +713,8 @@ const GameScreen = ({
 
       collectedCoinsRef.current.clear()
       setCoins(0)
+
+      diedThisRunRef.current = false
 
       setGameOver(false)
       setRestartAnimation(false)
@@ -967,6 +999,13 @@ const GameScreen = ({
         isPaused={isPaused || isCalibrating}
         controlMode={controlMode}
       />
+      {gameOver && (
+        <DeathAnimation
+          x={GAME_CONFIG.player.left}
+          y={playerRef.current?.getYPosition() ?? 0}
+          groundY={playerGroundYRef.current}
+        />
+      )}
       <div id="game-world"  >
         <div id="ground" className={isPaused || gameOver || isCalibrating ? "paused" : ""} style={{ height: `${GAME_CONFIG.ground.height}%` }}>
           <div id="ground-shadow" ></div>

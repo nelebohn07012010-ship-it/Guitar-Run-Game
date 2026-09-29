@@ -15,6 +15,10 @@ import continueButton from "./assets/continue_button.png"
 import crouchImage from "./assets/crouch_img.png"
 import heroImage from "./assets/hero.png"
 
+import fragment1 from "./assets/fragment_1.png"
+import fragment2 from "./assets/fragment_2.png"
+import fragment3 from "./assets/fragment_3.png"
+
 const imageAssets = [
   homeButton,
   platformImage,
@@ -30,7 +34,10 @@ const imageAssets = [
   arcadeFloor,
   continueButton,
   crouchImage,
-  heroImage
+  heroImage,
+  fragment1,
+  fragment2,
+  fragment3
 ]
 
 export const preloadAssets = async () => {

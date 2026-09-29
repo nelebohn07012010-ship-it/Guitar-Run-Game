@@ -95,6 +95,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
     getScreenRect: () => {
       return document.getElementById("player")?.getBoundingClientRect() ?? null
     },
+
   }))
 
   // ====================

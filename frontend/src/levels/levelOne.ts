@@ -15,7 +15,17 @@ const levelOne: Level = {
       positionY: 35,
       width: 5,
       height: 5,
-    },
+    }, {
+      id: 25,
+      type: "crouch",
+      note: "E",
+      string: "Tiefe E",
+      fret: 0,
+      positionX: 50,
+      positionY: 30,
+      width: 10,
+      height: 5,
+    }
 
   ]
 }
