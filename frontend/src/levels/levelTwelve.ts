@@ -11,8 +11,8 @@ const levelTwelve: Level = {
     // =====================================================
     // INTRO – ruhig beginnen
     // =====================================================
-    { id: 1, type: "spike", note: "E", string: "Tiefe E", fret: 0, positionX: 70, positionY: 20, width: 5, height: 8 },
-    { id: 2, type: "spike", note: "G", string: "Tiefe E", fret: 3, positionX: 135, positionY: 30, width: 5, height: 8 },
+    { id: 1, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 70, positionY: 20, width: 5, height: 8 },
+    { id: 2, type: "spike", note: "G", string: "Low E", fret: 3, positionX: 135, positionY: 30, width: 5, height: 8 },
     { id: 3, type: "spike", note: "C", string: "A", fret: 3, positionX: 200, positionY: 22, width: 5, height: 8 },
     { id: 4, type: "spike", note: "F", string: "D", fret: 3, positionX: 265, positionY: 35, width: 5, height: 8 },
     { id: 5, type: "obstacle", note: "G", string: "D", fret: 5, positionX: 355, positionY: 28, width: 105, height: 8 },
@@ -21,7 +21,7 @@ const levelTwelve: Level = {
     // =====================================================
     // RIFF A – steigender String-Wechsel
     // =====================================================
-    { id: 7, type: "spike", note: "A", string: "Tiefe E", fret: 5, positionX: 610, positionY: 20, width: 5, height: 8 },
+    { id: 7, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 610, positionY: 20, width: 5, height: 8 },
     { id: 8, type: "spike", note: "D", string: "A", fret: 5, positionX: 665, positionY: 34, width: 5, height: 8 },
     { id: 9, type: "spike", note: "G", string: "D", fret: 5, positionX: 720, positionY: 22, width: 5, height: 8 },
     { id: 10, type: "spike", note: "D", string: "G", fret: 7, positionX: 775, positionY: 38, width: 5, height: 8 },
@@ -32,7 +32,7 @@ const levelTwelve: Level = {
     // =====================================================
     // SPEED BURST 1
     // =====================================================
-    { id: 14, type: "spike", note: "E", string: "Tiefe E", fret: 0, positionX: 1060, positionY: 20, width: 5, height: 8 },
+    { id: 14, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 1060, positionY: 20, width: 5, height: 8 },
     { id: 15, type: "spike", note: "C", string: "A", fret: 3, positionX: 1110, positionY: 34, width: 5, height: 8 },
     { id: 16, type: "spike", note: "F", string: "D", fret: 3, positionX: 1160, positionY: 22, width: 5, height: 8 },
     { id: 17, type: "spike", note: "C", string: "G", fret: 5, positionX: 1210, positionY: 38, width: 5, height: 8 },
@@ -43,12 +43,12 @@ const levelTwelve: Level = {
     // =====================================================
     // STRING-SKIPPING
     // =====================================================
-    { id: 21, type: "spike", note: "G", string: "Tiefe E", fret: 3, positionX: 1480, positionY: 20, width: 5, height: 8 },
+    { id: 21, type: "spike", note: "G", string: "Low E", fret: 3, positionX: 1480, positionY: 20, width: 5, height: 8 },
     { id: 22, type: "spike", note: "F", string: "D", fret: 3, positionX: 1530, positionY: 36, width: 5, height: 8 },
     { id: 23, type: "spike", note: "D", string: "G", fret: 7, positionX: 1580, positionY: 22, width: 5, height: 8 },
     { id: 24, type: "spike", note: "C", string: "A", fret: 3, positionX: 1630, positionY: 38, width: 5, height: 8 },
     { id: 25, type: "spike", note: "G", string: "D", fret: 5, positionX: 1680, positionY: 20, width: 5, height: 8 },
-    { id: 26, type: "obstacle", note: "A", string: "Tiefe E", fret: 5, positionX: 1760, positionY: 28, width: 100, height: 8 },
+    { id: 26, type: "obstacle", note: "A", string: "Low E", fret: 5, positionX: 1760, positionY: 28, width: 100, height: 8 },
 
     // =====================================================
     // ERHOLUNG
@@ -60,14 +60,14 @@ const levelTwelve: Level = {
     // =====================================================
     // SPEED BURST 2 – enger
     // =====================================================
-    { id: 30, type: "spike", note: "A", string: "Tiefe E", fret: 5, positionX: 2150, positionY: 20, width: 5, height: 8 },
+    { id: 30, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 2150, positionY: 20, width: 5, height: 8 },
     { id: 31, type: "spike", note: "C", string: "A", fret: 3, positionX: 2198, positionY: 34, width: 5, height: 8 },
     { id: 32, type: "spike", note: "G", string: "D", fret: 5, positionX: 2246, positionY: 22, width: 5, height: 8 },
     { id: 33, type: "spike", note: "D", string: "G", fret: 7, positionX: 2294, positionY: 38, width: 5, height: 8 },
     { id: 34, type: "spike", note: "A", string: "D", fret: 7, positionX: 2342, positionY: 20, width: 5, height: 8 },
     { id: 35, type: "spike", note: "C", string: "G", fret: 5, positionX: 2390, positionY: 34, width: 5, height: 8 },
     { id: 36, type: "spike", note: "F", string: "D", fret: 3, positionX: 2438, positionY: 22, width: 5, height: 8 },
-    { id: 37, type: "crouch", note: "A", string: "Tiefe E", fret: 5, positionX: 2510, positionY: 32, width: 85, height: 8 },
+    { id: 37, type: "crouch", note: "A", string: "Low E", fret: 5, positionX: 2510, positionY: 32, width: 85, height: 8 },
 
     // =====================================================
     // MITTELTEIL
@@ -79,7 +79,7 @@ const levelTwelve: Level = {
     // =====================================================
     // FINAL RUN – langer String-Wechsel
     // =====================================================
-    { id: 41, type: "spike", note: "E", string: "Tiefe E", fret: 0, positionX: 2990, positionY: 20, width: 5, height: 8 },
+    { id: 41, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 2990, positionY: 20, width: 5, height: 8 },
     { id: 42, type: "spike", note: "D", string: "A", fret: 5, positionX: 3040, positionY: 34, width: 5, height: 8 },
     { id: 43, type: "spike", note: "G", string: "D", fret: 5, positionX: 3090, positionY: 22, width: 5, height: 8 },
     { id: 44, type: "spike", note: "D", string: "G", fret: 7, positionX: 3140, positionY: 38, width: 5, height: 8 },
@@ -96,7 +96,7 @@ const levelTwelve: Level = {
     { id: 51, type: "spike", note: "A", string: "D", fret: 7, positionX: 3490, positionY: 22, width: 5, height: 8 },
     { id: 52, type: "spike", note: "C", string: "G", fret: 5, positionX: 3540, positionY: 38, width: 5, height: 8 },
     { id: 53, type: "crouch", note: "G", string: "D", fret: 5, positionX: 3610, positionY: 32, width: 90, height: 8 },
-    { id: 54, type: "spike", note: "A", string: "Tiefe E", fret: 5, positionX: 3670, positionY: 20, width: 5, height: 8 },
+    { id: 54, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 3670, positionY: 20, width: 5, height: 8 },
     { id: 55, type: "coin", positionX: 3700, positionY: 45, width: 8, height: 8 },
   ]
 }
