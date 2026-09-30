@@ -5,15 +5,38 @@ import LandingScreen from "./components/LandingScreen"
 import "./App.css"
 import GuitarAudioService from './services/GuitarAudioService'
 import levelOne from "./levels/levelOne"
+import levelTwo from './levels/levelTwo'
+import levelThree from './levels/levelThree'
+import levelFour from './levels/levelFour'
+import levelFive from './levels/levelFive'
+import levelSix from './levels/levelSix'
+import levelSeven from './levels/levelSeven'
+import levelEight from './levels/levelEight'
+import levelNine from './levels/levelNine'
+import levelTen from './levels/levelTen'
+import levelTwelve from './levels/levelTwelve'
+import levelEleven from './levels/levelEleven'
 import tutorial from './levels/tutorial'
 import tutorialArr from './levels/tutorial2'
+
 import LoadingScreen from './components/LoadingSreen'
 import { preloadAssets } from './assetPreloader'
 
 const levels = [
   tutorial,
   tutorialArr,
-  levelOne
+  levelOne,
+  levelTwo,
+  levelThree,
+  levelFour,
+  levelFive,
+  levelSix,
+  levelSeven,
+  levelEight,
+  levelNine,
+  levelTen,
+  levelEleven,
+  levelTwelve
 ]
 
 function App() {
