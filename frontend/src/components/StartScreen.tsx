@@ -36,6 +36,9 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   const [levelStats, setLevelStats] = useState<LevelStat[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [showAchievements, setShowAchievements] = useState(false)
+  const [showControlHint, setShowControlHint] = useState(() => {
+    return localStorage.getItem("guitar-run-control-hint-seen") !== "true"
+  })
 
   useEffect(() => {
     localStorage.setItem(
@@ -82,6 +85,34 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   const currentLevel = levels[selectedLevel]
   return (<section id="start-screen">
     <div id="start-area">
+      {showControlHint && (
+        <div id="control-hint-overlay">
+          <div id="settings-highlight"></div>
+          <div id="control-hint">
+
+
+            <h2>IMPORTANT</h2>
+
+            <p>
+              Before starting the game, choose your preferred control mode
+              in the settings.
+            </p>
+
+            <button
+              id="control-hint-close"
+              onClick={() => {
+                localStorage.setItem(
+                  "guitar-run-control-hint-seen",
+                  "true"
+                )
+                setShowControlHint(false)
+              }}
+            >
+              GOT IT
+            </button>
+          </div>
+        </div>
+      )}
 
       <div
         id="level-background"
@@ -113,6 +144,11 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
       <button id="settings-button" onClick={() => setShowSettings(true)}>
         <img src={Settings} alt="⚙" />
       </button>
+      {showControlHint && (
+        <div id="settings-highlight">
+        </div>
+      )}
+
       {showSettings && (
         <div id="settings-menu">
 

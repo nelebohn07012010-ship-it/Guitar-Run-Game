@@ -54,31 +54,28 @@ If the note is wrong, the run fails and the player has to try again.
 
 ---
 
-## 🎸 Guitar Mode
+## 🎮 How to Play
 
-Guitar Mode uses the browser's **Web Audio API** to analyze microphone input.
+Guitar Run can be played in two different control modes:
 
-The game:
+### 🎸 Guitar Mode
 
-1. requests microphone access
-2. calibrates the background noise
-3. analyzes the incoming audio signal
-4. searches for the fundamental frequency
-5. compares the detected frequency with guitar notes
-6. determines the closest matching string and fret
-7. uses that information as gameplay input
+In Guitar Mode, you control the player by playing the required notes on a real guitar.
 
-The calibration step is important because microphones and environments can have different background noise levels.
+Before starting the level, the game performs a short microphone calibration. **Do not play any guitar notes while the calibration is running.** During calibration, the game measures the current background noise level and uses it to determine which sounds should be treated as guitar input. Playing notes during this phase can cause them to be treated as background noise and may prevent the game from detecting them correctly afterwards.
 
-The game therefore measures the current noise floor before gameplay begins.
+For the best guitar detection, the guitar signal should be clearly louder than the surrounding background noise.
 
----
+- 🎸 **Acoustic guitar:** Play in a quiet room and avoid background noise as much as possible.
+- 🎸 **Electric guitar:** Use an amplifier and set the volume high enough for the microphone to clearly pick up the guitar.
+- 🔇 Avoid playing other sounds or instruments near the microphone.
+- 🎙️ Make sure the browser has permission to access your microphone.
 
-## ⌨️ Arrow Key Mode
+Once calibration is finished, play the notes required by the obstacles. The game detects the played frequency and checks whether it matches the expected string and fret.
 
-Guitar Run also includes an alternative keyboard mode.
+### ⌨️ Arrow Key Mode
 
-This makes the game playable without a guitar and is useful for testing the gameplay itself.
+If you do not want to use a guitar, you can select Arrow Key Mode in the settings.
 
 Controls:
 
@@ -87,7 +84,7 @@ Controls:
 | `Arrow Up` | Jump |
 | `Arrow Down` | Crouch |
 
-In Arrow Key Mode, the level music is also enabled.
+The control mode can be changed at any time from the **Settings** menu on the Start Screen.
 
 ---
 

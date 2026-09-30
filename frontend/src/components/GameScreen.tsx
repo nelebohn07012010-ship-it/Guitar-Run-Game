@@ -731,7 +731,7 @@ const GameScreen = ({
       }
 
       setRestartKey(key => key + 1)
-    }, 2000)
+    }, 1500)
 
     return () => {
       clearTimeout(restartTimer)
