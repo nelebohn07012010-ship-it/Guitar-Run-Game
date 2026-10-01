@@ -54,6 +54,7 @@ function App() {
   const [showLanding, setShowLanding] = useState(true)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
 
+
   const startLoading = async () => {
     setShowLanding(false)
     setAssetsLoaded(false)
@@ -65,7 +66,9 @@ function App() {
     }
 
     setAssetsLoaded(true)
+    await startGame(currentLevel)
   }
+
 
   useEffect(() => {
     localStorage.setItem("guitar-run-control-mode", controlMode)
