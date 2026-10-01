@@ -18,6 +18,7 @@ import EndScreen from "./EndScreen.tsx"
 import { saveLevelStat } from "../levels/levelStats.ts"
 import DeathAnimation from "../components/player/DeathAnimation"
 import { saveAchievement } from "../levels/achievementStats.ts"
+import { playGameSound } from "../services/GuitarSoundService.ts"
 
 const ObstacleLayer = memo(function ObstacleLayer({
   obstacles,
@@ -687,6 +688,7 @@ const GameScreen = ({
     }
 
     diedThisRunRef.current = true
+    playGameSound("death")
 
 
     if (beatAudioRef.current) {
@@ -714,6 +716,8 @@ const GameScreen = ({
       setCoins(0)
 
       diedThisRunRef.current = false
+
+      playGameSound("restart")
 
       setGameOver(false)
       setRestartAnimation(false)
@@ -783,8 +787,8 @@ const GameScreen = ({
         ) {
           collectedCoinsRef.current.add(obstacle.id)
           setCoins(prev => prev + 1)
+          playGameSound("coin")
 
-          console.log("COIN GESAMMELT")
         }
 
         continue

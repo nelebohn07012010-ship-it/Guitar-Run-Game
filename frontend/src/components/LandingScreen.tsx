@@ -6,6 +6,24 @@ type LandingScreenProps = {
 }
 
 const LandingScreen = ({ onStart }: LandingScreenProps) => {
+  const handleStart = async () => {
+    try {
+      // Vollbildmodus anfordern
+      if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen()
+      }
+
+      // Querformat anfordern
+      if (screen.orientation?.lock) {
+        await screen.orientation.lock("landscape")
+      }
+    } catch (error) {
+      console.log("Landscape mode is not supported:", error)
+    }
+
+    onStart()
+  }
+
   return (
     <section
       id="landing-screen"
@@ -17,7 +35,7 @@ const LandingScreen = ({ onStart }: LandingScreenProps) => {
 
         <h2>PLAY NOW</h2>
 
-        <button id="landing-play-button" onClick={onStart}>
+        <button id="landing-play-button" onClick={handleStart}>
           PLAY
         </button>
 
