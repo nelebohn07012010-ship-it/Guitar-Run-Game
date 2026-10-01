@@ -55,6 +55,7 @@ function App() {
   const [assetsLoaded, setAssetsLoaded] = useState(false)
 
 
+
   const startLoading = async () => {
     setShowLanding(false)
     setAssetsLoaded(false)
@@ -66,8 +67,8 @@ function App() {
     }
 
     setAssetsLoaded(true)
-    await startGame(currentLevel)
   }
+
 
 
   useEffect(() => {

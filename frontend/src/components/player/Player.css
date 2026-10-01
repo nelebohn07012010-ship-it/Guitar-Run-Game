@@ -6,7 +6,6 @@
 #player-visual {
   width: 100%;
   height: 100%;
-  background-image: url("../../assets/player_img.png");
   background-size: 100% 100%;
 
   transition: transform 0.5s linear;
@@ -20,16 +19,6 @@
   bottom: 0;
   width: 80%;
   height: 25%;
-
-  background: linear-gradient(to top,
-      rgba(255, 0, 204, 1),
-      rgba(255, 77, 232, 0.55),
-      transparent);
-
-  box-shadow:
-    0 0 1.5cqw #ff00cc,
-    0 0 3cqw #ff00cc,
-    0 0 5cqw rgba(255, 0, 204, 0.8);
 
   pointer-events: none;
 }

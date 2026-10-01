@@ -3,10 +3,6 @@
    ========================= */
 
 .neon-arcade {
-  position: relative;
-  overflow: hidden;
-  container-type: size;
-
   /* Colors */
   --background: #0a0014;
   --background-glow: rgba(0, 229, 255, 0.5);
@@ -22,23 +18,22 @@
   --glow-medium: 0 0 1.4cqw var(--primary);
   --glow-large: 0 0 2.8cqw var(--primary);
 
-  /* Game */
-  --note-small: clamp(0.8rem, 2.2cqw, 1.8rem);
-  --note-large: clamp(1rem, 2.5cqw, 2rem);
-
   /* Background */
 
   --background-scroll-speed: 30s;
   --background-image: url("../assets/arcade_backgrnd.png");
 
-  width: 100%;
-
   background-color: var(--ground);
+}
 
+/* Theme-only visuals. Layout and dimensions stay in the component styles. */
+.neon-arcade#game-area {
+  border: 0.1cqw solid var(--secondary);
+  box-shadow: 0 0 3cqw var(--secondary), 0 0 5cqw var(--secondary-glow);
+}
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+#game-screen.neon-arcade {
+  background-image: url("../assets/arcade_bckgrnd_startscreen.png");
 }
 
 /* BACKGROUND IMAGE */
@@ -118,6 +113,15 @@
 
 .neon-arcade #ground::before {
   background-image: url("../assets/arcade_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.neon-arcade #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(0, 0, 0, 0.8),
+    inset -10cqw 0 8cqw -4cqw rgba(0, 0, 0, 0.8),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(0, 0, 0, 0.7);
 }
 
 
@@ -189,4 +193,37 @@
     0 0 0.8cqw color-mix(in srgb, currentColor 35%, transparent);
 
   text-shadow: 0 0 0.4cqw #ffffff, 0 0 0.8cqw currentColor;
+}
+
+.neon-arcade .text-obstacle {
+  background: rgba(10, 10, 20, 0.9);
+  border: 0.15vw solid white;
+  color: white;
+  box-shadow: 0 0 0.3vw rgba(255, 255, 255, 0.8), 0 0 0.8vw rgba(255, 0, 204, 0.5);
+}
+
+.neon-arcade #player-visual {
+  background-image: url("../assets/player_img.png");
+}
+
+.neon-arcade #player.crouching::after {
+  background: linear-gradient(to top, rgba(255, 0, 204, 1), rgba(255, 77, 232, 0.55), transparent);
+  box-shadow: 0 0 1.5cqw #ff00cc, 0 0 3cqw #ff00cc, 0 0 5cqw rgba(255, 0, 204, 0.8);
+}
+
+.neon-arcade #calibration-overlay {
+  background: rgba(0, 0, 0, 0.75);
+  border: 0.1vw solid rgba(255, 255, 255, 0.7);
+}
+
+.neon-arcade #calibration-text,
+.neon-arcade #calibration-warning,
+.neon-arcade #calibration-countdown,
+.neon-arcade #attempt-counter {
+  color: white;
+}
+
+.neon-arcade #attempt-counter {
+  text-shadow: 0.12vw 0.12vw 0 #000, -0.08vw -0.08vw 0 #000,
+    0.08vw -0.08vw 0 #000, -0.08vw 0.08vw 0 #000;
 }

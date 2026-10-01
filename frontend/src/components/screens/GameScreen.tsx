@@ -1,24 +1,24 @@
-import Player from "./player/Player"
-import type { PlayerHandle } from "./player/Player"
+import Player from "../player/Player.tsx"
+import type { PlayerHandle } from "../player/Player.tsx"
 import "./GameScreen.css"
-import Spike from "./obstacles/Spike"
-import Crouch from "./obstacles/Crouch"
-import Obstacle from "./obstacles/Platform"
-import Coin from "./obstacles/Coin"
-import Text from "./obstacles/Text"
-import type { GameObjectHandle } from "./obstacles/GameObject"
+import Spike from "../obstacles/Spike.tsx"
+import Crouch from "../obstacles/Crouch.tsx"
+import Obstacle from "../obstacles/Platform.tsx"
+import Coin from "../obstacles/Coin.tsx"
+import Text from "../obstacles/Text.tsx"
+import type { GameObjectHandle } from "../obstacles/GameObject.tsx"
 import { memo, useEffect, useState, useRef } from "react"
 import type { MutableRefObject } from "react"
-import levelOne from "../levels/levelOne"
-import GuitarAudioService from "../services/GuitarAudioService"
-import "../styles/neonArcade.css"
-import { GAME_CONFIG } from "../gameConfig"
+import levelOne from "../../levels/levelOne.ts"
+import GuitarAudioService from "../../services/GuitarAudioService.ts"
+import "../../styles/neonArcade.css"
+import { GAME_CONFIG } from "../../gameConfig.ts"
 import PauseMenu from "./PauseMenu.tsx"
 import EndScreen from "./EndScreen.tsx"
-import { saveLevelStat } from "../levels/levelStats.ts"
-import DeathAnimation from "../components/player/DeathAnimation"
-import { saveAchievement } from "../levels/achievementStats.ts"
-import { playGameSound } from "../services/GuitarSoundService.ts"
+import { saveLevelStat } from "../../levels/levelStats.ts"
+import DeathAnimation from "../player/DeathAnimation.tsx"
+import { saveAchievement } from "../../levels/achievementStats.ts"
+import { playGameSound } from "../../services/GuitarSoundService.ts"
 
 const ObstacleLayer = memo(function ObstacleLayer({
   obstacles,
@@ -953,7 +953,7 @@ const GameScreen = ({
   // ====================
 
 
-  return (<section ref={gameScreenRef} id="game-screen" className={currentLevel.style}>
+  return (<section ref={gameScreenRef} id="game-screen">
 
     <div
       ref={gameAreaRef}

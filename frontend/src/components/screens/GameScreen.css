@@ -6,12 +6,13 @@
   justify-content: center;
   align-items: center;
 
+  background-image: url(../assets/arcade_bckgrnd_startscreen.png);
+
   overflow: hidden;
 }
 
 #game-area {
   position: relative;
-  container-type: size;
 
   width: min(80vw, calc(80vh * 19.5 / 9));
   aspect-ratio: 19.5 / 9;
@@ -19,9 +20,12 @@
   overflow: hidden;
   box-sizing: border-box;
 
-  --note-small: clamp(0.8rem, 2.2cqw, 1.8rem);
-  --note-large: clamp(1rem, 2.5cqw, 2rem);
+  border: 0.1cqw solid var(--secondary);
 
+
+  box-shadow:
+    0 0 3cqw var(--secondary),
+    0 0 5cqw var(--secondary-glow);
 }
 
 /* BACKGROUND SCROLL */
@@ -60,7 +64,7 @@
 
 /* GROUND SCROLL */
 
-#ground::before {
+.neon-arcade #ground::before {
   content: "";
   position: absolute;
 
@@ -70,11 +74,14 @@
   width: 200%;
   height: 100%;
 
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+
   animation: ground-scroll 0.54s linear infinite;
   animation-play-state: running;
 }
 
-#ground.paused::before {
+.neon-arcade #ground.paused::before {
   animation-play-state: paused;
 }
 
@@ -100,6 +107,10 @@
   pointer-events: none;
   z-index: 3;
 
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(0, 0, 0, 0.8),
+    inset -10cqw 0 8cqw -4cqw rgba(0, 0, 0, 0.8),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(0, 0, 0, 0.7);
 }
 
 /* PAUSE BUTTON */
@@ -118,6 +129,10 @@
   width: 90%;
   height: 90%;
 
+  background: rgba(0, 0, 0, 0.75);
+  border: 0.1vw solid rgba(255, 255, 255, 0.7);
+
+
   z-index: 200;
 
   display: flex;
@@ -127,17 +142,20 @@
 }
 
 #calibration-text {
+  color: white;
   font-size: 2.5vw;
   font-weight: 700;
 }
 
 #calibration-warning {
+  color: white;
   font-size: 1.3vw;
   font-weight: 400;
   margin-top: 2%;
 }
 
 #calibration-countdown {
+  color: white;
   font-size: 4vw;
   font-weight: 700;
   margin-top: 3%;
@@ -147,6 +165,8 @@
   position: absolute;
 
   bottom: 55%;
+
+  color: white;
 
   font-size: 2.2vw;
   font-weight: 900;
@@ -159,4 +179,9 @@
 
   z-index: 10;
 
+  text-shadow:
+    0.12vw 0.12vw 0 #000,
+    -0.08vw -0.08vw 0 #000,
+    0.08vw -0.08vw 0 #000,
+    -0.08vw 0.08vw 0 #000;
 }
