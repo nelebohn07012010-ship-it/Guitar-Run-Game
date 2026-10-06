@@ -228,7 +228,7 @@ Vite will provide a local URL where the game can be opened in the browser.
 
 A browser-playable version of Guitar Run will be published using GitHub Pages.
 
-**Live Demo: Coming soon**
+**Live Demo: https://nelebohn07012010-ship-it.github.io/Guitar-Run-Game/**
 
 ---
 

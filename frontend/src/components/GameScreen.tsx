@@ -348,10 +348,12 @@ const GameScreen = ({
         detectionInterval = window.setInterval(() => {
 
           const data = service.getFrequencyData()
+          if (!data) return
 
-          if (!data) {
-            return
-          }
+          const chordFrequencies =
+            service.getDetectedChordFrequencies(data)
+
+
 
           const fundamentalFrequency =
             service.getFundamentalFrequency(data)

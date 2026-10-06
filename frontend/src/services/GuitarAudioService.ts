@@ -1,3 +1,27 @@
+type GuitarChord = {
+  name: string
+  notes: string[]
+}
+
+const guitarChords: GuitarChord[] = [
+  {
+    name: "C",
+    notes: ["C", "E", "G"]
+  },
+  {
+    name: "G",
+    notes: ["G", "B", "D"]
+  },
+  {
+    name: "Am",
+    notes: ["A", "C", "E"]
+  },
+  {
+    name: "F",
+    notes: ["F", "A", "C"]
+  }
+]
+
 class GuitarAudioService {
   private noiseFloor: number | null = null
 
@@ -31,6 +55,74 @@ class GuitarAudioService {
     this.analyser.getByteFrequencyData(data)
 
     return data
+  }
+
+  getDetectedFrequencies(data: Uint8Array) {
+    if (!this.analyser || !this.audioContext) return []
+
+    const sampleRate = this.audioContext.sampleRate
+    const fftSize = this.analyser.fftSize
+
+    const frequencies: {
+      frequency: number
+      intensity: number
+    }[] = []
+
+    for (let bin = 1; bin < data.length - 1; bin++) {
+      const intensity = data[bin]
+
+      if (
+        intensity <= data[bin - 1] ||
+        intensity <= data[bin + 1]
+      ) {
+        continue
+      }
+
+      if (intensity < 30) continue
+
+      const frequency =
+        bin * sampleRate / fftSize
+
+      if (frequency < 70 || frequency > 350) continue
+
+      frequencies.push({
+        frequency,
+        intensity
+      })
+    }
+
+    frequencies.sort(
+      (a, b) => b.intensity - a.intensity
+    )
+
+    return frequencies
+      .slice(0, 6)
+      .map(item => item.frequency)
+  }
+
+  getDetectedChordFrequencies(data: Uint8Array) {
+    const frequencies = this.getDetectedFrequencies(data)
+
+    const detectedFrequencies: number[] = []
+
+    for (const frequency of frequencies) {
+      const positions = this.getClosestNote(frequency)
+
+      if (!positions) continue
+
+      const alreadyDetected = detectedFrequencies.some(
+        detectedFrequency =>
+          Math.abs(detectedFrequency - positions[0].targetFrequency) < 1
+      )
+
+      if (alreadyDetected) continue
+
+      detectedFrequencies.push(
+        positions[0].targetFrequency
+      )
+    }
+
+    return detectedFrequencies
   }
 
   getSignalLevel(data: Uint8Array) {
@@ -198,6 +290,45 @@ class GuitarAudioService {
     return matches
   }
 
+  getChordDefinitions() {
+    return guitarChords
+  }
+
+  getDetectedNotes(frequencies: number[]) {
+    const detectedNotes = new Set<string>()
+
+    for (const frequency of frequencies) {
+      const positions = this.getClosestNote(frequency)
+
+      if (!positions) continue
+
+      detectedNotes.add(positions[0].name)
+    }
+
+    return Array.from(detectedNotes)
+  }
+
+  getDetectedChord(data: Uint8Array) {
+    const frequencies =
+      this.getDetectedChordFrequencies(data)
+
+    const detectedNotes =
+      this.getDetectedNotes(frequencies)
+
+    for (const chord of guitarChords) {
+      const matchesAllNotes =
+        chord.notes.every(note =>
+          detectedNotes.includes(note)
+        )
+
+      if (matchesAllNotes) {
+        return chord.name
+      }
+    }
+
+    return null
+  }
+
   async calibrateNoiseFloor() {
     if (!this.analyser) {
       return null
@@ -243,5 +374,6 @@ class GuitarAudioService {
     return noiseFloor
   }
 }
+
 
 export default GuitarAudioService
