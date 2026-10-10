@@ -8,6 +8,7 @@ type ObstacleProps = {
   width: number
   height: number
   note?: string
+  chord?: string
   string?: string
   fret?: number
 }

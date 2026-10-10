@@ -115,6 +115,7 @@ function App() {
 
     await service.start()
 
+
     const calibrateNoiseFloor =
       await service.calibrateNoiseFloor()
 

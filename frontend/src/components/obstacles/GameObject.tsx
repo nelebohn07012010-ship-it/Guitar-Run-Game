@@ -12,6 +12,7 @@ export type GameObjectProps = {
   width: number
   height: number
   note?: string
+  chord?: string
   string?: string
   fret?: number
   className: string
@@ -24,6 +25,7 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
   height,
   string,
   fret,
+  chord,
   className,
   children,
 }, ref) => {
@@ -61,10 +63,16 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
     >
       {children}
 
-      {string && fret !== undefined && (
+      {(chord || (string && fret !== undefined)) && (
         <div className={`obstacle-note ${className}`}>
-          <strong>{string}-string</strong>
-          <span>fret {fret}</span>
+          {chord ? (
+            <strong>{chord}</strong>
+          ) : (
+            <>
+              <strong>{string}-string</strong>
+              <span>fret {fret}</span>
+            </>
+          )}
         </div>
       )}
     </div>

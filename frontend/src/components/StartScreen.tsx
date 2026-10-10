@@ -97,6 +97,9 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
               Before starting the game, choose your preferred control mode
               in the settings.
             </p>
+            <p>
+              For the best gaming experience, make sure you play loud enough and in a quiet room.
+            </p>
 
             <button
               id="control-hint-close"

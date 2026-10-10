@@ -4,27 +4,76 @@ type GuitarChord = {
 }
 
 const guitarChords: GuitarChord[] = [
-  {
-    name: "C",
-    notes: ["C", "E", "G"]
-  },
-  {
-    name: "G",
-    notes: ["G", "B", "D"]
-  },
-  {
-    name: "Am",
-    notes: ["A", "C", "E"]
-  },
-  {
-    name: "F",
-    notes: ["F", "A", "C"]
-  }
+  // Dur
+  { name: "C", notes: ["C", "E", "G"] },
+  { name: "C#", notes: ["C#", "F", "G#"] },
+  { name: "D", notes: ["D", "F#", "A"] },
+  { name: "D#", notes: ["D#", "G", "A#"] },
+  { name: "E", notes: ["E", "G#", "B"] },
+  { name: "F", notes: ["F", "A", "C"] },
+  { name: "F#", notes: ["F#", "A#", "C#"] },
+  { name: "G", notes: ["G", "B", "D"] },
+  { name: "G#", notes: ["G#", "C", "D#"] },
+  { name: "A", notes: ["A", "C#", "E"] },
+  { name: "A#", notes: ["A#", "D", "F"] },
+  { name: "B", notes: ["B", "D#", "F#"] },
+
+  // Moll
+  { name: "Cm", notes: ["C", "D#", "G"] },
+  { name: "C#m", notes: ["C#", "E", "G#"] },
+  { name: "Dm", notes: ["D", "F", "A"] },
+  { name: "D#m", notes: ["D#", "F#", "A#"] },
+  { name: "Em", notes: ["E", "G", "B"] },
+  { name: "Fm", notes: ["F", "G#", "C"] },
+  { name: "F#m", notes: ["F#", "A", "C#"] },
+  { name: "Gm", notes: ["G", "A#", "D"] },
+  { name: "G#m", notes: ["G#", "B", "D#"] },
+  { name: "Am", notes: ["A", "C", "E"] },
+  { name: "A#m", notes: ["A#", "C#", "F"] },
+  { name: "Bm", notes: ["B", "D", "F#"] },
+
+  // Vermindert
+  { name: "Cdim", notes: ["C", "D#", "F#"] },
+  { name: "Ddim", notes: ["D", "F", "G#"] },
+  { name: "Edim", notes: ["E", "G", "A#"] },
+  { name: "Fdim", notes: ["F", "G#", "B"] },
+  { name: "Gdim", notes: ["G", "A#", "C#"] },
+  { name: "Adim", notes: ["A", "C", "D#"] },
+  { name: "Bdim", notes: ["B", "D", "F"] },
+
+  // Sus2
+  { name: "Csus2", notes: ["C", "D", "G"] },
+  { name: "Dsus2", notes: ["D", "E", "A"] },
+  { name: "Esus2", notes: ["E", "F#", "B"] },
+  { name: "Fsus2", notes: ["F", "G", "C"] },
+  { name: "Gsus2", notes: ["G", "A", "D"] },
+  { name: "Asus2", notes: ["A", "B", "E"] },
+  { name: "Bsus2", notes: ["B", "C#", "F#"] },
+
+  // Sus4
+  { name: "Csus4", notes: ["C", "F", "G"] },
+  { name: "Dsus4", notes: ["D", "G", "A"] },
+  { name: "Esus4", notes: ["E", "A", "B"] },
+  { name: "Fsus4", notes: ["F", "A#", "C"] },
+  { name: "Gsus4", notes: ["G", "C", "D"] },
+  { name: "Asus4", notes: ["A", "D", "E"] },
+  { name: "Bsus4", notes: ["B", "E", "F#"] },
+
+  // Powerchords
+  { name: "C5", notes: ["C", "G"] },
+  { name: "D5", notes: ["D", "A"] },
+  { name: "E5", notes: ["E", "B"] },
+  { name: "F5", notes: ["F", "C"] },
+  { name: "G5", notes: ["G", "D"] },
+  { name: "A5", notes: ["A", "E"] },
+  { name: "B5", notes: ["B", "F#"] },
 ]
 
 class GuitarAudioService {
   private noiseFloor: number | null = null
-
+  private detectedChordNotes = new Set<string>()
+  private chordDetectionStartTime: number | null = null
+  private chordNoteHistory: string[][] = []
   private audioContext: AudioContext | null = null
   private source: MediaStreamAudioSourceNode | null = null
   private analyser: AnalyserNode | null = null
@@ -247,6 +296,155 @@ class GuitarAudioService {
     }
   }
 
+  getChordNotes(data: Uint8Array) {
+    if (!this.analyser || !this.audioContext) {
+      return []
+    }
+
+    const sampleRate = this.audioContext.sampleRate
+    const fftSize = this.analyser.fftSize
+
+    const noteFrequencies = [
+      { name: "C", frequency: 130.81 },
+      { name: "C#", frequency: 138.59 },
+      { name: "D", frequency: 146.83 },
+      { name: "D#", frequency: 155.56 },
+      { name: "E", frequency: 164.81 },
+      { name: "F", frequency: 174.61 },
+      { name: "F#", frequency: 185.00 },
+      { name: "G", frequency: 196.00 },
+      { name: "G#", frequency: 207.65 },
+      { name: "A", frequency: 220.00 },
+      { name: "A#", frequency: 233.08 },
+      { name: "B", frequency: 246.94 },
+    ]
+
+    const getIntensity = (frequency: number) => {
+      const targetBin =
+        Math.round(frequency * fftSize / sampleRate)
+
+      let maxIntensity = 0
+
+      for (let offset = -2; offset <= 2; offset++) {
+        const bin = targetBin + offset
+
+        if (bin < 0 || bin >= data.length) {
+          continue
+        }
+
+        const intensity = data[bin]
+
+        if (intensity > maxIntensity) {
+          maxIntensity = intensity
+        }
+      }
+
+      return maxIntensity
+    }
+
+    const scoredNotes = noteFrequencies.map(note => {
+      const fundamental = getIntensity(note.frequency)
+
+      const secondHarmonic =
+        getIntensity(note.frequency * 2)
+
+      const thirdHarmonic =
+        getIntensity(note.frequency * 3)
+
+      const score =
+        fundamental +
+        secondHarmonic * 0.7 +
+        thirdHarmonic * 0.5
+
+      return {
+        name: note.name,
+        score,
+      }
+    })
+
+    const strongestScore = Math.max(
+      ...scoredNotes.map(note => note.score),
+      0
+    )
+
+    const noiseThreshold = Math.max(
+      this.noiseFloor !== null
+        ? this.noiseFloor * 2
+        : 0,
+      strongestScore * 0.35
+    )
+
+    const validNotes =
+      scoredNotes.filter(note =>
+        note.score > noiseThreshold
+      )
+
+    validNotes.sort(
+      (a, b) => b.score - a.score
+    )
+
+    return validNotes
+      .slice(0, 3)
+      .map(note => note.name)
+  }
+
+  addChordNotes(notes: string[]) {
+    this.chordNoteHistory.push(notes)
+
+    const now = performance.now()
+
+    if (this.chordDetectionStartTime === null) {
+      this.chordDetectionStartTime = now
+    }
+
+    if (now - this.chordDetectionStartTime > 300) {
+      const noteCounts = new Map<string, number>()
+
+      for (const frame of this.chordNoteHistory) {
+        for (const note of frame) {
+          noteCounts.set(
+            note,
+            (noteCounts.get(note) ?? 0) + 1
+          )
+        }
+      }
+
+      const stableNotes = Array.from(noteCounts.entries())
+        .filter(([, count]) => count >= 3)
+        .map(([note]) => note)
+
+      this.detectedChordNotes =
+        new Set(stableNotes)
+
+      this.chordNoteHistory = []
+      this.chordDetectionStartTime = now
+    }
+  }
+
+  getNoteName(frequency: number) {
+    const noteNames = [
+      "C",
+      "C#",
+      "D",
+      "D#",
+      "E",
+      "F",
+      "F#",
+      "G",
+      "G#",
+      "A",
+      "A#",
+      "B",
+    ]
+
+    const midiNote =
+      Math.round(
+        12 * Math.log2(frequency / 440) + 69
+      )
+
+    return noteNames[midiNote % 12]
+  }
+
 
   getClosestNote(frequency: number) {
     const strings = [
@@ -273,9 +471,33 @@ class GuitarAudioService {
           )
 
         if (differenceInSemitones <= 0.5) {
+          const noteNames = [
+            "C",
+            "C#",
+            "D",
+            "D#",
+            "E",
+            "F",
+            "F#",
+            "G",
+            "G#",
+            "A",
+            "A#",
+            "B"
+          ]
+
+          const midi =
+            Math.round(
+              69 +
+              12 *
+              Math.log2(targetFrequency / 440)
+            )
+
+
           matches.push({
             name: string.name,
             fret,
+            note: this.getNoteName(targetFrequency),
             targetFrequency,
             differenceInSemitones,
           })
@@ -290,44 +512,62 @@ class GuitarAudioService {
     return matches
   }
 
+
+
   getChordDefinitions() {
     return guitarChords
   }
 
-  getDetectedNotes(frequencies: number[]) {
-    const detectedNotes = new Set<string>()
+  addDetectedChordNote(frequency: number) {
+    const positions = this.getClosestNote(frequency)
+    if (!positions) return
 
-    for (const frequency of frequencies) {
-      const positions = this.getClosestNote(frequency)
-
-      if (!positions) continue
-
-      detectedNotes.add(positions[0].name)
+    if (this.chordDetectionStartTime === null) {
+      this.chordDetectionStartTime = performance.now()
     }
 
-    return Array.from(detectedNotes)
+    const elapsed =
+      performance.now() - this.chordDetectionStartTime
+
+    if (elapsed > 500) {
+      this.detectedChordNotes.clear()
+      this.chordDetectionStartTime = performance.now()
+    }
+
+    this.detectedChordNotes.add(positions[0].note)
   }
 
-  getDetectedChord(data: Uint8Array) {
-    const frequencies =
-      this.getDetectedChordFrequencies(data)
+  getDetectedChordNotes() {
+    return Array.from(this.detectedChordNotes)
+  }
 
-    const detectedNotes =
-      this.getDetectedNotes(frequencies)
+  clearDetectedChordNotes() {
+    this.detectedChordNotes.clear()
+  }
 
+  getDetectedChord() {
+    const detectedNotes = this.getDetectedChordNotes()
+    console.log("Erkannte Akkordtöne:", detectedNotes)
     for (const chord of guitarChords) {
       const matchesAllNotes =
         chord.notes.every(note =>
           detectedNotes.includes(note)
         )
 
-      if (matchesAllNotes) {
+      const hasOnlyChordNotes =
+        detectedNotes.every(note =>
+          chord.notes.includes(note)
+        )
+
+      if (matchesAllNotes && hasOnlyChordNotes) {
         return chord.name
       }
     }
 
     return null
   }
+
+
 
   async calibrateNoiseFloor() {
     if (!this.analyser) {

@@ -5,6 +5,7 @@ export type LevelNote = {
   id: number
   type: ObstacleType
   note?: string
+  chord?: string
   string?: string
   fret?: number
   positionX: number

@@ -42,6 +42,7 @@ const ObstacleLayer = memo(function ObstacleLayer({
               width={obstacle.width}
               height={obstacle.height}
               note={obstacle.note}
+              chord={obstacle.chord}
               string={obstacle.string}
               fret={obstacle.fret}
             />
@@ -60,6 +61,7 @@ const ObstacleLayer = memo(function ObstacleLayer({
               width={obstacle.width}
               height={obstacle.height}
               note={obstacle.note}
+              chord={obstacle.chord}
               string={obstacle.string}
               fret={obstacle.fret}
             />
@@ -108,6 +110,7 @@ const ObstacleLayer = memo(function ObstacleLayer({
             width={obstacle.width}
             height={obstacle.height}
             note={obstacle.note}
+            chord={obstacle.chord}
             string={obstacle.string}
             fret={obstacle.fret}
           />
@@ -349,14 +352,49 @@ const GameScreen = ({
 
           const data = service.getFrequencyData()
           if (!data) return
+          const chordNotes = service.getChordNotes(data)
 
-          const chordFrequencies =
-            service.getDetectedChordFrequencies(data)
+          service.addChordNotes(chordNotes)
+          console.log("AKKORD – aktuelle Töne:", chordNotes)
+          console.log(
+            "AKKORD – stabile Töne:",
+            service.getDetectedChordNotes()
+          )
+          const chordObstacle = activeObstacleDataRef.current
 
+          if (chordObstacle?.chord !== undefined) {
+            const detectedChord = service.getDetectedChord()
 
+            if (detectedChord === chordObstacle.chord) {
+              const playerCanJump =
+                playerYRef.current <=
+                playerGroundYRef.current + 0.5
+
+              if (chordObstacle.type === "crouch") {
+                playerRef.current?.setIsCrouching(true)
+              } else if (playerCanJump) {
+                setJumpTrigger(trigger => trigger + 1)
+              }
+            } else if (chordObstacle.type === "crouch") {
+              playerRef.current?.setIsCrouching(false)
+            }
+
+            return
+          }
 
           const fundamentalFrequency =
             service.getFundamentalFrequency(data)
+
+          if (fundamentalFrequency) {
+            service.addDetectedChordNote(
+              fundamentalFrequency.frequency
+            )
+
+          }
+
+
+
+
 
           if (!fundamentalFrequency) {
             return
@@ -374,6 +412,7 @@ const GameScreen = ({
           }
 
           const detectedPosition = detectedPositions[0]
+
 
           const detectedNoteKey =
             `${detectedPosition.name}-${detectedPosition.fret}`
@@ -398,12 +437,16 @@ const GameScreen = ({
             playerRef.current?.setIsCrouching(false)
             return
           }
-          if (
-            activeObstacle.string === undefined ||
-            activeObstacle.fret === undefined
-          ) {
-            playerRef.current?.setIsCrouching(false)
-            return
+
+
+          if (activeObstacle.chord === undefined) {
+            if (
+              activeObstacle.string === undefined ||
+              activeObstacle.fret === undefined
+            ) {
+              playerRef.current?.setIsCrouching(false)
+              return
+            }
           }
 
 
@@ -424,8 +467,7 @@ const GameScreen = ({
 
 
             if (
-              position.name === activeObstacle.string &&
-              position.fret === activeObstacle.fret
+              position.note === activeObstacle.note
             ) {
               if (activeObstacle.type === "crouch") {
                 playerRef.current?.setIsCrouching(true)
@@ -587,7 +629,7 @@ const GameScreen = ({
               gameAreaCenterY - playerBottomY
 
             setCameraY(cameraOffsetY)
-            console.log("CAMERA Y:", cameraOffsetY)
+
           } else {
             setCameraY(0)
           }
@@ -924,12 +966,19 @@ const GameScreen = ({
     let nextObstacle = null
 
     for (const obstacle of currentLevel.obstacles) {
+
+      const isChordObstacle = obstacle.chord !== undefined
+
       if (
-        obstacle.string === undefined ||
-        obstacle.fret === undefined
+        !isChordObstacle &&
+        (
+          obstacle.string === undefined ||
+          obstacle.fret === undefined
+        )
       ) {
         continue
       }
+
 
       const obstacleHasBeenPassed =
         obstacle.type === "crouch"
