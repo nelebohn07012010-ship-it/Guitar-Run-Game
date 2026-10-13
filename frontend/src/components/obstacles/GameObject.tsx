@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from "react"
-import "./Note.css"
+
 
 export type GameObjectHandle = {
   getRect: () => DOMRect | null
@@ -62,19 +62,6 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
       }}
     >
       {children}
-
-      {(chord || (string && fret !== undefined)) && (
-        <div className={`obstacle-note ${className}`}>
-          {chord ? (
-            <strong>{chord}</strong>
-          ) : (
-            <>
-              <strong>{string}-string</strong>
-              <span>fret {fret}</span>
-            </>
-          )}
-        </div>
-      )}
     </div>
   )
 })

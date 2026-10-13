@@ -11,6 +11,7 @@ import { memo, useEffect, useState, useRef } from "react"
 import type { MutableRefObject } from "react"
 import levelOne from "../levels/levelOne"
 import GuitarAudioService from "../services/GuitarAudioService"
+import "../styles/desert.css"
 import "../styles/neonArcade.css"
 import { GAME_CONFIG } from "../gameConfig"
 import PauseMenu from "./PauseMenu.tsx"
@@ -19,7 +20,13 @@ import { saveLevelStat } from "../levels/levelStats.ts"
 import DeathAnimation from "../components/player/DeathAnimation"
 import { saveAchievement } from "../levels/achievementStats.ts"
 import { playGameSound } from "../services/GuitarSoundService.ts"
-
+import NoteCatalog from "./NoteCatalog"
+type LevelAttempt = {
+  date: string
+  progress: number
+  coins: number
+  attemptNumber: number
+}
 const ObstacleLayer = memo(function ObstacleLayer({
   obstacles,
   gameObjRef,
@@ -139,12 +146,45 @@ const GameScreen = ({
   //===========================
   //SAVING
   //===========================
+
+  const recordAttempt = () => {
+    if (attemptRecordedRef.current) return
+
+    sessionAttemptsRef.current.push({
+      date: new Date().toISOString(),
+      progress: levelProgressRef.current,
+      coins,
+      attemptNumber: attempts,
+    })
+
+    attemptRecordedRef.current = true
+  }
+
   const handleHome = () => {
+    recordAttempt()
+
+    const allAttempts = sessionAttemptsRef.current
+
+    const bestAttempt = allAttempts.reduce((best, attempt) => {
+      if (attempt.progress > best.progress) {
+        return attempt
+      }
+
+      if (
+        attempt.progress === best.progress &&
+        attempt.coins > best.coins
+      ) {
+        return attempt
+      }
+
+      return best
+    })
+
     saveLevelStat({
       levelName: currentLevel.name,
-      date: new Date().toISOString(),
-      progress: levelProgress,
-      coins,
+      date: bestAttempt.date,
+      progress: bestAttempt.progress,
+      coins: bestAttempt.coins,
       totalCoins: currentLevel.obstacles.filter(
         obstacle => obstacle.type === "coin"
       ).length,
@@ -203,6 +243,10 @@ const GameScreen = ({
   const collectedCoinsRef = useRef<Set<number>>(new Set())
   const [coins, setCoins] = useState(0)
 
+  const sessionAttemptsRef = useRef<LevelAttempt[]>([])
+  const attemptRecordedRef = useRef(false)
+
+
   const [playerY, setPlayerY] = useState(50)
   const previousPlayerBottomRef = useRef(playerY)
   const [playerGroundY, setPlayerGroundY] = useState(GAME_CONFIG.ground.height)
@@ -237,6 +281,8 @@ const GameScreen = ({
   const diedThisRunRef = useRef(false)
 
   const attemptPositionX = 40
+
+  const [activeObstacleId, setActiveObstacleId] = useState<number | null>(null)
   //=================================
   //CALIBRATING PAUSE
   //=================================
@@ -734,6 +780,8 @@ const GameScreen = ({
     diedThisRunRef.current = true
     playGameSound("death")
 
+    recordAttempt()
+
 
     if (beatAudioRef.current) {
       beatAudioRef.current.pause()
@@ -755,6 +803,7 @@ const GameScreen = ({
       setJumpTrigger(0)
 
       setAttemps(prev => prev + 1)
+      attemptRecordedRef.current = false
 
       collectedCoinsRef.current.clear()
       setCoins(0)
@@ -996,7 +1045,14 @@ const GameScreen = ({
       }
     }
 
+    const previousObstacle = activeObstacleDataRef.current
+
     activeObstacleDataRef.current = nextObstacle
+    setActiveObstacleId(nextObstacle?.id ?? null)
+
+    if (previousObstacle?.type === "crouch" && previousObstacle !== nextObstacle) {
+      playerRef.current?.setIsCrouching(false)
+    }
 
   }, [movement])
   // ====================
@@ -1011,6 +1067,7 @@ const GameScreen = ({
       id="game-area"
       className={`${currentLevel.style} ${restartAnimation ? "restart-animation" : ""}`}
     >
+      <NoteCatalog obstacles={currentLevel.obstacles} activeObstacleId={activeObstacleId} />
       {isCalibrating && (
         <div id="calibration-overlay">
           <div id="calibration-text">

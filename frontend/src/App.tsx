@@ -3,6 +3,7 @@ import GameScreen from './components/GameScreen'
 import StartScreen from './components/StartScreen'
 import LandingScreen from "./components/LandingScreen"
 import "./App.css"
+import { useWakeLock } from "./services/useWakeLock"
 import GuitarAudioService from './services/GuitarAudioService'
 import levelOne from "./levels/levelOne"
 import levelTwo from './levels/levelTwo'
@@ -53,7 +54,7 @@ function App() {
   })
   const [showLanding, setShowLanding] = useState(true)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
-
+  useWakeLock(isPlaying)
 
 
   const startLoading = async () => {

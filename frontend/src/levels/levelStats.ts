@@ -24,47 +24,40 @@ export const getLevelStats = (): LevelStat[] => {
   }
 }
 
+
+
 export const saveLevelStat = (newStat: LevelStat) => {
   const stats = getLevelStats()
 
-  const levelStats = stats.filter(
+  // Nur Ergebnisse desselben Levels und Steuerungsmodus vergleichen.
+  const previousStats = stats.filter(
     stat =>
       stat.levelName === newStat.levelName &&
       stat.controlMode === newStat.controlMode
   )
 
-  const bestProgress =
-    levelStats.length > 0
-      ? Math.max(...levelStats.map(stat => stat.progress))
-      : 0
+  // Prüfen, ob das neue Ergebnis besser als alle bisherigen ist.
+  const isBetter = previousStats.every(
+    stat =>
+      newStat.progress > stat.progress ||
+      (
+        newStat.progress === stat.progress &&
+        newStat.coins > stat.coins
+      )
+  )
 
-  const bestCoins =
-    levelStats.length > 0
-      ? Math.max(...levelStats.map(stat => stat.coins))
-      : 0
-
-  const bestAttempts =
-    levelStats.length > 0
-      ? Math.min(...levelStats.map(stat => stat.attempts))
-      : Infinity
-
-  const isBetter =
-    levelStats.length === 0 ||
-    newStat.progress > bestProgress ||
-    newStat.coins > bestCoins ||
-    newStat.attempts < bestAttempts
-
+  // Wenn es nicht besser ist, nichts speichern.
   if (!isBetter) {
     return
   }
 
+  // Besseres Ergebnis hinzufügen, alte Einträge bleiben erhalten.
   stats.push(newStat)
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(stats)
-  )
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(stats))
 }
+
+
 
 export const clearLevelStats = () => {
   localStorage.removeItem(STORAGE_KEY)

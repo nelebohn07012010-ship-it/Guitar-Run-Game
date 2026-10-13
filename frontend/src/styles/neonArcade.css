@@ -128,7 +128,7 @@
 /* OBSTACLE DESIGN */
 
 .neon-arcade .obstacle {
-  background-image: url("../assets/platform_img.png");
+  background-image: url("../assets/arcade_platform.png");
   box-shadow: var(--glow-medium);
 }
 
@@ -144,7 +144,7 @@
 /* CROUCH DESIGN */
 
 .neon-arcade .crouch {
-  background-image: url("../assets/crouch_img.png");
+  background-image: url("../assets/arcade_crouch.png");
   box-shadow: var(--glow-medium);
 }
 
@@ -162,7 +162,7 @@
 
 
 .neon-arcade .spike-shape {
-  background-image: url("../assets/spike_img.jpeg");
+  background-image: url("../assets/arcade_spike.jpeg");
 }
 
 .neon-arcade .obstacle-note.spike {
@@ -202,9 +202,7 @@
   box-shadow: 0 0 0.3vw rgba(255, 255, 255, 0.8), 0 0 0.8vw rgba(255, 0, 204, 0.5);
 }
 
-.neon-arcade #player-visual {
-  background-image: url("../assets/player_img.png");
-}
+
 
 .neon-arcade #player.crouching::after {
   background: linear-gradient(to top, rgba(255, 0, 204, 1), rgba(255, 77, 232, 0.55), transparent);
@@ -226,4 +224,61 @@
 .neon-arcade #attempt-counter {
   text-shadow: 0.12vw 0.12vw 0 #000, -0.08vw -0.08vw 0 #000,
     0.08vw -0.08vw 0 #000, -0.08vw 0.08vw 0 #000;
+}
+
+
+
+/* NOTE CATALOG DESIGN */
+
+.neon-arcade .note-catalog-item {
+  background: #030509;
+  border: 0.08cqw solid #657080;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(255, 255, 255, 0.25),
+    0 0 0.8cqw rgba(0, 0, 0, 0.9);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* ACTIVE OBSTACLE */
+.neon-arcade .note-catalog-item.active {
+  background: #02090d;
+  border: 0.12cqw solid #00f0ff;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(0, 240, 255, 0.9),
+    0 0 1.4cqw rgba(0, 240, 255, 0.65),
+    inset 0 0 0.6cqw rgba(0, 240, 255, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #00f0ff,
+    0 0 0.8cqw rgba(0, 240, 255, 0.8);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* PLAYED OBSTACLES */
+.neon-arcade .note-catalog-item.played {
+  background: #020805;
+  border-color: #39ff88;
+
+  color: #8affc1;
+
+  box-shadow:
+    0 0 0.3cqw rgba(57, 255, 136, 0.7),
+    0 0 0.9cqw rgba(57, 255, 136, 0.45);
+
+  text-shadow:
+    0 0 0.3cqw rgba(57, 255, 136, 0.8);
+
+  opacity: 0.45;
 }

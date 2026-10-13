@@ -1,0 +1,291 @@
+/* =========================
+   DESERT RUNNER - WÜSTEN THEME
+   ========================= */
+
+.desert-theme {
+  /* COLORS */
+  --background: #e8a65b;
+  --background-glow: rgba(255, 204, 128, 0.25);
+  --ground: #9b542e;
+  --primary: #ffd27a;
+  --secondary: #b85c38;
+  --secondary-glow: rgba(184, 92, 56, 0.35);
+  --accent: #37c6bd;
+  --text: #fff3d6;
+
+  /* GLOW - warm statt Neon */
+  --glow-small: 0 0 0.4cqw var(--primary);
+  --glow-medium: 0 0 0.8cqw var(--secondary);
+  --glow-large: 0 0 1.5cqw var(--secondary-glow);
+
+  /* BACKGROUND */
+  --background-scroll-speed: 45s;
+
+
+  background-color: var(--ground);
+}
+
+/* =========================
+   GAME AREA
+   ========================= */
+
+.desert-theme #game-area {
+  border: 0.1cqw solid #d68a49;
+  box-shadow:
+    0 0 1.5cqw rgba(255, 190, 100, 0.25),
+    inset 0 0 1cqw rgba(70, 34, 17, 0.15);
+}
+
+#game-screen.desert-theme {
+  background-image: url("../assets/desert_startscreen.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* =========================
+   BACKGROUND IMAGE
+   ========================= */
+
+.desert-theme #background-layer {
+  background-image: url("../assets/desert_background.png");
+}
+
+/* =========================
+   SUNSET COLOR ANIMATION
+   ========================= */
+
+.desert-theme::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #f5b66a;
+  opacity: 0.1;
+
+  animation: desert-sunset 100s linear infinite;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes desert-sunset {
+  0% {
+    background: #f5b66a;
+  }
+
+  25% {
+    background: #e98b58;
+  }
+
+  50% {
+    background: #d66b53;
+  }
+
+  75% {
+    background: #e9a15c;
+  }
+
+  100% {
+    background: #f5b66a;
+  }
+}
+
+.desert-theme.restart-animation::before {
+  animation: none;
+}
+
+/* =========================
+   GROUND DESIGN
+   ========================= */
+
+.desert-theme #ground::before {
+  background-image: url("../assets/desert_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.desert-theme #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(65, 30, 12, 0.35),
+    inset -10cqw 0 8cqw -4cqw rgba(65, 30, 12, 0.35),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(65, 30, 12, 0.45);
+}
+
+/* =========================
+   OBSTACLE DESIGN
+   ========================= */
+
+.desert-theme .obstacle {
+  background-image: url("../assets/desert_platform.png");
+  box-shadow: 0 0.25cqw 0.5cqw rgba(65, 30, 12, 0.25);
+}
+
+.desert-theme .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: 0 0 0.3cqw rgba(255, 210, 122, 0.4);
+}
+
+.desert-theme .obstacle-note span {
+  color: var(--text);
+}
+
+/* =========================
+   CROUCH DESIGN
+   ========================= */
+
+.desert-theme .crouch {
+  background-image: url("../assets/desert_crouch.png");
+  box-shadow: 0 0.2cqw 0.5cqw rgba(48, 78, 35, 0.3);
+}
+
+.desert-theme .crouch-note strong {
+  color: #b8e0a5;
+  text-shadow: 0 0 0.3cqw rgba(75, 120, 55, 0.3);
+}
+
+.desert-theme .crouch-note span {
+  color: var(--text);
+}
+
+/* =========================
+   SPIKE DESIGN
+   ========================= */
+
+.desert-theme .spike-shape {
+  background-image: url("../assets/desert_spike.png");
+}
+
+.desert-theme .obstacle-note .spike {
+  color: #ffad6b;
+}
+
+.desert-theme .obstacle-note .obstacle {
+  color: #ffd27a;
+}
+
+.desert-theme .obstacle-note .crouch {
+  color: #b8e0a5;
+}
+
+.desert-theme .spike-note span {
+  color: var(--text);
+}
+
+/* =========================
+   NOTE DESIGN
+   ========================= */
+
+.desert-theme .obstacle-note {
+  background: rgba(75, 38, 22, 0.92);
+  border: 0.05cqw solid currentColor;
+  color: #fff3d6;
+
+  box-shadow:
+    0 0 0.2cqw rgba(255, 210, 122, 0.2);
+
+  text-shadow: none;
+}
+
+.desert-theme .text-obstacle {
+  background: rgba(75, 38, 22, 0.92);
+  border: 0.15vw solid #ffd27a;
+  color: #fff3d6;
+
+  box-shadow:
+    0 0 0.3vw rgba(255, 210, 122, 0.25);
+}
+
+/* =========================
+   PLAYER DESIGN
+   ========================= */
+
+
+
+.desert-theme #player.crouching::after {
+  background: linear-gradient(to top,
+      rgba(55, 198, 189, 0.8),
+      rgba(55, 198, 189, 0.3),
+      transparent);
+
+  box-shadow:
+    0 0 1cqw rgba(55, 198, 189, 0.25);
+}
+
+/* =========================
+   CALIBRATION & HUD
+   ========================= */
+
+.desert-theme #calibration-overlay {
+  background: rgba(55, 29, 17, 0.82);
+  border: 0.1vw solid rgba(255, 226, 177, 0.7);
+}
+
+.desert-theme #calibration-text,
+.desert-theme #calibration-warning,
+.desert-theme #calibration-countdown,
+.desert-theme #attempt-counter {
+  color: #fff3d6;
+}
+
+.desert-theme #attempt-counter {
+  text-shadow:
+    0.12vw 0.12vw 0 #4b2616,
+    -0.08vw -0.08vw 0 #4b2616,
+    0.08vw -0.08vw 0 #4b2616,
+    -0.08vw 0.08vw 0 #4b2616;
+}
+
+/* NOTE CATALOG DESIGN */
+
+.desert-theme .note-catalog-item {
+  background: #030509;
+  border: 0.08cqw solid #657080;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(255, 255, 255, 0.25),
+    0 0 0.8cqw rgba(0, 0, 0, 0.9);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* ACTIVE OBSTACLE */
+.desert-theme .note-catalog-item.active {
+  background: #02090d;
+  border: 0.12cqw solid #00f0ff;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(0, 240, 255, 0.9),
+    0 0 1.4cqw rgba(0, 240, 255, 0.65),
+    inset 0 0 0.6cqw rgba(0, 240, 255, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #00f0ff,
+    0 0 0.8cqw rgba(0, 240, 255, 0.8);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* PLAYED OBSTACLES */
+.desert-theme .note-catalog-item.played {
+  background: #020805;
+  border-color: #39ff88;
+
+  color: #8affc1;
+
+  box-shadow:
+    0 0 0.3cqw rgba(57, 255, 136, 0.7),
+    0 0 0.9cqw rgba(57, 255, 136, 0.45);
+
+  text-shadow:
+    0 0 0.3cqw rgba(57, 255, 136, 0.8);
+
+  opacity: 0.45;
+}
