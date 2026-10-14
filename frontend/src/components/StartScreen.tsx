@@ -3,6 +3,7 @@ import levelOne from "../levels/levelOne"
 import { useState, useRef, useEffect } from "react"
 import playButton from "../assets/play_button.png"
 import rankingButton from "../assets/ranking_button.png"
+import achievmentButton from "../assets/achievement_button.png"
 import Settings from "../assets/setting.png"
 import {
   getLevelStats,
@@ -197,7 +198,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
           id="achievements-button"
           onClick={() => setShowAchievements(true)}
         >
-          <img src={rankingButton} alt="Achievments" />
+          <img src={achievmentButton} alt="Achievments" />
         </button>
 
         <button
