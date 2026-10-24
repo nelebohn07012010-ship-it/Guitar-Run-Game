@@ -13,7 +13,7 @@
   position: relative;
   container-type: size;
 
-  width: min(90vw, calc(90vh * 19.5 / 9));
+  width: min(95vw, calc(95vh * 19.5 / 9));
   aspect-ratio: 19.5 / 9;
 
   overflow: hidden;
@@ -24,22 +24,7 @@
 
 }
 
-@media (orientation: landscape) and (max-width: 900px) {
-  #game-screen {
-    width: 100vw;
-    height: 100dvh;
-    padding: 0;
-    margin: 0;
-  }
 
-  #game-area {
-    width: 100vw;
-    height: 100dvh;
-    aspect-ratio: auto;
-    max-width: none;
-    box-sizing: border-box;
-  }
-}
 
 /* BACKGROUND SCROLL */
 

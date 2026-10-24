@@ -1,0 +1,252 @@
+/* =========================
+   SNOW RUNNER - SCHNEE THEME
+   ========================= */
+
+.snow-theme {
+  /* COLORS */
+  --background: #cceeff;
+  --background-glow: rgba(240, 250, 255, 0.35);
+  --ground: #426d91;
+  --primary: #f4fcff;
+  --secondary: #82c9ed;
+  --secondary-glow: rgba(130, 201, 237, 0.4);
+  --accent: #8ff5f0;
+  --text: #f5fbff;
+
+  /* GLOW - frostiges Eisleuchten */
+  --glow-small: 0 0 0.4cqw var(--primary);
+  --glow-medium: 0 0 0.8cqw var(--secondary);
+  --glow-large: 0 0 1.5cqw var(--secondary-glow);
+
+  /* BACKGROUND */
+  --background-scroll-speed: 45s;
+
+  background-color: var(--ground);
+}
+
+/* =========================
+   GAME AREA
+   ========================= */
+
+.snow-theme #game-area {
+  border: 0.1cqw solid #d9f5ff;
+  box-shadow:
+    0 0 1.5cqw rgba(190, 235, 255, 0.35),
+    inset 0 0 1cqw rgba(18, 48, 78, 0.2);
+}
+
+#game-screen.snow-theme,
+#start-screen.snow-theme {
+  background-image: url("../assets/snow_background_starscreen.png");
+}
+
+/* =========================
+   BACKGROUND IMAGE
+   ========================= */
+
+.snow-theme #background-layer {
+  background-image: url("../assets/snow_background.png");
+}
+
+
+/* =========================
+   GROUND DESIGN
+   ========================= */
+
+.snow-theme #ground::before {
+  background-image: url("/src/assets/snow_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.snow-theme #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(18, 48, 78, 0.3),
+    inset -10cqw 0 8cqw -4cqw rgba(18, 48, 78, 0.3),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(18, 48, 78, 0.4);
+}
+
+/* =========================
+   OBSTACLE DESIGN
+   ========================= */
+
+.snow-theme .obstacle {
+  background-image: url("/src/assets/snow_platform.png");
+  box-shadow: 0 0.25cqw 0.5cqw rgba(18, 48, 78, 0.3);
+}
+
+.snow-theme .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: 0 0 0.3cqw rgba(244, 252, 255, 0.55);
+}
+
+.snow-theme .obstacle-note span {
+  color: var(--text);
+}
+
+/* =========================
+   CROUCH DESIGN
+   ========================= */
+
+.snow-theme .crouch {
+  background-image: url("/src/assets/snow_crouch.png");
+  box-shadow: 0 0.2cqw 0.5cqw rgba(40, 100, 140, 0.35);
+}
+
+.snow-theme .crouch-note strong {
+  color: #9ff8f2;
+  text-shadow: 0 0 0.3cqw rgba(143, 245, 240, 0.4);
+}
+
+.snow-theme .crouch-note span {
+  color: var(--text);
+}
+
+/* =========================
+   SPIKE DESIGN
+   ========================= */
+
+.snow-theme .spike-shape {
+  background-image: url("/src/assets/snow_spike.png");
+}
+
+.snow-theme .obstacle-note .spike {
+  color: #b8edff;
+}
+
+.snow-theme .obstacle-note .obstacle {
+  color: #f4fcff;
+}
+
+.snow-theme .obstacle-note .crouch {
+  color: #9ff8f2;
+}
+
+.snow-theme .spike-note span {
+  color: var(--text);
+}
+
+/* =========================
+   NOTE DESIGN
+   ========================= */
+
+.snow-theme .obstacle-note {
+  background: rgba(24, 53, 79, 0.92);
+  border: 0.05cqw solid currentColor;
+  color: #f5fbff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(210, 242, 255, 0.25);
+
+  text-shadow: none;
+}
+
+.snow-theme .text-obstacle {
+  background: rgba(24, 53, 79, 0.92);
+  border: 0.15vw solid #d9f5ff;
+  color: #f5fbff;
+
+  box-shadow:
+    0 0 0.3vw rgba(190, 235, 255, 0.3);
+}
+
+/* =========================
+   PLAYER DESIGN
+   ========================= */
+
+.snow-theme #player.crouching::after {
+  background: linear-gradient(to top,
+      rgba(143, 245, 240, 0.8),
+      rgba(143, 245, 240, 0.3),
+      transparent);
+
+  box-shadow:
+    0 0 1cqw rgba(143, 245, 240, 0.35);
+}
+
+/* =========================
+   CALIBRATION & HUD
+   ========================= */
+
+.snow-theme #calibration-overlay {
+  background: rgba(19, 43, 66, 0.86);
+  border: 0.1vw solid rgba(220, 246, 255, 0.75);
+}
+
+.snow-theme #calibration-text,
+.snow-theme #calibration-warning,
+.snow-theme #calibration-countdown,
+.snow-theme #attempt-counter {
+  color: #f5fbff;
+}
+
+.snow-theme #attempt-counter {
+  text-shadow:
+    0.12vw 0.12vw 0 #18354f,
+    -0.08vw -0.08vw 0 #18354f,
+    0.08vw -0.08vw 0 #18354f,
+    -0.08vw 0.08vw 0 #18354f;
+}
+
+/* =========================
+   NOTE CATALOG DESIGN
+   ========================= */
+
+.snow-theme .note-catalog-item {
+  background: #102536;
+  border: 0.08cqw solid #7faac5;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(220, 246, 255, 0.2),
+    0 0 0.8cqw rgba(5, 20, 35, 0.8);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* =========================
+   ACTIVE OBSTACLE
+   ========================= */
+
+.snow-theme .note-catalog-item.active {
+  background: #102b40;
+  border: 0.12cqw solid #8ff5f0;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(143, 245, 240, 0.9),
+    0 0 1.4cqw rgba(143, 245, 240, 0.6),
+    inset 0 0 0.6cqw rgba(143, 245, 240, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #8ff5f0,
+    0 0 0.8cqw rgba(143, 245, 240, 0.75);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* =========================
+   PLAYED OBSTACLES
+   ========================= */
+
+.snow-theme .note-catalog-item.played {
+  background: #102c2e;
+  border-color: #8af5c5;
+
+  color: #b4ffdc;
+
+  box-shadow:
+    0 0 0.3cqw rgba(138, 245, 197, 0.65),
+    0 0 0.9cqw rgba(138, 245, 197, 0.4);
+
+  text-shadow:
+    0 0 0.3cqw rgba(138, 245, 197, 0.75);
+
+  opacity: 0.45;
+}

@@ -1,3 +1,4 @@
+
 export const GAME_CONFIG = {
   player: {
     left: 25,
@@ -5,8 +6,9 @@ export const GAME_CONFIG = {
     height: 11,
   },
 
+
+
   ground: {
     height: 20,
   },
-
 }

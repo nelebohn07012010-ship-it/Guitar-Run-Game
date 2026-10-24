@@ -73,13 +73,17 @@ export default function NoteCatalog({
               ref={isActive ? activeItemRef : null}
               className={[
                 "note-catalog-item",
+                obstacle.chord ? "chord-item" : "single-note-item",
                 isActive ? "active" : "",
                 isPlayed ? "played" : "",
               ].join(" ")}
             >
 
               {obstacle.chord ? (
-                <strong>{obstacle.chord} CHORD</strong>
+                <div className="chord-label">
+                  <strong>{obstacle.chord}</strong>
+                  <span>CHORD</span>
+                </div>
               ) : (
                 <span className="note-details">
                   <span>string : {obstacle.string}</span>

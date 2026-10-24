@@ -20,6 +20,7 @@ type PlayerProps = {
   groundY: number
   isPaused: boolean
   controlMode: "guitar" | "arrows"
+  playerSize: "fast" | "slow"
 }
 
 const Player = forwardRef<PlayerHandle, PlayerProps>(({
@@ -29,6 +30,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
   groundY,
   isPaused,
   controlMode,
+  playerSize: playerSizeName,
 }, ref) => {
 
   // ====================
@@ -49,10 +51,9 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
   // ====================
   // JUMP LOGIC
   // ====================
-
   const jump = () => {
     if (yPositionRef.current <= currentGroundYRef.current + 0.5) {
-      verticalSpeedRef.current = 70
+      verticalSpeedRef.current = playerSizeName === "slow" ? 70 : 240
       setIsJumping(true)
       setRotation(prev => prev + 180)
     }
@@ -146,7 +147,8 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
         const deltaTime = time - lastTime.current
         const deltaSeconds = deltaTime / 1000
 
-        const gravity = 180
+        const gravity = playerSizeName === "slow" ? 180 : 1000
+
         const newVerticalSpeed =
           verticalSpeedRef.current - gravity * deltaSeconds
 
@@ -206,8 +208,17 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
   // ====================
   // RENDER
   // ====================
-  const playerHeight = isCrouching ? GAME_CONFIG.player.height / 2 : GAME_CONFIG.player.height
-  const playerWidth = GAME_CONFIG.player.width
+
+
+  const playerSize = GAME_CONFIG.player
+
+  const playerWidth = playerSize.width;
+
+  const playerHeight = isCrouching
+    ? playerSize.height / 2
+    : playerSize.height;
+
+
   return (
     <div id="player" className={isCrouching ? "crouching" : ""} style={{
       left: `${GAME_CONFIG.player.left}%`,

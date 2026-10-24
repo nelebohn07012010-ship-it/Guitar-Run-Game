@@ -11,6 +11,8 @@ import {
   type LevelStat
 } from "../levels/levelStats"
 import Achievements from "./Achievements.tsx"
+import { isLevelUnlocked } from "../levels/levelUnlock.ts"
+
 
 
 const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setControlMode }: {
@@ -33,6 +35,8 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
       ? parsed
       : 0
   })
+  const [expandedChord, setExpandedChord] = useState<string | null>(null)
+  const [showChordGuide, setShowChordGuide] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [levelStats, setLevelStats] = useState<LevelStat[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
@@ -84,8 +88,148 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   }, [])
 
   const currentLevel = levels[selectedLevel]
-  return (<section id="start-screen">
-    <div id="start-area">
+  const currentLevelUnlocked = isLevelUnlocked(
+    currentLevel,
+    levels
+  )
+  const levelChords = [
+    ...new Set(
+      currentLevel.obstacles
+        .map((obstacle) => obstacle.chord)
+        .filter((chord): chord is string => Boolean(chord))
+    ),
+  ]
+
+  const showMusicTab =
+    controlMode === "guitar" && levelChords.length > 0
+  return (<section id="start-screen" className={currentLevel.style}>
+
+    <div
+      id="start-area"
+      className={!currentLevelUnlocked ? "start-area-locked" : ""}
+    >
+      {!currentLevelUnlocked && (
+        <div id="level-lock-overlay" aria-label="Level gesperrt">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect
+              x="12"
+              y="27"
+              width="40"
+              height="30"
+              rx="4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              d="M21 27V19a11 11 0 0 1 22 0v8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+            <circle cx="32" cy="40" r="3" fill="currentColor" />
+            <path
+              d="M32 43v5"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      )}
+
+      {showMusicTab && (
+        <>
+          <button
+            id="music-guide-button"
+            type="button"
+            aria-label="Akkordübersicht öffnen"
+            aria-expanded={showChordGuide}
+            onClick={() => setShowChordGuide(true)}
+          >
+            ♫
+          </button>
+
+          {showChordGuide && (
+            <div
+              id="music-guide-overlay"
+              onClick={() => setShowChordGuide(false)}
+            >
+              <div
+                id="music-guide-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Noten und Akkorde dieses Levels"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button
+                  id="music-guide-close"
+                  type="button"
+                  aria-label="Schließen"
+                  onClick={() => setShowChordGuide(false)}
+                >
+                  ×
+                </button>
+
+                <h2> CHORDS</h2>
+
+                <div id="music-guide-list">
+                  {levelChords.map((chord) => (
+                    <button
+                      className="music-guide-card"
+                      key={chord}
+                      type="button"
+                      onClick={() => setExpandedChord(chord)}
+                      aria-label={`${chord} vergrößern`}
+                    >
+                      <h3>{chord}</h3>
+
+                      <div className="music-guide-image-placeholder">
+                        <img
+                          src={`src/assets/${chord}.png`}
+                          alt={`Chord ${chord}`}
+                        />
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+          )}
+          {expandedChord && (
+            <div
+              id="expanded-chord-overlay"
+              onClick={() => setExpandedChord(null)}
+            >
+              <div
+                id="expanded-chord-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Akkord ${expandedChord}`}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button
+                  id="expanded-chord-close"
+                  type="button"
+                  aria-label="Akkordansicht schließen"
+                  onClick={() => setExpandedChord(null)}
+                >
+                  ×
+                </button>
+
+                <div className="expanded-chord-image">
+                  <img
+                    src={`src/assets/${expandedChord}.png`}
+                    alt={`Chord ${expandedChord}`}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
       {showControlHint && (
         <div id="control-hint-overlay">
           <div id="settings-highlight"></div>
@@ -203,7 +347,12 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
 
         <button
           id="play-button"
-          onClick={() => startGame(currentLevel)}
+          disabled={!currentLevelUnlocked}
+          onClick={() => {
+            if (currentLevelUnlocked) {
+              startGame(currentLevel)
+            }
+          }}
         >
           <img src={playButton} alt="Play" />
         </button>

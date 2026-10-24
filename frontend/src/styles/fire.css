@@ -1,0 +1,304 @@
+/* =========================
+   FIRE RUNNER - FEUER THEME
+   ========================= */
+
+.fire-theme {
+  /* COLORS */
+  --background: #451512;
+  --background-glow: rgba(255, 91, 31, 0.3);
+  --ground: #261718;
+  --primary: #ffe08a;
+  --secondary: #ff572e;
+  --secondary-glow: rgba(255, 65, 30, 0.4);
+  --accent: #ffb52e;
+  --text: #fff0dc;
+
+  /* GLOW - glühende Lava */
+  --glow-small: 0 0 0.4cqw var(--primary);
+  --glow-medium: 0 0 0.8cqw var(--secondary);
+  --glow-large: 0 0 1.5cqw var(--secondary-glow);
+
+  /* BACKGROUND */
+  --background-scroll-speed: 45s;
+
+  background-color: var(--ground);
+}
+
+/* =========================
+   GAME AREA
+   ========================= */
+
+.fire-theme #game-area {
+  border: 0.1cqw solid #ff713d;
+  box-shadow:
+    0 0 1.5cqw rgba(255, 90, 35, 0.3),
+    inset 0 0 1cqw rgba(65, 12, 8, 0.35);
+}
+
+#game-screen.fire-theme,
+#start-screen.fire-theme {
+  background-image: url("../assets/fire_background.png");
+}
+
+/* =========================
+   BACKGROUND IMAGE
+   ========================= */
+
+.fire-theme #background-layer {
+  background-image: url("../assets/fire_background.png");
+}
+
+/* =========================
+   FIRE COLOR ANIMATION
+   ========================= */
+
+#game-screen.fire-theme::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #ff6a2b;
+  opacity: 0.12;
+
+  animation: fire-flicker 12s ease-in-out infinite alternate;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes fire-flicker {
+  0% {
+    background: #ff6a2b;
+    opacity: 0.08;
+  }
+
+  25% {
+    background: #ff3d24;
+    opacity: 0.14;
+  }
+
+  50% {
+    background: #ffb52e;
+    opacity: 0.1;
+  }
+
+  75% {
+    background: #d9271b;
+    opacity: 0.16;
+  }
+
+  100% {
+    background: #ff6a2b;
+    opacity: 0.1;
+  }
+}
+
+.fire-theme.restart-animation::before {
+  animation: none;
+}
+
+/* =========================
+   GROUND DESIGN
+   ========================= */
+
+.fire-theme #ground::before {
+  background-image: url("../assets/fire_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.fire-theme #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(25, 8, 5, 0.5),
+    inset -10cqw 0 8cqw -4cqw rgba(25, 8, 5, 0.5),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(25, 8, 5, 0.6);
+}
+
+/* =========================
+   OBSTACLE DESIGN
+   ========================= */
+
+.fire-theme .obstacle {
+  background-image: url("../assets/fire_platform.png");
+  box-shadow:
+    0 0.25cqw 0.5cqw rgba(30, 8, 5, 0.4),
+    0 0 0.5cqw rgba(255, 87, 46, 0.15);
+}
+
+.fire-theme .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: 0 0 0.3cqw rgba(255, 224, 138, 0.5);
+}
+
+.fire-theme .obstacle-note span {
+  color: var(--text);
+}
+
+/* =========================
+   CROUCH DESIGN
+   ========================= */
+
+.fire-theme .crouch {
+  background-image: url("../assets/fire_crouch.png");
+  box-shadow:
+    0 0.2cqw 0.5cqw rgba(30, 8, 5, 0.4),
+    0 0 0.4cqw rgba(255, 181, 46, 0.2);
+}
+
+.fire-theme .crouch-note strong {
+  color: #ffbd70;
+  text-shadow: 0 0 0.3cqw rgba(255, 110, 45, 0.45);
+}
+
+.fire-theme .crouch-note span {
+  color: var(--text);
+}
+
+/* =========================
+   SPIKE DESIGN
+   ========================= */
+
+.fire-theme .spike-shape {
+  background-image: url("../assets/fire_spike.png");
+}
+
+.fire-theme .obstacle-note .spike {
+  color: #ff8a52;
+}
+
+.fire-theme .obstacle-note .obstacle {
+  color: #ffe08a;
+}
+
+.fire-theme .obstacle-note .crouch {
+  color: #ffbd70;
+}
+
+.fire-theme .spike-note span {
+  color: var(--text);
+}
+
+/* =========================
+   NOTE DESIGN
+   ========================= */
+
+.fire-theme .obstacle-note {
+  background: rgba(48, 16, 13, 0.93);
+  border: 0.05cqw solid currentColor;
+  color: #fff0dc;
+
+  box-shadow:
+    0 0 0.2cqw rgba(255, 145, 65, 0.25);
+
+  text-shadow: none;
+}
+
+.fire-theme .text-obstacle {
+  background: rgba(48, 16, 13, 0.93);
+  border: 0.15vw solid #ffe08a;
+  color: #fff0dc;
+
+  box-shadow:
+    0 0 0.3vw rgba(255, 120, 45, 0.3);
+}
+
+/* =========================
+   PLAYER DESIGN
+   ========================= */
+
+.fire-theme #player.crouching::after {
+  background: linear-gradient(to top,
+      rgba(255, 87, 46, 0.85),
+      rgba(255, 181, 46, 0.35),
+      transparent);
+
+  box-shadow:
+    0 0 1cqw rgba(255, 87, 46, 0.35);
+}
+
+/* =========================
+   CALIBRATION & HUD
+   ========================= */
+
+.fire-theme #calibration-overlay {
+  background: rgba(39, 13, 12, 0.88);
+  border: 0.1vw solid rgba(255, 190, 120, 0.75);
+}
+
+.fire-theme #calibration-text,
+.fire-theme #calibration-warning,
+.fire-theme #calibration-countdown,
+.fire-theme #attempt-counter {
+  color: #fff0dc;
+}
+
+.fire-theme #attempt-counter {
+  text-shadow:
+    0.12vw 0.12vw 0 #30100d,
+    -0.08vw -0.08vw 0 #30100d,
+    0.08vw -0.08vw 0 #30100d,
+    -0.08vw 0.08vw 0 #30100d;
+}
+
+/* =========================
+   NOTE CATALOG DESIGN
+   ========================= */
+
+.fire-theme .note-catalog-item {
+  background: #1c0d0d;
+  border: 0.08cqw solid #8d5140;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(255, 150, 90, 0.2),
+    0 0 0.8cqw rgba(10, 3, 3, 0.85);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* =========================
+   ACTIVE OBSTACLE
+   ========================= */
+
+.fire-theme .note-catalog-item.active {
+  background: #2b100d;
+  border: 0.12cqw solid #ffb52e;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(255, 181, 46, 0.9),
+    0 0 1.4cqw rgba(255, 87, 46, 0.6),
+    inset 0 0 0.6cqw rgba(255, 181, 46, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #ffb52e,
+    0 0 0.8cqw rgba(255, 87, 46, 0.75);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* =========================
+   PLAYED OBSTACLES
+   ========================= */
+
+.fire-theme .note-catalog-item.played {
+  background: #21120d;
+  border-color: #ff754a;
+
+  color: #ffb08a;
+
+  box-shadow:
+    0 0 0.3cqw rgba(255, 117, 74, 0.65),
+    0 0 0.9cqw rgba(255, 117, 74, 0.35);
+
+  text-shadow:
+    0 0 0.3cqw rgba(255, 117, 74, 0.75);
+
+  opacity: 0.45;
+}

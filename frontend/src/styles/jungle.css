@@ -1,0 +1,304 @@
+/* =========================
+   JUNGLE RUNNER - Jungle THEME
+   ========================= */
+
+.jungle-theme {
+  /* COLORS */
+  --background: #1d593b;
+  --background-glow: rgba(100, 220, 130, 0.25);
+  --ground: #173c2b;
+  --primary: #d4ff9b;
+  --secondary: #3e9b58;
+  --secondary-glow: rgba(62, 155, 88, 0.4);
+  --accent: #45e0b2;
+  --text: #efffe8;
+
+  /* GLOW - biolumineszentes Dschungellicht */
+  --glow-small: 0 0 0.4cqw var(--primary);
+  --glow-medium: 0 0 0.8cqw var(--secondary);
+  --glow-large: 0 0 1.5cqw var(--secondary-glow);
+
+  /* BACKGROUND */
+  --background-scroll-speed: 45s;
+
+  background-color: var(--ground);
+}
+
+/* =========================
+   GAME AREA
+   ========================= */
+
+.jungle-theme #game-area {
+  border: 0.1cqw solid #65bd70;
+  box-shadow:
+    0 0 1.5cqw rgba(82, 210, 110, 0.25),
+    inset 0 0 1cqw rgba(7, 35, 21, 0.3);
+}
+
+#game-screen.jungle-theme,
+#start-screen.jungle-theme {
+  background-image: url("../assets/jungle_background.png");
+}
+
+/* =========================
+   BACKGROUND IMAGE
+   ========================= */
+
+.jungle-theme #background-layer {
+  background-image: url("../assets/jungle_background.png");
+}
+
+/* =========================
+   JUNGLE LIGHT ANIMATION
+   ========================= */
+
+#game-screen.jungle-theme::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #70d77d;
+  opacity: 0.1;
+
+  animation: jungle-light 35s ease-in-out infinite alternate;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes jungle-light {
+  0% {
+    background: #70d77d;
+    opacity: 0.07;
+  }
+
+  25% {
+    background: #27b58a;
+    opacity: 0.12;
+  }
+
+  50% {
+    background: #b4ed83;
+    opacity: 0.08;
+  }
+
+  75% {
+    background: #16866c;
+    opacity: 0.14;
+  }
+
+  100% {
+    background: #70d77d;
+    opacity: 0.1;
+  }
+}
+
+.jungle-theme.restart-animation::before {
+  animation: none;
+}
+
+/* =========================
+   GROUND DESIGN
+   ========================= */
+
+.jungle-theme #ground::before {
+  background-image: url("../assets/jungle_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.jungle-theme #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(5, 28, 15, 0.4),
+    inset -10cqw 0 8cqw -4cqw rgba(5, 28, 15, 0.4),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(5, 28, 15, 0.5);
+}
+
+/* =========================
+   OBSTACLE DESIGN
+   ========================= */
+
+.jungle-theme .obstacle {
+  background-image: url("../assets/jungle_platform.png");
+  box-shadow:
+    0 0.25cqw 0.5cqw rgba(5, 28, 15, 0.35),
+    0 0 0.4cqw rgba(90, 200, 100, 0.15);
+}
+
+.jungle-theme .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: 0 0 0.3cqw rgba(212, 255, 155, 0.4);
+}
+
+.jungle-theme .obstacle-note span {
+  color: var(--text);
+}
+
+/* =========================
+   CROUCH DESIGN
+   ========================= */
+
+.jungle-theme .crouch {
+  background-image: url("../assets/jungle_crouch.png");
+  box-shadow:
+    0 0.2cqw 0.5cqw rgba(5, 28, 15, 0.35),
+    0 0 0.4cqw rgba(69, 224, 178, 0.2);
+}
+
+.jungle-theme .crouch-note strong {
+  color: #8ff5c5;
+  text-shadow: 0 0 0.3cqw rgba(69, 224, 178, 0.4);
+}
+
+.jungle-theme .crouch-note span {
+  color: var(--text);
+}
+
+/* =========================
+   SPIKE DESIGN
+   ========================= */
+
+.jungle-theme .spike-shape {
+  background-image: url("../assets/jungle_spike.png");
+}
+
+.jungle-theme .obstacle-note .spike {
+  color: #ffcc79;
+}
+
+.jungle-theme .obstacle-note .obstacle {
+  color: #d4ff9b;
+}
+
+.jungle-theme .obstacle-note .crouch {
+  color: #8ff5c5;
+}
+
+.jungle-theme .spike-note span {
+  color: var(--text);
+}
+
+/* =========================
+   NOTE DESIGN
+   ========================= */
+
+.jungle-theme .obstacle-note {
+  background: rgba(13, 45, 29, 0.93);
+  border: 0.05cqw solid currentColor;
+  color: #efffe8;
+
+  box-shadow:
+    0 0 0.2cqw rgba(140, 230, 145, 0.2);
+
+  text-shadow: none;
+}
+
+.jungle-theme .text-obstacle {
+  background: rgba(13, 45, 29, 0.93);
+  border: 0.15vw solid #d4ff9b;
+  color: #efffe8;
+
+  box-shadow:
+    0 0 0.3vw rgba(100, 220, 130, 0.25);
+}
+
+/* =========================
+   PLAYER DESIGN
+   ========================= */
+
+.jungle-theme #player.crouching::after {
+  background: linear-gradient(to top,
+      rgba(69, 224, 178, 0.8),
+      rgba(69, 224, 178, 0.3),
+      transparent);
+
+  box-shadow:
+    0 0 1cqw rgba(69, 224, 178, 0.3);
+}
+
+/* =========================
+   CALIBRATION & HUD
+   ========================= */
+
+.jungle-theme #calibration-overlay {
+  background: rgba(10, 38, 24, 0.87);
+  border: 0.1vw solid rgba(200, 255, 190, 0.7);
+}
+
+.jungle-theme #calibration-text,
+.jungle-theme #calibration-warning,
+.jungle-theme #calibration-countdown,
+.jungle-theme #attempt-counter {
+  color: #efffe8;
+}
+
+.jungle-theme #attempt-counter {
+  text-shadow:
+    0.12vw 0.12vw 0 #0d2d1d,
+    -0.08vw -0.08vw 0 #0d2d1d,
+    0.08vw -0.08vw 0 #0d2d1d,
+    -0.08vw 0.08vw 0 #0d2d1d;
+}
+
+/* =========================
+   NOTE CATALOG DESIGN
+   ========================= */
+
+.jungle-theme .note-catalog-item {
+  background: #0b2117;
+  border: 0.08cqw solid #477e56;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(190, 255, 180, 0.15),
+    0 0 0.8cqw rgba(0, 15, 8, 0.85);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* =========================
+   ACTIVE OBSTACLE
+   ========================= */
+
+.jungle-theme .note-catalog-item.active {
+  background: #102d1d;
+  border: 0.12cqw solid #45e0b2;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(69, 224, 178, 0.9),
+    0 0 1.4cqw rgba(69, 224, 178, 0.5),
+    inset 0 0 0.6cqw rgba(69, 224, 178, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #45e0b2,
+    0 0 0.8cqw rgba(69, 224, 178, 0.7);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* =========================
+   PLAYED OBSTACLES
+   ========================= */
+
+.jungle-theme .note-catalog-item.played {
+  background: #10251a;
+  border-color: #80e8a3;
+
+  color: #b8ffd0;
+
+  box-shadow:
+    0 0 0.3cqw rgba(128, 232, 163, 0.6),
+    0 0 0.9cqw rgba(128, 232, 163, 0.35);
+
+  text-shadow:
+    0 0 0.3cqw rgba(128, 232, 163, 0.7);
+
+  opacity: 0.45;
+}

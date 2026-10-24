@@ -1,0 +1,295 @@
+/* =========================
+   SKY RUNNER - HIMMEL THEME
+   ========================= */
+
+.sky-theme {
+  /* COLORS */
+  --background: #78c9f5;
+  --background-glow: rgba(210, 242, 255, 0.3);
+  --ground: #367eae;
+  --primary: #e8f8ff;
+  --secondary: #3c9ed0;
+  --secondary-glow: rgba(60, 158, 208, 0.35);
+  --accent: #75f0e8;
+  --text: #f4fcff;
+
+  /* GLOW - sanftes Himmelsleuchten */
+  --glow-small: 0 0 0.4cqw var(--primary);
+  --glow-medium: 0 0 0.8cqw var(--secondary);
+  --glow-large: 0 0 1.5cqw var(--secondary-glow);
+
+  /* BACKGROUND */
+  --background-scroll-speed: 45s;
+
+  background-color: var(--ground);
+}
+
+/* =========================
+   GAME AREA
+   ========================= */
+
+.sky-theme #game-area {
+  border: 0.1cqw solid #a9e6ff;
+  box-shadow:
+    0 0 1.5cqw rgba(174, 231, 255, 0.3),
+    inset 0 0 1cqw rgba(20, 75, 120, 0.15);
+}
+
+#game-screen.sky-theme,
+#start-screen.sky-theme {
+  background-image: url("../assets/sky_background.png");
+}
+
+/* =========================
+   BACKGROUND IMAGE
+   ========================= */
+
+.sky-theme #background-layer {
+  background-image: url("../assets/sky_background.png");
+}
+
+/* =========================
+   SKY COLOR ANIMATION
+   ========================= */
+
+#game-screen.sky-theme::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #b8eaff;
+  opacity: 0.1;
+
+  animation: sky-shift 100s linear infinite;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes sky-shift {
+  0% {
+    background: #b8eaff;
+  }
+
+  25% {
+    background: #8ed8fa;
+  }
+
+  50% {
+    background: #c5edff;
+  }
+
+  75% {
+    background: #73c6ef;
+  }
+
+  100% {
+    background: #b8eaff;
+  }
+}
+
+.sky-theme.restart-animation::before {
+  animation: none;
+}
+
+/* =========================
+   GROUND DESIGN
+   ========================= */
+
+.sky-theme #ground::before {
+  background-image: url("../assets/sky_floor.png");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+.sky-theme #ground-shadow {
+  box-shadow:
+    inset 10cqw 0 8cqw -4cqw rgba(22, 70, 115, 0.25),
+    inset -10cqw 0 8cqw -4cqw rgba(22, 70, 115, 0.25),
+    inset 0 -5cqw 6cqw -2.5cqw rgba(22, 70, 115, 0.35);
+}
+
+/* =========================
+   OBSTACLE DESIGN
+   ========================= */
+
+.sky-theme .obstacle {
+  background-image: url("../assets/sky_platform.png");
+  box-shadow: 0 0.25cqw 0.5cqw rgba(25, 86, 130, 0.25);
+}
+
+.sky-theme .obstacle-note strong {
+  color: var(--primary);
+  text-shadow: 0 0 0.3cqw rgba(232, 248, 255, 0.5);
+}
+
+.sky-theme .obstacle-note span {
+  color: var(--text);
+}
+
+/* =========================
+   CROUCH DESIGN
+   ========================= */
+
+.sky-theme .crouch {
+  background-image: url("../assets/sky_crouch.png");
+  box-shadow: 0 0.2cqw 0.5cqw rgba(25, 86, 130, 0.3);
+}
+
+.sky-theme .crouch-note strong {
+  color: #9efff5;
+  text-shadow: 0 0 0.3cqw rgba(117, 240, 232, 0.4);
+}
+
+.sky-theme .crouch-note span {
+  color: var(--text);
+}
+
+/* =========================
+   SPIKE DESIGN
+   ========================= */
+
+.sky-theme .spike-shape {
+  background-image: url("../assets/sky_spike.png");
+}
+
+.sky-theme .obstacle-note .spike {
+  color: #a5e7ff;
+}
+
+.sky-theme .obstacle-note .obstacle {
+  color: #e8f8ff;
+}
+
+.sky-theme .obstacle-note .crouch {
+  color: #9efff5;
+}
+
+.sky-theme .spike-note span {
+  color: var(--text);
+}
+
+/* =========================
+   NOTE DESIGN
+   ========================= */
+
+.sky-theme .obstacle-note {
+  background: rgba(22, 66, 105, 0.9);
+  border: 0.05cqw solid currentColor;
+  color: #f4fcff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(174, 231, 255, 0.25);
+
+  text-shadow: none;
+}
+
+.sky-theme .text-obstacle {
+  background: rgba(22, 66, 105, 0.9);
+  border: 0.15vw solid #e8f8ff;
+  color: #f4fcff;
+
+  box-shadow:
+    0 0 0.3vw rgba(174, 231, 255, 0.3);
+}
+
+/* =========================
+   PLAYER DESIGN
+   ========================= */
+
+.sky-theme #player.crouching::after {
+  background: linear-gradient(to top,
+      rgba(117, 240, 232, 0.8),
+      rgba(117, 240, 232, 0.3),
+      transparent);
+
+  box-shadow:
+    0 0 1cqw rgba(117, 240, 232, 0.3);
+}
+
+/* =========================
+   CALIBRATION & HUD
+   ========================= */
+
+.sky-theme #calibration-overlay {
+  background: rgba(18, 54, 88, 0.84);
+  border: 0.1vw solid rgba(220, 246, 255, 0.75);
+}
+
+.sky-theme #calibration-text,
+.sky-theme #calibration-warning,
+.sky-theme #calibration-countdown,
+.sky-theme #attempt-counter {
+  color: #f4fcff;
+}
+
+.sky-theme #attempt-counter {
+  text-shadow:
+    0.12vw 0.12vw 0 #164269,
+    -0.08vw -0.08vw 0 #164269,
+    0.08vw -0.08vw 0 #164269,
+    -0.08vw 0.08vw 0 #164269;
+}
+
+/* =========================
+   NOTE CATALOG DESIGN
+   ========================= */
+
+.sky-theme .note-catalog-item {
+  background: #10283c;
+  border: 0.08cqw solid #83b9d6;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.3cqw rgba(220, 246, 255, 0.2),
+    0 0 0.8cqw rgba(5, 25, 45, 0.7);
+
+  text-shadow: none;
+
+  opacity: 0.7;
+}
+
+/* =========================
+   ACTIVE OBSTACLE
+   ========================= */
+
+.sky-theme .note-catalog-item.active {
+  background: #102c42;
+  border: 0.12cqw solid #75f0e8;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0.2cqw rgba(117, 240, 232, 0.9),
+    0 0 1.4cqw rgba(117, 240, 232, 0.55),
+    inset 0 0 0.6cqw rgba(117, 240, 232, 0.2);
+
+  text-shadow:
+    0 0 0.3cqw #75f0e8,
+    0 0 0.8cqw rgba(117, 240, 232, 0.7);
+
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* =========================
+   PLAYED OBSTACLES
+   ========================= */
+
+.sky-theme .note-catalog-item.played {
+  background: #102b2e;
+  border-color: #7cf5bd;
+
+  color: #a9ffda;
+
+  box-shadow:
+    0 0 0.3cqw rgba(124, 245, 189, 0.6),
+    0 0 0.9cqw rgba(124, 245, 189, 0.35);
+
+  text-shadow:
+    0 0 0.3cqw rgba(124, 245, 189, 0.7);
+
+  opacity: 0.45;
+}

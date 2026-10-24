@@ -26,13 +26,16 @@
   background-color: var(--ground);
 }
 
+
+
 /* Theme-only visuals. Layout and dimensions stay in the component styles. */
 .neon-arcade#game-area {
   border: 0.1cqw solid var(--secondary);
   box-shadow: 0 0 3cqw var(--secondary), 0 0 5cqw var(--secondary-glow);
 }
 
-#game-screen.neon-arcade {
+#game-screen.neon-arcade,
+#start-screen.neon-arcade {
   background-image: url("../assets/arcade_bckgrnd_startscreen.png");
 }
 
@@ -44,7 +47,7 @@
 
 /* BACKGROUND COLOR ANIMATION */
 
-.neon-arcade::before {
+#game-screen.neon-arcade::before {
   content: "";
   position: absolute;
   inset: 0;

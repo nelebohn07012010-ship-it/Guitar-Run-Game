@@ -13,6 +13,10 @@ import levelOne from "../levels/levelOne"
 import GuitarAudioService from "../services/GuitarAudioService"
 import "../styles/desert.css"
 import "../styles/neonArcade.css"
+import "../styles/sky.css"
+import "../styles/snow.css"
+import "../styles/fire.css"
+import "../styles/jungle.css"
 import { GAME_CONFIG } from "../gameConfig"
 import PauseMenu from "./PauseMenu.tsx"
 import EndScreen from "./EndScreen.tsx"
@@ -21,6 +25,9 @@ import DeathAnimation from "../components/player/DeathAnimation"
 import { saveAchievement } from "../levels/achievementStats.ts"
 import { playGameSound } from "../services/GuitarSoundService.ts"
 import NoteCatalog from "./NoteCatalog"
+import { completeLevel } from "../levels/levelUnlock.ts"
+
+
 type LevelAttempt = {
   date: string
   progress: number
@@ -506,8 +513,11 @@ const GameScreen = ({
             const playerCanJump =
               playerYRef.current <=
               playerGroundYRef.current + 0.5
-            if (activeObstacle.type === "crouch" && position.name === activeObstacle.string && position.fret === activeObstacle.fret) {
-              correctCrouchTone = true
+            if (
+              activeObstacle.type === "crouch" &&
+              position.note === activeObstacle.note
+            ) {
+              correctCrouchTone = true;
             }
 
 
@@ -558,16 +568,23 @@ const GameScreen = ({
     playerYRef.current = yPosition
     setPlayerY(yPosition)
   }
-  const playerLeft = GAME_CONFIG.player.left
-  const playerWidth = GAME_CONFIG.player.width
 
+  const playerLeft = GAME_CONFIG.player.left;
 
+  const playerSize =
+    GAME_CONFIG.player
 
-  const playerHeight = playerRef.current?.isCrouching() ? GAME_CONFIG.player.height / 2 : GAME_CONFIG.player.height
+  const playerWidth = playerSize.width;
 
-  const playerRight = playerLeft + playerWidth
-  const playerBottom = playerY
-  const playerTop = playerBottom + playerHeight
+  const playerHeight = playerRef.current?.isCrouching()
+    ? playerSize.height / 2
+    : playerSize.height;
+
+  const playerRight = playerLeft + playerWidth;
+
+  const playerBottom = playerY;
+  const playerTop = playerBottom + playerHeight;
+
 
 
 
@@ -702,6 +719,8 @@ const GameScreen = ({
           allObstacles.length > 0 &&
           passedObstacles.length === allObstacles.length
         ) {
+          completeLevel(currentLevel.name)
+
           setLevelComplete(true)
           setIsPaused(true)
         }
@@ -853,6 +872,8 @@ const GameScreen = ({
         continue
       }
 
+
+
       const obstacleLeft = obstacle.positionX - movementRef.current
       const obstacleRight = obstacleLeft + obstacle.width
 
@@ -907,16 +928,20 @@ const GameScreen = ({
         continue
       }
 
+
       if (obstacle.type === "spike") {
+        const horizontalInset = obstacle.width * 0.15
+        const verticalInset = obstacle.height * 0.15
+
         const collision = checkSpikeCollision(
           playerLeft,
           playerRight,
           playerBottom,
           playerTop,
-          obstacleLeft,
-          obstacleRight,
-          obstacleBottom,
-          obstacleTop
+          obstacleLeft + horizontalInset,
+          obstacleRight - horizontalInset,
+          obstacleBottom + verticalInset,
+          obstacleTop - verticalInset
         )
 
         if (collision) {
@@ -925,6 +950,7 @@ const GameScreen = ({
 
         continue
       }
+
 
       const horizontalOverlap =
         playerRight > obstacleLeft &&
@@ -1109,6 +1135,7 @@ const GameScreen = ({
         ref={playerRef}
         isPaused={isPaused || isCalibrating}
         controlMode={controlMode}
+        playerSize={currentLevel.speed ?? "slow"}
       />
       {gameOver && (
         <DeathAnimation

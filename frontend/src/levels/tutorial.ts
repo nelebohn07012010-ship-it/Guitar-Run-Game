@@ -7,6 +7,7 @@ const tutorial: Level = {
   backgroundImage,
   name: "Tutorial (Guitar)",
   style: "neon-arcade",
+  group: 1,
   obstacles: [
     {
       id: 1,

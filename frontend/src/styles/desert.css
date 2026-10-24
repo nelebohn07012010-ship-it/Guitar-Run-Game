@@ -36,10 +36,9 @@
     inset 0 0 1cqw rgba(70, 34, 17, 0.15);
 }
 
-#game-screen.desert-theme {
-  background-image: url("../assets/desert_startscreen.png");
-  background-size: cover;
-  background-position: center;
+#game-screen.desert-theme,
+#start-screen.desert-theme {
+  background-image: url("../assets/desert_background_startscreen.png");
 }
 
 /* =========================
@@ -54,7 +53,7 @@
    SUNSET COLOR ANIMATION
    ========================= */
 
-.desert-theme::before {
+#game-srceen.desert-theme::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -138,14 +137,7 @@
   box-shadow: 0 0.2cqw 0.5cqw rgba(48, 78, 35, 0.3);
 }
 
-.desert-theme .crouch-note strong {
-  color: #b8e0a5;
-  text-shadow: 0 0 0.3cqw rgba(75, 120, 55, 0.3);
-}
 
-.desert-theme .crouch-note span {
-  color: var(--text);
-}
 
 /* =========================
    SPIKE DESIGN
@@ -155,21 +147,7 @@
   background-image: url("../assets/desert_spike.png");
 }
 
-.desert-theme .obstacle-note .spike {
-  color: #ffad6b;
-}
 
-.desert-theme .obstacle-note .obstacle {
-  color: #ffd27a;
-}
-
-.desert-theme .obstacle-note .crouch {
-  color: #b8e0a5;
-}
-
-.desert-theme .spike-note span {
-  color: var(--text);
-}
 
 /* =========================
    NOTE DESIGN

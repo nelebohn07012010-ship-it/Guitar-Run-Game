@@ -13,36 +13,36 @@
   background: transparent;
 }
 
-
-
 .note-catalog-track {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-
   display: flex;
   align-items: center;
   gap: 1%;
+
   width: 100%;
+  padding: 1%;
+  box-sizing: border-box;
 
   overflow-x: auto;
   overflow-y: hidden;
 
-  padding: 1%;
-  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-
+.note-catalog-track::-webkit-scrollbar {
+  display: none;
+}
 
 .note-catalog-item {
   flex: 0 0 20%;
   min-width: 20%;
   min-height: 100px;
-
   padding: 0%;
+
   box-sizing: border-box;
 
   display: flex;
@@ -56,15 +56,14 @@
   border: 1px solid rgba(150, 170, 210, 0.25);
 
   font-size: 400%;
-
   opacity: 0.7;
+
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
     opacity 0.2s ease,
     transform 0.2s ease;
 }
-
 
 .note-catalog-item strong {
   font-size: 420%;
@@ -76,6 +75,7 @@
   white-space: nowrap;
 }
 
+/* Aktive Karte */
 .note-catalog-item.active {
   color: #fff;
   background: rgba(8, 10, 28, 0.92);
@@ -85,6 +85,7 @@
   transform: scale(1.06);
 }
 
+/* Bereits gespielte Karte */
 .note-catalog-item.played {
   color: #8affc1;
   background: rgba(8, 10, 28, 0.92);
@@ -92,7 +93,15 @@
   opacity: 0.85;
 }
 
+/* Einzelnoten */
+.note-catalog-item.single-note-item {
+  flex: 0 0 20%;
+  min-width: 20%;
+  min-height: 100px;
+  font-size: 400%;
+}
 
+/* Details einer Einzelnote */
 .note-details {
   display: flex;
   flex-direction: column;
@@ -100,8 +109,40 @@
   gap: 4%;
 }
 
+/* Akkordkarten: gleiche Größe wie Einzelnoten */
+.note-catalog-item.chord-item {
+  flex: 0 0 20%;
+  min-width: 20%;
+  min-height: 100px;
+  padding: 4px;
+  gap: 4px;
 
+  box-sizing: border-box;
+  font-size: 100%;
+}
 
-.note-catalog-track::-webkit-scrollbar {
-  display: none;
+/* Akkordname und CHORD-Label */
+.note-catalog-item.chord-item .chord-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.note-catalog-item.chord-item .chord-label strong {
+  font-size: 300%;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.note-catalog-item.chord-item .chord-label span {
+  font-size: 100%;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Aktive Akkordkarte etwas weniger vergrößern */
+.note-catalog-item.chord-item.active {
+  transform: scale(1.03);
 }

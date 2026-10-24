@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(../assets/arcade_bckgrnd_startscreen.png);
 }
 
 #start-area {
@@ -633,4 +632,306 @@
   border-color: #ff7777;
 
   transform: scale(1.04);
+}
+
+/* =========================
+   Musik-Button
+========================= */
+
+#music-guide-button {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #00f0ff;
+  border-radius: 12px;
+  color: #00f0ff;
+  background: rgba(8, 10, 28, 0.92);
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+#music-guide-button:hover {
+  background: rgba(0, 240, 255, 0.15);
+}
+
+/* =========================
+   Akkordübersicht
+========================= */
+
+#music-guide-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 12, 0.82);
+}
+
+#music-guide-panel {
+  position: relative;
+  width: min(800px, 100%);
+  max-height: 95%;
+  overflow-y: auto;
+  padding: 28px;
+  box-sizing: border-box;
+  color: #fff;
+  background: #0b1025;
+  border: 1px solid #00f0ff;
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.2);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#music-guide-panel::-webkit-scrollbar {
+  display: none;
+}
+
+#music-guide-panel h2 {
+  margin-top: 0;
+  color: #00f0ff;
+  text-align: center;
+}
+
+#music-guide-panel>p {
+  color: #b7bfd6;
+  text-align: center;
+}
+
+#music-guide-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  color: #fff;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#music-guide-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* =========================
+   Akkordkarten
+========================= */
+
+.music-guide-card {
+  position: relative;
+  width: 160px;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.65);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.music-guide-card h3 {
+  display: none;
+}
+
+.music-guide-card:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 0 12px rgba(0, 240, 255, 0.9),
+    0 0 24px rgba(0, 240, 255, 0.6);
+}
+
+.music-guide-card:focus,
+.music-guide-card:focus-visible,
+.music-guide-card:active {
+  outline: none;
+  border: none;
+}
+
+.music-guide-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.music-guide-image-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* =========================
+   Vergrößerte Akkordkarte
+========================= */
+
+#expanded-chord-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 12, 0.88);
+}
+
+#expanded-chord-panel {
+  position: relative;
+  z-index: 10000;
+  width: min(420px, 85vw, calc(85vh * 3 / 4));
+  aspect-ratio: 3 / 4;
+  max-height: 85%;
+  overflow-y: auto;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #fff;
+  text-align: center;
+  background: #0b1025;
+  border: 2px solid #00f0ff;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+}
+
+#expanded-chord-panel h2 {
+  margin: 0 0 24px;
+  color: #00f0ff;
+  font-size: 36px;
+}
+
+#expanded-chord-close {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  border: none;
+  color: #fff;
+  background: transparent;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.expanded-chord-image {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Animation
+========================= */
+
+@keyframes chord-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  #music-guide-button {
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
+
+  #music-guide-panel {
+    padding: 24px 14px;
+  }
+
+  #music-guide-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.expanded-chord-image {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.expanded-chord-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#start-area {
+  position: relative;
+}
+
+#start-area.start-area-locked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: grayscale(100%);
+  pointer-events: none;
+}
+
+#level-lock-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+}
+
+#level-lock-overlay svg {
+  width: clamp(90px, 15vw, 180px);
+  height: auto;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.5));
 }

@@ -1,5 +1,6 @@
 import type { ObstacleType } from "./obstacleTypes"
 
+type PlayerSize = "fast" | "slow";
 
 export type LevelNote = {
   id: number
@@ -18,7 +19,9 @@ export type LevelNote = {
 export type Level = {
   name: string
   backgroundImage: string
+  group?: number
   style: string
+  speed?: PlayerSize;
   music: string
   obstacles: LevelNote[]
 }
