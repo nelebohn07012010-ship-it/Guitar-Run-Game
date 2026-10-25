@@ -1093,6 +1093,25 @@ const GameScreen = ({
       id="game-area"
       className={`${currentLevel.style} ${restartAnimation ? "restart-animation" : ""}`}
     >
+
+      {currentLevel.style === "snow-theme" && (
+        <div id="snowfall" aria-hidden="true">
+          {Array.from({ length: 100 }, (_, i) => (
+            <span
+              className="snowflake"
+              key={i}
+              style={{
+                left: `${(i * 37) % 100}%`,
+                animationDuration: `${5 + ((i * 13) % 8)}s`,
+                animationDelay: `${-((i * 7) % 12)}s`,
+                "--drift": `${((i * 17) % 61) - 30}px`,
+                "--size": `${3 + ((i * 11) % 5)}px`,
+              } as React.CSSProperties}
+            />
+          ))}
+        </div>
+      )}
+
       <NoteCatalog obstacles={currentLevel.obstacles} activeObstacleId={activeObstacleId} />
       {isCalibrating && (
         <div id="calibration-overlay">

@@ -8,7 +8,7 @@ const levelThree: Level = {
   speed: "fast",
   name: "7 Nation Army (3)",
   style: "neon-arcade",
-  group: 1,
+  group: 6,
   obstacles: [
     // Wiederholung 1
     { id: 1, type: "obstacle", note: "E", string: "A", fret: 7, positionX: 100, positionY: 20, width: 30, height: 8 },
