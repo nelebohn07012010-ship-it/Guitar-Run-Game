@@ -5,8 +5,9 @@ import music from "../assets/Neon Run.mp3"
 const levelTwelve: Level = {
   backgroundImage,
   music,
-  name: "Final Overload (lvl. 12)",
-  style: "neon-arcade",
+  name: "Snow (5)",
+  style: "snow-theme",
+  group: 11,
   obstacles: [
     // =====================================================
     // INTRO – ruhig beginnen

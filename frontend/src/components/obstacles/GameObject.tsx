@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react"
 
 
 export type GameObjectHandle = {
@@ -20,6 +20,7 @@ export type GameObjectProps = {
 }
 
 const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
+  positionX,
   positionY,
   width,
   height,
@@ -31,16 +32,31 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
 }, ref) => {
 
   const objectRef = useRef<HTMLDivElement>(null)
+  const gameAreaWidthRef = useRef(0)
+
+  useEffect(() => {
+    const gameArea = objectRef.current?.closest("#game-area")
+    if (!gameArea) return
+
+    const updateGameAreaWidth = () => {
+      gameAreaWidthRef.current = gameArea.getBoundingClientRect().width
+    }
+
+    updateGameAreaWidth()
+
+    const resizeObserver = new ResizeObserver(updateGameAreaWidth)
+    resizeObserver.observe(gameArea)
+
+    return () => resizeObserver.disconnect()
+  }, [])
 
   useImperativeHandle(ref, () => ({
     getRect: () => objectRef.current?.getBoundingClientRect() ?? null,
     setVisualPosition: (newPositionX: number, opacity = 1, cameraY = 0) => {
       const element = objectRef.current
       if (!element) return
-      const gameAreaWidth =
-        element.closest("#game-area")?.getBoundingClientRect().width ?? 0
       const positionPx =
-        (newPositionX / 100) * gameAreaWidth
+        ((newPositionX - positionX) / 100) * gameAreaWidthRef.current
 
       element.style.transform =
         `translate3d(${positionPx}px, ${-cameraY}px, 0)`
@@ -55,7 +71,7 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
       className={className}
       style={{
         position: "absolute",
-        left: 0,
+        left: `${positionX}%`,
         bottom: `${positionY}%`,
         width: `${width}%`,
         height: `${height}%`,

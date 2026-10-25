@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
 } from "react"
@@ -25,6 +26,23 @@ const Text = forwardRef<GameObjectHandle, TextProps>(
   }, ref) => {
 
     const objectRef = useRef<HTMLDivElement>(null)
+    const gameAreaWidthRef = useRef(0)
+
+    useEffect(() => {
+      const gameArea = objectRef.current?.closest("#game-area")
+      if (!gameArea) return
+
+      const updateGameAreaWidth = () => {
+        gameAreaWidthRef.current = gameArea.getBoundingClientRect().width
+      }
+
+      updateGameAreaWidth()
+
+      const resizeObserver = new ResizeObserver(updateGameAreaWidth)
+      resizeObserver.observe(gameArea)
+
+      return () => resizeObserver.disconnect()
+    }, [])
 
     useImperativeHandle(ref, () => ({
       getRect: () => {
@@ -41,14 +59,8 @@ const Text = forwardRef<GameObjectHandle, TextProps>(
           return
         }
 
-        const gameAreaWidth =
-          element
-            .closest("#game-area")
-            ?.getBoundingClientRect()
-            .width ?? 0
-
         const positionPx =
-          (newPositionX / 100) * gameAreaWidth
+          ((newPositionX - positionX) / 100) * gameAreaWidthRef.current
 
         element.style.transform =
           `translate3d(${positionPx}px, 0, 0)`
@@ -63,7 +75,7 @@ const Text = forwardRef<GameObjectHandle, TextProps>(
         className="text-obstacle"
         style={{
           position: "absolute",
-          left: 0,
+          left: `${positionX}%`,
           bottom: `${positionY}%`,
           width: `${width}%`,
           height: `${height}%`,

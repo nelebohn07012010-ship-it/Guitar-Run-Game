@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react"
+import { memo, useEffect, useRef } from "react"
 import "./NoteCatalog.css"
 
 type CatalogObstacle = {
@@ -16,7 +16,7 @@ type NoteCatalogProps = {
   activeObstacleId: number | null
 }
 
-export default function NoteCatalog({
+const NoteCatalog = memo(function NoteCatalog({
   obstacles,
   activeObstacleId,
 }: NoteCatalogProps) {
@@ -97,4 +97,6 @@ export default function NoteCatalog({
       </div>
     </div>
   )
-}
+})
+
+export default NoteCatalog

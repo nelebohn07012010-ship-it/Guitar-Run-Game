@@ -1,14 +1,9 @@
 import Player from "./player/Player"
 import type { PlayerHandle } from "./player/Player"
-import "./GameScreen.css"
-import Spike from "./obstacles/Spike"
-import Crouch from "./obstacles/Crouch"
-import Obstacle from "./obstacles/Platform"
-import Coin from "./obstacles/Coin"
-import Text from "./obstacles/Text"
 import type { GameObjectHandle } from "./obstacles/GameObject"
-import { memo, useEffect, useState, useRef } from "react"
-import type { MutableRefObject } from "react"
+import "./GameScreen.css"
+import { memo, useCallback, useEffect, useState, useRef } from "react"
+import type { CSSProperties } from "react"
 import levelOne from "../levels/levelOne"
 import GuitarAudioService from "../services/GuitarAudioService"
 import "../styles/desert.css"
@@ -26,6 +21,7 @@ import { saveAchievement } from "../levels/achievementStats.ts"
 import { playGameSound } from "../services/GuitarSoundService.ts"
 import NoteCatalog from "./NoteCatalog"
 import { completeLevel } from "../levels/levelUnlock.ts"
+import ObstacleLayer from "./game/ObstacleLayer"
 
 
 type LevelAttempt = {
@@ -34,105 +30,27 @@ type LevelAttempt = {
   coins: number
   attemptNumber: number
 }
-const ObstacleLayer = memo(function ObstacleLayer({
-  obstacles,
-  gameObjRef,
-}: {
-  obstacles: typeof levelOne.obstacles
-  gameObjRef: MutableRefObject<Record<number, GameObjectHandle | null>>
-}) {
+
+const Snowfall = memo(function Snowfall() {
   return (
-    <div id="obstacle-layer">
-      {obstacles.map((obstacle) => {
-        if (obstacle.type === "spike") {
-          return (
-            <Spike
-              key={obstacle.id}
-              ref={(ref) => {
-                gameObjRef.current[obstacle.id] = ref
-              }}
-              positionX={obstacle.positionX}
-              positionY={obstacle.positionY}
-              width={obstacle.width}
-              height={obstacle.height}
-              note={obstacle.note}
-              chord={obstacle.chord}
-              string={obstacle.string}
-              fret={obstacle.fret}
-            />
-          )
-        }
-
-        if (obstacle.type === "crouch") {
-          return (
-            <Crouch
-              key={obstacle.id}
-              ref={(ref) => {
-                gameObjRef.current[obstacle.id] = ref
-              }}
-              positionX={obstacle.positionX}
-              positionY={obstacle.positionY}
-              width={obstacle.width}
-              height={obstacle.height}
-              note={obstacle.note}
-              chord={obstacle.chord}
-              string={obstacle.string}
-              fret={obstacle.fret}
-            />
-          )
-        }
-
-        if (obstacle.type === "coin") {
-          return (
-            <Coin
-              key={obstacle.id}
-              ref={(ref) => {
-                gameObjRef.current[obstacle.id] = ref
-              }}
-              positionX={obstacle.positionX}
-              positionY={obstacle.positionY}
-              width={obstacle.width}
-              height={obstacle.height}
-            />
-          )
-        }
-
-        if (obstacle.type === "text") {
-          return (
-            <Text
-              key={obstacle.id}
-              ref={(ref) => {
-                gameObjRef.current[obstacle.id] = ref
-              }}
-              positionX={obstacle.positionX}
-              positionY={obstacle.positionY}
-              width={obstacle.width}
-              height={obstacle.height}
-              text={obstacle.text}
-            />
-          )
-        }
-
-        return (
-          <Obstacle
-            key={obstacle.id}
-            ref={(ref) => {
-              gameObjRef.current[obstacle.id] = ref
-            }}
-            positionX={obstacle.positionX}
-            positionY={obstacle.positionY}
-            width={obstacle.width}
-            height={obstacle.height}
-            note={obstacle.note}
-            chord={obstacle.chord}
-            string={obstacle.string}
-            fret={obstacle.fret}
-          />
-        )
-      })}
+    <div id="snowfall" aria-hidden="true">
+      {Array.from({ length: 100 }, (_, i) => (
+        <span
+          className="snowflake"
+          key={i}
+          style={{
+            left: `${(i * 37) % 200}%`,
+            animationDuration: `${5 + ((i * 13) % 8)}s`,
+            animationDelay: `${-((i * 7) % 12)}s`,
+            "--drift": `${((i * 17) % 61) - 30}px`,
+            "--size": `${3 + ((i * 11) % 5)}px`,
+          } as CSSProperties}
+        />
+      ))}
     </div>
   )
 })
+
 const GameScreen = ({
   playing,
   noiseFloor,
@@ -282,7 +200,6 @@ const GameScreen = ({
   const [levelProgress, setLevelProgress] = useState(0)
   const levelProgressRef = useRef(0)
   const [restartAnimation, setRestartAnimation] = useState(false)
-  const [cameraY, setCameraY] = useState(0)
   const lastObstacle = currentLevel.obstacles[currentLevel.obstacles.length - 1]
 
   const diedThisRunRef = useRef(false)
@@ -564,10 +481,10 @@ const GameScreen = ({
   // PLAYER
   // ====================
 
-  const handlePlayerPosition = (yPosition: number) => {
+  const handlePlayerPosition = useCallback((yPosition: number) => {
     playerYRef.current = yPosition
     setPlayerY(yPosition)
-  }
+  }, [])
 
   const playerLeft = GAME_CONFIG.player.left;
 
@@ -678,26 +595,6 @@ const GameScreen = ({
 
         movementRef.current = newMovement
         setMovement(newMovement)
-        const playerRect = playerRef.current?.getScreenRect()
-        const gameAreaRect = gameAreaRef.current?.getBoundingClientRect()
-
-        if (playerRect && gameAreaRect) {
-          const playerBottomY = playerRect.bottom
-
-          const gameAreaCenterY =
-            gameAreaRect.top + gameAreaRect.height / 2
-
-          if (playerBottomY < gameAreaCenterY) {
-            const cameraOffsetY =
-              gameAreaCenterY - playerBottomY
-
-            setCameraY(cameraOffsetY)
-
-          } else {
-            setCameraY(0)
-          }
-        }
-
         if (
           playerGroundYRef.current !== GAME_CONFIG.ground.height &&
           !playerIsOnObstacleRef.current
@@ -729,6 +626,17 @@ const GameScreen = ({
 
           if (!object) return
 
+          const obstacleLeft = obstacle.positionX - newMovement
+          const obstacleRight = obstacleLeft + obstacle.width
+          const fadeDistance = 24
+
+          if (
+            obstacleRight < -fadeDistance ||
+            obstacleLeft > 100 + fadeDistance
+          ) {
+            return
+          }
+
           if (
             obstacle.type === "coin" &&
             collectedCoinsRef.current.has(obstacle.id)
@@ -736,16 +644,11 @@ const GameScreen = ({
             object.setVisualPosition(
               obstacle.positionX - newMovement,
               0,
-              cameraY
+              0
             )
 
             return
           }
-
-          const obstacleLeft = obstacle.positionX - newMovement
-          const obstacleRight = obstacleLeft + obstacle.width
-
-          const fadeDistance = 24
 
           const fadeIn = Math.min(
             1,
@@ -762,7 +665,7 @@ const GameScreen = ({
           object.setVisualPosition(
             obstacleLeft,
             obstacleOpacity,
-            cameraY
+            0
           )
         })
       }
@@ -812,6 +715,14 @@ const GameScreen = ({
     const restartTimer = setTimeout(() => {
       movementRef.current = 0
       setMovement(0)
+
+      currentLevel.obstacles.forEach((obstacle) => {
+        gameObjRef.current[obstacle.id]?.setVisualPosition(
+          obstacle.positionX,
+          1,
+          0
+        )
+      })
 
       lastTime.current = 0
 
@@ -1094,23 +1005,7 @@ const GameScreen = ({
       className={`${currentLevel.style} ${restartAnimation ? "restart-animation" : ""}`}
     >
 
-      {currentLevel.style === "snow-theme" && (
-        <div id="snowfall" aria-hidden="true">
-          {Array.from({ length: 100 }, (_, i) => (
-            <span
-              className="snowflake"
-              key={i}
-              style={{
-                left: `${(i * 37) % 100}%`,
-                animationDuration: `${5 + ((i * 13) % 8)}s`,
-                animationDelay: `${-((i * 7) % 12)}s`,
-                "--drift": `${((i * 17) % 61) - 30}px`,
-                "--size": `${3 + ((i * 11) % 5)}px`,
-              } as React.CSSProperties}
-            />
-          ))}
-        </div>
-      )}
+      {currentLevel.style === "snow-theme" && <Snowfall />}
 
       <NoteCatalog obstacles={currentLevel.obstacles} activeObstacleId={activeObstacleId} />
       {isCalibrating && (

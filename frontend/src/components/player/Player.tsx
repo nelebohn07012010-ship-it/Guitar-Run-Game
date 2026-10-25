@@ -1,5 +1,5 @@
 import "./Player.css"
-import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react"
+import { memo, useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react"
 import { GAME_CONFIG } from "../../gameConfig"
 import SlideParticles from "./SlideParticles"
 
@@ -23,7 +23,8 @@ type PlayerProps = {
   playerSize: "fast" | "slow"
 }
 
-const Player = forwardRef<PlayerHandle, PlayerProps>(({
+const Player = memo(
+  forwardRef<PlayerHandle, PlayerProps>(({
   onPositionChange,
   gameOver,
   jumpTrigger,
@@ -202,7 +203,7 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
       window.removeEventListener("keyup", handleKeyUp)
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [gameOver, onPositionChange, controlMode])
+  }, [gameOver, onPositionChange, controlMode, isPaused, isJumping, playerSizeName])
 
 
   // ====================
@@ -234,7 +235,8 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(({
       <SlideParticles isCrouching={isCrouching} isLanding={isLanding} isPaused={isPaused || gameOver || isJumping} />
     </div>
   )
-})
+  })
+)
 
 
 export default Player

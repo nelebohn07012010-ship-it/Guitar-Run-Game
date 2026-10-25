@@ -25,11 +25,11 @@ const ObstacleLayer = memo(function ObstacleLayer({
         }
 
         if (obstacle.type === "spike") {
-          return <Spike key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} string={obstacle.string} fret={obstacle.fret} />
+          return <Spike key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
         }
 
         if (obstacle.type === "crouch") {
-          return <Crouch key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} string={obstacle.string} fret={obstacle.fret} />
+          return <Crouch key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
         }
 
         if (obstacle.type === "coin") {
@@ -40,7 +40,7 @@ const ObstacleLayer = memo(function ObstacleLayer({
           return <Text key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} text={obstacle.text} />
         }
 
-        return <Platform key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} string={obstacle.string} fret={obstacle.fret} />
+        return <Platform key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
       })}
     </div>
   )
