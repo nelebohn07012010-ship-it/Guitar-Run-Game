@@ -6,6 +6,7 @@ const tutorialArr: Level = {
   music,
   backgroundImage,
   name: "Tutorial (Arrows)",
+  difficulty: "Absolute Beginner",
   style: "neon-arcade",
   obstacles: [
     {

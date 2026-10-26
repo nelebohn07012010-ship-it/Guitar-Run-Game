@@ -8,7 +8,8 @@ const levelTen: Level = {
   speed: "fast",
   name: "Snow (3)",
   style: "snow-theme",
-  group: 8,
+  group: 3,
+  difficulty: "Advanced",
   obstacles: [
     { id: 1, type: "spike", note: "A", string: "A", fret: 6, positionX: 70, positionY: 20, width: 5, height: 8 },
     { id: 2, type: "spike", note: "D", string: "D", fret: 6, positionX: 100, positionY: 20, width: 5, height: 8 },

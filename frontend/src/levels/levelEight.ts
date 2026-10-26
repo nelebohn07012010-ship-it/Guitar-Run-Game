@@ -5,6 +5,7 @@ import music from "../assets/Neon Run.mp3"
 const levelEight: Level = {
   backgroundImage,
   music,
+  difficulty: "Advanced Beginner",
   name: "Snow (1)",
   style: "snow-theme",
   group: 3,
@@ -12,6 +13,7 @@ const levelEight: Level = {
     { id: 1, type: "spike", note: "A", string: "A", fret: 6, positionX: 70, positionY: 20, width: 5, height: 8 },
     { id: 2, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 220, positionY: 20, width: 140, height: 8 },
     { id: 3, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 370, positionY: 28, width: 140, height: 8 },
+    { id: 100, type: "coin", positionX: 440, positionY: 48, width: 8, height: 8 },
     { id: 4, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 520, positionY: 36, width: 140, height: 8 },
     { id: 5, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 670, positionY: 44, width: 580, height: 8 },
     { id: 6, type: "spike", note: "G", string: "G", fret: 6, positionX: 820, positionY: 52, width: 5, height: 8 },
@@ -20,6 +22,7 @@ const levelEight: Level = {
     { id: 9, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 1270, positionY: 36, width: 140, height: 8 },
     { id: 10, type: "obstacle", note: "A", string: "A", fret: 7, positionX: 1420, positionY: 28, width: 305, height: 8 },
     { id: 11, type: "spike", note: "D", string: "D", fret: 6, positionX: 1570, positionY: 36, width: 5, height: 8 },
+    { id: 101, type: "coin", positionX: 1575, positionY: 56, width: 8, height: 8 },
     { id: 12, type: "spike", note: "G", string: "G", fret: 4, positionX: 1720, positionY: 36, width: 5, height: 8 },
 
     { id: 13, type: "crouch", note: "D", string: "D", fret: 6, positionX: 1870, positionY: 20, width: 30, height: 8 },
@@ -27,6 +30,7 @@ const levelEight: Level = {
     { id: 15, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 2170, positionY: 20, width: 140, height: 8 },
     { id: 16, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 2320, positionY: 28, width: 140, height: 8 },
     { id: 17, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 2470, positionY: 36, width: 140, height: 8 },
+    { id: 102, type: "coin", positionX: 2540, positionY: 56, width: 8, height: 8 },
     { id: 18, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 2620, positionY: 44, width: 140, height: 8 },
     { id: 19, type: "obstacle", note: "E", string: "Low E", fret: 7, positionX: 2770, positionY: 52, width: 580, height: 8 },
     { id: 20, type: "spike", note: "A", string: "A", fret: 6, positionX: 2920, positionY: 60, width: 5, height: 8 },
@@ -41,6 +45,7 @@ const levelEight: Level = {
     { id: 29, type: "spike", note: "A", string: "A", fret: 9, positionX: 4270, positionY: 52, width: 5, height: 8 },
     { id: 30, type: "spike", note: "D", string: "D", fret: 8, positionX: 4420, positionY: 52, width: 5, height: 8 },
     { id: 31, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 4570, positionY: 36, width: 155, height: 8 },
+    { id: 103, type: "coin", positionX: 4745, positionY: 40, width: 8, height: 8 },
 
     { id: 32, type: "obstacle", note: "D", string: "D", fret: 8, positionX: 4720, positionY: 20, width: 140, height: 8 },
     { id: 33, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 4870, positionY: 28, width: 140, height: 8 },
@@ -55,6 +60,7 @@ const levelEight: Level = {
     { id: 42, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 6220, positionY: 44, width: 570, height: 8 },
     { id: 43, type: "spike", note: "G", string: "G", fret: 6, positionX: 6370, positionY: 52, width: 5, height: 8 },
     { id: 44, type: "crouch", note: "G", string: "G", fret: 4, positionX: 6520, positionY: 62, width: 30, height: 8 },
+    { id: 104, type: "coin", positionX: 6590, positionY: 72, width: 8, height: 8 },
     { id: 45, type: "spike", note: "D", string: "D", fret: 6, positionX: 6670, positionY: 52, width: 5, height: 8 },
     { id: 46, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 6820, positionY: 36, width: 155, height: 8 },
     { id: 47, type: "spike", note: "A", string: "A", fret: 7, positionX: 6970, positionY: 44, width: 5, height: 8 },
@@ -69,6 +75,7 @@ const levelEight: Level = {
     { id: 55, type: "spike", note: "G", string: "G", fret: 4, positionX: 8170, positionY: 36, width: 5, height: 8 },
     { id: 56, type: "obstacle", note: "E", string: "Low E", fret: 7, positionX: 8320, positionY: 36, width: 130, height: 8 },
     { id: 57, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 8470, positionY: 44, width: 130, height: 8 },
+    { id: 105, type: "coin", positionX: 8540, positionY: 72, width: 8, height: 8 },
     { id: 58, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 8620, positionY: 44, width: 30, height: 8 },
     { id: 59, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 8770, positionY: 44, width: 30, height: 8 },
     { id: 60, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 8920, positionY: 36, width: 140, height: 8 },
@@ -78,6 +85,7 @@ const levelEight: Level = {
     { id: 64, type: "spike", note: "D", string: "D", fret: 4, positionX: 9520, positionY: 52, width: 5, height: 8 },
     { id: 65, type: "obstacle", note: "E", string: "Low E", fret: 6, positionX: 9670, positionY: 52, width: 5, height: 8 },
     { id: 66, type: "obstacle", note: "A", string: "A", fret: 4, positionX: 9820, positionY: 60, width: 5, height: 8 },
+    { id: 106, type: "coin", positionX: 9890, positionY: 88, width: 8, height: 8 },
     { id: 67, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 9970, positionY: 60, width: 5, height: 8 },
     { id: 68, type: "crouch", note: "A", string: "A", fret: 4, positionX: 10120, positionY: 70, width: 5, height: 8 },
 
@@ -85,6 +93,7 @@ const levelEight: Level = {
     { id: 70, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 10420, positionY: 28, width: 140, height: 8 },
     { id: 71, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 10570, positionY: 36, width: 140, height: 8 },
     { id: 72, type: "obstacle", note: "A", string: "A", fret: 4, positionX: 10720, positionY: 44, width: 155, height: 8 },
+    { id: 107, type: "coin", positionX: 10865, positionY: 72, width: 8, height: 8 },
     { id: 73, type: "spike", note: "D", string: "D", fret: 4, positionX: 10870, positionY: 52, width: 5, height: 8 }
   ]
 }

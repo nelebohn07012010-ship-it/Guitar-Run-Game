@@ -5,6 +5,7 @@ import music from "../assets/Arcade Tutorial.mp3"
 const tutorial: Level = {
   music,
   backgroundImage,
+  difficulty: "Absolute Beginner",
   name: "Tutorial (Guitar)",
   style: "neon-arcade",
   group: 1,

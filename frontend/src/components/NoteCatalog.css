@@ -146,3 +146,46 @@
 .note-catalog-item.chord-item.active {
   transform: scale(1.03);
 }
+
+
+
+@media (max-width: 600px) {
+  .note-catalog-track {
+    gap: 1%;
+    padding: 1%;
+  }
+
+  .note-catalog-item,
+  .note-catalog-item.single-note-item,
+  .note-catalog-item.chord-item {
+    flex: 0 0 20%;
+    min-width: 20%;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    padding: 2px;
+    gap: 4px;
+    font-size: clamp(12px, 4vw, 20px);
+  }
+
+  .note-catalog-item strong,
+  .note-catalog-item .chord-label strong {
+    font-size: clamp(16px, 5vw, 24px);
+  }
+
+  .note-catalog-item span {
+    font-size: clamp(9px, 2.5vw, 12px);
+    white-space: normal;
+  }
+
+  .note-catalog-item .chord-label span {
+    font-size: clamp(8px, 2vw, 10px);
+  }
+
+  .note-catalog-item.active {
+    transform: scale(1.02);
+  }
+
+  .note-catalog-item.chord-item.active {
+    transform: scale(1.02);
+  }
+}

@@ -935,3 +935,71 @@
   height: auto;
   filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.5));
 }
+
+
+#level-difficulty {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translateX(-50%);
+
+
+  font-size: 2.3vw;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+
+  z-index: 2;
+}
+
+
+
+.difficulty-absolute-beginner {
+  color: #5ffff5;
+  text-shadow:
+    0 0 5px #5ffff5,
+    0 0 10px #00e5d4,
+    0 0 20px #00cfc3,
+    0 0 35px #00a99d;
+}
+
+
+.difficulty-advanced-beginner {
+  color: #7dff8a;
+  text-shadow:
+    0 0 5px #7dff8a,
+    0 0 10px #32e84f,
+    0 0 20px #16c934,
+    0 0 35px #008f20;
+}
+
+
+.difficulty-intermediate {
+  color: #fff36b;
+  text-shadow:
+    0 0 5px #fff36b,
+    0 0 10px #ffe600,
+    0 0 20px #ffd000,
+    0 0 35px #e6a800;
+}
+
+.difficulty-advanced {
+  color: #ff7777;
+  text-shadow:
+    0 0 5px #ff7777,
+    0 0 10px #ff3030,
+    0 0 20px #f00000,
+    0 0 35px #b80000;
+}
+
+
+.difficulty-master {
+  color: #ff4545;
+  text-shadow:
+    0 0 5px #d90000,
+    0 0 10px #a80000,
+    0 0 20px #780000,
+    0 0 35px #4a0000;
+}

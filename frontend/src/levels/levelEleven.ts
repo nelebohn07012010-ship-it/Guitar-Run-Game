@@ -5,9 +5,11 @@ import music from "../assets/Neon Run.mp3"
 const levelEleven: Level = {
   backgroundImage,
   music,
+  speed: "fast",
   name: "Snow (4)",
   style: "snow-theme",
-  group: 12,
+  difficulty: "Advanced",
+  group: 3,
   obstacles: [
     { id: 1, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 135, positionY: 20, width: 10, height: 8 },
     { id: 2, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 150, positionY: 20, width: 10, height: 16 },

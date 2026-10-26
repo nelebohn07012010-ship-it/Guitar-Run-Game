@@ -6,9 +6,10 @@ const levelThree: Level = {
   backgroundImage,
   music,
   speed: "fast",
+  difficulty: "Master",
   name: "7 Nation Army (3)",
   style: "neon-arcade",
-  group: 6,
+  group: 1,
   obstacles: [
     // Wiederholung 1
     { id: 1, type: "obstacle", note: "E", string: "A", fret: 7, positionX: 100, positionY: 20, width: 30, height: 8 },

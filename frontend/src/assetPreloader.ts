@@ -16,6 +16,12 @@ import level4Preview from "./assets/level4_preview.png"
 import level5Preview from "./assets/level5_preview.png"
 import level6Preview from "./assets/level6_preview.png"
 import level7Preview from "./assets/level7_preview.png"
+import level8Preview from "./assets/level8_preview.png"
+import level9Preview from "./assets/level9_preview.png"
+import level10Preview from "./assets/level10_preview.png"
+import level11Preview from "./assets/level11_preview.png"
+import level12Preview from "./assets/level12_preview.png"
+
 
 import arcadeBackground from "./assets/arcade_backgrnd.png"
 import arcadeStartBackground from "./assets/arcade_bckgrnd_startscreen.png"
@@ -60,6 +66,11 @@ const imageAssets = [
   level5Preview,
   level6Preview,
   level7Preview,
+  level8Preview,
+  level9Preview,
+  level10Preview,
+  level11Preview,
+  level12Preview,
   arcadeBackground,
   desertBackground,
   arcadeStartBackground,

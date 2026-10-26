@@ -7,6 +7,7 @@ const levelFour: Level = {
   music,
   name: "Country Roads (1)",
   style: "desert-theme",
+  difficulty: "Advanced Beginner",
   group: 2,
   obstacles: [
     // Verse 1

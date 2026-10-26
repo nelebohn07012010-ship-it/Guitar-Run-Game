@@ -1,104 +1,97 @@
 import type { Level } from "./levelTypes"
-import backgroundImage from "../assets/arcade_bckgrnd_startscreen.png"
+import backgroundImage from "../assets/level12_preview.png"
 import music from "../assets/Neon Run.mp3"
 
 const levelTwelve: Level = {
   backgroundImage,
   music,
+  speed: "fast",
   name: "Snow (5)",
   style: "snow-theme",
-  group: 11,
+  difficulty: "Master",
+  group: 3,
   obstacles: [
-    // =====================================================
-    // INTRO – ruhig beginnen
-    // =====================================================
-    { id: 1, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 70, positionY: 20, width: 5, height: 8 },
-    { id: 2, type: "spike", note: "G", string: "Low E", fret: 3, positionX: 135, positionY: 20, width: 5, height: 8 },
-    { id: 3, type: "spike", note: "C", string: "A", fret: 3, positionX: 200, positionY: 20, width: 5, height: 8 },
-    { id: 4, type: "spike", note: "F", string: "D", fret: 3, positionX: 265, positionY: 20, width: 5, height: 8 },
-    { id: 5, type: "obstacle", note: "G", string: "D", fret: 5, positionX: 355, positionY: 20, width: 105, height: 8 },
-    { id: 6, type: "coin", positionX: 520, positionY: 40, width: 8, height: 8 },
 
-    // =====================================================
-    // RIFF A – steigender String-Wechsel
-    // =====================================================
-    { id: 7, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 610, positionY: 20, width: 5, height: 8 },
-    { id: 8, type: "spike", note: "D", string: "A", fret: 5, positionX: 665, positionY: 20, width: 5, height: 8 },
-    { id: 9, type: "spike", note: "G", string: "D", fret: 5, positionX: 720, positionY: 20, width: 5, height: 8 },
-    { id: 10, type: "spike", note: "D", string: "G", fret: 7, positionX: 775, positionY: 20, width: 5, height: 8 },
-    { id: 11, type: "spike", note: "A", string: "D", fret: 7, positionX: 830, positionY: 20, width: 5, height: 8 },
-    { id: 12, type: "spike", note: "C", string: "G", fret: 5, positionX: 885, positionY: 20, width: 5, height: 8 },
-    { id: 13, type: "crouch", note: "G", string: "D", fret: 5, positionX: 955, positionY: 30, width: 75, height: 8 },
+    { id: 1, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 135, positionY: 20, width: 10, height: 8 },
+    { id: 2, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 150, positionY: 20, width: 10, height: 10 },
+    { id: 3, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 165, positionY: 20, width: 10, height: 12 },
+    { id: 4, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 180, positionY: 20, width: 10, height: 14 },
+    { id: 5, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 195, positionY: 20, width: 10, height: 16 },
+    { id: 6, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 210, positionY: 20, width: 10, height: 18 },
+    { id: 7, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 225, positionY: 25, width: 103, height: 15 },
+    { id: 8, type: "spike", note: "D", string: "D", fret: 6, positionX: 240, positionY: 40, width: 5, height: 8 },
+    { id: 9, type: "spike", note: "G", string: "G", fret: 4, positionX: 255, positionY: 40, width: 5, height: 8 },
+    { id: 10, type: "spike", note: "A", string: "A", fret: 7, positionX: 270, positionY: 40, width: 5, height: 8 },
+    { id: 11, type: "spike", note: "D", string: "D", fret: 6, positionX: 285, positionY: 40, width: 5, height: 8 },
+    { id: 12, type: "spike", note: "G", string: "G", fret: 4, positionX: 300, positionY: 40, width: 5, height: 8 },
+    { id: 13, type: "spike", note: "D", string: "D", fret: 6, positionX: 315, positionY: 40, width: 5, height: 8 },
+    { id: 14, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 330, positionY: 20, width: 10, height: 22 },
+    { id: 15, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 345, positionY: 20, width: 10, height: 24 },
+    { id: 16, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 360, positionY: 20, width: 10, height: 26 },
+    { id: 17, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 375, positionY: 20, width: 10, height: 28 },
+    { id: 18, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 390, positionY: 20, width: 10, height: 30 },
 
-    // =====================================================
-    // SPEED BURST 1
-    // =====================================================
-    { id: 14, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 1060, positionY: 20, width: 5, height: 8 },
-    { id: 15, type: "spike", note: "C", string: "A", fret: 3, positionX: 1110, positionY: 20, width: 5, height: 8 },
-    { id: 16, type: "spike", note: "F", string: "D", fret: 3, positionX: 1160, positionY: 20, width: 5, height: 8 },
-    { id: 17, type: "spike", note: "C", string: "G", fret: 5, positionX: 1210, positionY: 20, width: 5, height: 8 },
-    { id: 18, type: "spike", note: "D", string: "G", fret: 7, positionX: 1260, positionY: 20, width: 5, height: 8 },
-    { id: 19, type: "spike", note: "A", string: "D", fret: 7, positionX: 1310, positionY: 20, width: 5, height: 8 },
-    { id: 20, type: "coin", positionX: 1390, positionY: 40, width: 8, height: 8 },
+    { id: 19, type: "obstacle", note: "E", string: "Low E", fret: 7, positionX: 405, positionY: 20, width: 10, height: 32 },
+    { id: 20, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 420, positionY: 46, width: 103, height: 8 },
+    { id: 21, type: "spike", note: "D", string: "D", fret: 4, positionX: 435, positionY: 54, width: 5, height: 8 },
+    { id: 22, type: "spike", note: "A", string: "A", fret: 6, positionX: 450, positionY: 54, width: 5, height: 8 },
+    { id: 23, type: "spike", note: "D", string: "D", fret: 4, positionX: 465, positionY: 54, width: 5, height: 8 },
+    { id: 24, type: "spike", note: "D", string: "D", fret: 6, positionX: 480, positionY: 54, width: 5, height: 8 },
+    { id: 25, type: "spike", note: "D", string: "D", fret: 4, positionX: 495, positionY: 54, width: 5, height: 8 },
+    { id: 26, type: "spike", note: "A", string: "A", fret: 6, positionX: 510, positionY: 54, width: 5, height: 8 },
+    { id: 27, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 525, positionY: 20, width: 10, height: 56 },
+    { id: 28, type: "obstacle", note: "A", string: "A", fret: 7, positionX: 540, positionY: 20, width: 5, height: 52 },
+    { id: 29, type: "obstacle", note: "A", string: "A", fret: 9, positionX: 555, positionY: 20, width: 5, height: 48 },
+    { id: 30, type: "obstacle", note: "D", string: "D", fret: 8, positionX: 570, positionY: 20, width: 5, height: 44 },
+    { id: 31, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 585, positionY: 20, width: 5, height: 40 },
+    { id: 32, type: "obstacle", note: "D", string: "D", fret: 8, positionX: 600, positionY: 20, width: 5, height: 36 },
+    { id: 33, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 615, positionY: 20, width: 5, height: 32 },
+    { id: 34, type: "obstacle", note: "G", string: "G", fret: 8, positionX: 630, positionY: 20, width: 5, height: 28 },
+    { id: 35, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 645, positionY: 20, width: 5, height: 24 },
+    { id: 36, type: "obstacle", note: "D", string: "D", fret: 8, positionX: 660, positionY: 20, width: 5, height: 20 },
+    { id: 37, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 675, positionY: 20, width: 5, height: 16 },
 
-    // =====================================================
-    // STRING-SKIPPING
-    // =====================================================
-    { id: 21, type: "spike", note: "G", string: "Low E", fret: 3, positionX: 1480, positionY: 20, width: 5, height: 8 },
-    { id: 22, type: "spike", note: "F", string: "D", fret: 3, positionX: 1530, positionY: 20, width: 5, height: 8 },
-    { id: 23, type: "spike", note: "D", string: "G", fret: 7, positionX: 1580, positionY: 20, width: 5, height: 8 },
-    { id: 24, type: "spike", note: "C", string: "A", fret: 3, positionX: 1630, positionY: 20, width: 5, height: 8 },
-    { id: 25, type: "spike", note: "G", string: "D", fret: 5, positionX: 1680, positionY: 20, width: 5, height: 8 },
-    { id: 26, type: "obstacle", note: "A", string: "Low E", fret: 5, positionX: 1760, positionY: 20, width: 100, height: 8 },
+    { id: 38, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 690, positionY: 20, width: 5, height: 12 },
 
-    // =====================================================
-    // ERHOLUNG
-    // =====================================================
-    { id: 27, type: "spike", note: "D", string: "A", fret: 5, positionX: 1890, positionY: 20, width: 5, height: 8 },
-    { id: 28, type: "crouch", note: "C", string: "G", fret: 5, positionX: 1960, positionY: 30, width: 80, height: 8 },
-    { id: 29, type: "coin", positionX: 2070, positionY: 40, width: 8, height: 8 },
+    { id: 39, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 705, positionY: 20, width: 10, height: 8 },
+    { id: 40, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 720, positionY: 20, width: 10, height: 10 },
+    { id: 41, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 735, positionY: 20, width: 10, height: 12 },
+    { id: 42, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 750, positionY: 20, width: 10, height: 14 },
+    { id: 43, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 765, positionY: 20, width: 10, height: 16 },
+    { id: 44, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 780, positionY: 20, width: 10, height: 18 },
+    { id: 45, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 795, positionY: 25, width: 103, height: 15 },
+    { id: 46, type: "spike", note: "G", string: "G", fret: 4, positionX: 810, positionY: 40, width: 5, height: 8 },
+    { id: 47, type: "spike", note: "A", string: "A", fret: 7, positionX: 825, positionY: 40, width: 5, height: 8 },
+    { id: 48, type: "spike", note: "D", string: "D", fret: 6, positionX: 840, positionY: 40, width: 5, height: 8 },
+    { id: 49, type: "spike", note: "G", string: "G", fret: 4, positionX: 855, positionY: 40, width: 5, height: 8 },
+    { id: 50, type: "spike", note: "D", string: "D", fret: 6, positionX: 870, positionY: 40, width: 5, height: 8 },
+    { id: 51, type: "spike", note: "G", string: "G", fret: 4, positionX: 885, positionY: 40, width: 5, height: 8 },
+    { id: 52, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 900, positionY: 20, width: 10, height: 22 },
+    { id: 53, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 915, positionY: 20, width: 10, height: 24 },
+    { id: 54, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 930, positionY: 20, width: 10, height: 26 },
+    { id: 55, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 945, positionY: 20, width: 10, height: 28 },
 
-    // =====================================================
-    // SPEED BURST 2 – enger
-    // =====================================================
-    { id: 30, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 2150, positionY: 20, width: 5, height: 8 },
-    { id: 31, type: "spike", note: "C", string: "A", fret: 3, positionX: 2198, positionY: 20, width: 5, height: 8 },
-    { id: 32, type: "spike", note: "G", string: "D", fret: 5, positionX: 2246, positionY: 20, width: 5, height: 8 },
-    { id: 33, type: "spike", note: "D", string: "G", fret: 7, positionX: 2294, positionY: 20, width: 5, height: 8 },
-    { id: 34, type: "spike", note: "A", string: "D", fret: 7, positionX: 2342, positionY: 20, width: 5, height: 8 },
-    { id: 35, type: "spike", note: "C", string: "G", fret: 5, positionX: 2390, positionY: 20, width: 5, height: 8 },
-    { id: 36, type: "spike", note: "F", string: "D", fret: 3, positionX: 2438, positionY: 20, width: 5, height: 8 },
-    { id: 37, type: "crouch", note: "A", string: "Low E", fret: 5, positionX: 2510, positionY: 30, width: 85, height: 8 },
+    { id: 56, type: "obstacle", note: "E", string: "Low E", fret: 7, positionX: 960, positionY: 20, width: 10, height: 30 },
 
-    // =====================================================
-    // MITTELTEIL
-    // =====================================================
-    { id: 38, type: "obstacle", note: "C", string: "A", fret: 3, positionX: 2640, positionY: 20, width: 130, height: 8 },
-    { id: 39, type: "spike", note: "G", string: "D", fret: 5, positionX: 2820, positionY: 20, width: 5, height: 8 },
-    { id: 40, type: "coin", positionX: 2900, positionY: 40, width: 8, height: 8 },
+    { id: 57, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 975, positionY: 20, width: 10, height: 32 },
+    { id: 58, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 990, positionY: 46, width: 103, height: 8 },
+    { id: 59, type: "spike", note: "A", string: "A", fret: 6, positionX: 1005, positionY: 54, width: 5, height: 8 },
+    { id: 60, type: "spike", note: "D", string: "D", fret: 4, positionX: 1020, positionY: 54, width: 5, height: 8 },
+    { id: 61, type: "spike", note: "D", string: "D", fret: 6, positionX: 1035, positionY: 54, width: 5, height: 8 },
+    { id: 62, type: "spike", note: "D", string: "D", fret: 4, positionX: 1050, positionY: 54, width: 5, height: 8 },
+    { id: 63, type: "spike", note: "A", string: "A", fret: 6, positionX: 1065, positionY: 54, width: 5, height: 8 },
 
-    // =====================================================
-    // FINAL RUN – langer String-Wechsel
-    // =====================================================
-    { id: 41, type: "spike", note: "E", string: "Low E", fret: 0, positionX: 2990, positionY: 20, width: 5, height: 8 },
-    { id: 42, type: "spike", note: "D", string: "A", fret: 5, positionX: 3040, positionY: 20, width: 5, height: 8 },
-    { id: 43, type: "spike", note: "G", string: "D", fret: 5, positionX: 3090, positionY: 20, width: 5, height: 8 },
-    { id: 44, type: "spike", note: "D", string: "G", fret: 7, positionX: 3140, positionY: 20, width: 5, height: 8 },
-    { id: 45, type: "spike", note: "A", string: "D", fret: 7, positionX: 3190, positionY: 20, width: 5, height: 8 },
-    { id: 46, type: "spike", note: "C", string: "G", fret: 5, positionX: 3240, positionY: 20, width: 5, height: 8 },
+    { id: 64, type: "spike", note: "D", string: "D", fret: 4, positionX: 1080, positionY: 54, width: 5, height: 8 },
 
-    // =====================================================
-    // ENDGAME BURST
-    // =====================================================
-    { id: 47, type: "spike", note: "F", string: "D", fret: 3, positionX: 3290, positionY: 20, width: 5, height: 8 },
-    { id: 48, type: "spike", note: "C", string: "A", fret: 3, positionX: 3340, positionY: 20, width: 5, height: 8 },
-    { id: 49, type: "spike", note: "G", string: "D", fret: 5, positionX: 3390, positionY: 20, width: 5, height: 8 },
-    { id: 50, type: "spike", note: "D", string: "G", fret: 7, positionX: 3440, positionY: 20, width: 5, height: 8 },
-    { id: 51, type: "spike", note: "A", string: "D", fret: 7, positionX: 3490, positionY: 20, width: 5, height: 8 },
-    { id: 52, type: "spike", note: "C", string: "G", fret: 5, positionX: 3540, positionY: 20, width: 5, height: 8 },
-    { id: 53, type: "crouch", note: "G", string: "D", fret: 5, positionX: 3610, positionY: 30, width: 90, height: 8 },
-    { id: 54, type: "spike", note: "A", string: "Low E", fret: 5, positionX: 3670, positionY: 20, width: 5, height: 8 },
-    { id: 55, type: "coin", positionX: 3700, positionY: 30, width: 8, height: 8 },
+    { id: 65, type: "obstacle", note: "E", string: "Low E", fret: 6, positionX: 1095, positionY: 46, width: 103, height: 16 },
+    { id: 66, type: "spike", note: "A", string: "A", fret: 4, positionX: 1110, positionY: 62, width: 5, height: 8 },
+    { id: 67, type: "spike", note: "D", string: "D", fret: 4, positionX: 1125, positionY: 62, width: 5, height: 8 },
+    { id: 68, type: "spike", note: "A", string: "A", fret: 4, positionX: 1140, positionY: 62, width: 5, height: 8 },
+    { id: 69, type: "spike", note: "D", string: "D", fret: 4, positionX: 1155, positionY: 62, width: 5, height: 46 },
+    { id: 70, type: "spike", note: "D", string: "D", fret: 6, positionX: 1170, positionY: 62, width: 5, height: 48 },
+    { id: 71, type: "spike", note: "D", string: "D", fret: 4, positionX: 1185, positionY: 62, width: 5, height: 50 },
+    { id: 72, type: "obstacle", note: "A", string: "A", fret: 4, positionX: 1200, positionY: 20, width: 5, height: 52 },
+    { id: 73, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 1215, positionY: 20, width: 5, height: 42 }
   ]
 }
 

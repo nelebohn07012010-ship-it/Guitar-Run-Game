@@ -336,6 +336,15 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
         </div>
       )}
 
+      <div
+        id="level-difficulty"
+        className={`difficulty-${currentLevel.difficulty
+          .toLowerCase()
+          .replaceAll(" ", "-")}`}
+      >
+        {currentLevel.difficulty}
+      </div>
+
       <div id="level-actions">
 
         <button
@@ -365,6 +374,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
         </button>
 
       </div>
+
       {showAchievements && (
         <Achievements
           controlMode={controlMode}

@@ -5,6 +5,7 @@ import music from "../assets/Neon Run.mp3"
 const levelOne: Level = {
   backgroundImage,
   music,
+  difficulty: "Advanced Beginner",
   name: "7 Nation Army (1)",
   style: "neon-arcade",
   group: 1,
