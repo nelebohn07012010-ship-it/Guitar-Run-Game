@@ -86,7 +86,8 @@ const levelTen: Level = {
     { id: 70, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 2100, positionY: 20, width: 10, height: 16 },
     { id: 71, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 2115, positionY: 20, width: 10, height: 24 },
     { id: 72, type: "spike", note: "A", string: "A", fret: 4, positionX: 2145, positionY: 20, width: 5, height: 8 },
-    { id: 73, type: "spike", note: "D", string: "D", fret: 4, positionX: 2175, positionY: 20, width: 5, height: 8 }
+    { id: 73, type: "spike", note: "D", string: "D", fret: 4, positionX: 2175, positionY: 20, width: 5, height: 8 },
+    { id: 100, type: "coin", positionX: 2190, positionY: 30, width: 8, height: 8 },
   ]
 }
 

@@ -91,7 +91,8 @@ const levelTwelve: Level = {
     { id: 70, type: "spike", note: "D", string: "D", fret: 6, positionX: 1170, positionY: 62, width: 5, height: 48 },
     { id: 71, type: "spike", note: "D", string: "D", fret: 4, positionX: 1185, positionY: 62, width: 5, height: 50 },
     { id: 72, type: "obstacle", note: "A", string: "A", fret: 4, positionX: 1200, positionY: 20, width: 5, height: 52 },
-    { id: 73, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 1215, positionY: 20, width: 5, height: 42 }
+    { id: 73, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 1215, positionY: 20, width: 5, height: 42 },
+    { id: 100, type: "coin", positionX: 1220, positionY: 67, width: 8, height: 8 },
   ]
 }
 

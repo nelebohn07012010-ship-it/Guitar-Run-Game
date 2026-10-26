@@ -29,11 +29,13 @@ const levelNine: Level = {
     { id: 16, type: "spike", note: "G", string: "G", fret: 4, positionX: 590, positionY: 67, width: 5, height: 8 },
     { id: 17, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 630, positionY: 20, width: 20, height: 55 },
     { id: 18, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 670, positionY: 20, width: 20, height: 55 },
+    { id: 100, type: "coin", positionX: 700, positionY: 95, width: 8, height: 8 },
 
     { id: 19, type: "spike", note: "E", string: "Low E", fret: 7, positionX: 770, positionY: 20, width: 5, height: 8 },
     { id: 20, type: "spike", note: "A", string: "A", fret: 6, positionX: 810, positionY: 20, width: 5, height: 8 },
     { id: 21, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 850, positionY: 20, width: 30, height: 8 },
     { id: 22, type: "obstacle", note: "A", string: "A", fret: 6, positionX: 890, positionY: 20, width: 30, height: 16 },
+    { id: 101, type: "coin", positionX: 905, positionY: 56, width: 8, height: 8 },
     { id: 23, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 930, positionY: 28, width: 20, height: 16 },
     { id: 24, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 950, positionY: 36, width: 20, height: 16 },
     { id: 25, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 970, positionY: 42, width: 30, height: 16 },
@@ -49,6 +51,7 @@ const levelNine: Level = {
     { id: 35, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 1310, positionY: 20, width: 20, height: 55 },
     { id: 36, type: "obstacle", note: "D", string: "D", fret: 8, positionX: 1350, positionY: 20, width: 20, height: 55 },
     { id: 37, type: "obstacle", note: "G", string: "G", fret: 6, positionX: 1390, positionY: 20, width: 20, height: 55 },
+    { id: 102, type: "coin", positionX: 1420, positionY: 95, width: 8, height: 8 },
 
     { id: 38, type: "spike", note: "A", string: "A", fret: 6, positionX: 1490, positionY: 20, width: 5, height: 8 },
     { id: 39, type: "spike", note: "D", string: "D", fret: 6, positionX: 1530, positionY: 20, width: 5, height: 8 },
@@ -60,6 +63,7 @@ const levelNine: Level = {
     { id: 45, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 1730, positionY: 45, width: 230, height: 14 },
     { id: 46, type: "spike", note: "G", string: "G", fret: 4, positionX: 1770, positionY: 59, width: 5, height: 8 },
     { id: 47, type: "spike", note: "A", string: "A", fret: 7, positionX: 1810, positionY: 59, width: 5, height: 8 },
+    { id: 103, type: "coin", positionX: 1850, positionY: 87, width: 8, height: 8 },
     { id: 48, type: "spike", note: "D", string: "D", fret: 6, positionX: 1850, positionY: 59, width: 5, height: 8 },
     { id: 49, type: "spike", note: "G", string: "G", fret: 4, positionX: 1890, positionY: 59, width: 5, height: 8 },
     { id: 50, type: "spike", note: "D", string: "D", fret: 6, positionX: 1930, positionY: 59, width: 5, height: 8 },
@@ -68,6 +72,7 @@ const levelNine: Level = {
     { id: 53, type: "spike", note: "G", string: "G", fret: 4, positionX: 2010, positionY: 67, width: 5, height: 8 },
     { id: 54, type: "obstacle", note: "D", string: "D", fret: 6, positionX: 2050, positionY: 20, width: 20, height: 55 },
     { id: 55, type: "obstacle", note: "G", string: "G", fret: 4, positionX: 2090, positionY: 20, width: 20, height: 55 },
+    { id: 104, type: "coin", positionX: 2120, positionY: 95, width: 8, height: 8 },
 
     { id: 56, type: "spike", note: "E", string: "Low E", fret: 7, positionX: 2190, positionY: 20, width: 5, height: 8 },
     { id: 57, type: "spike", note: "A", string: "A", fret: 6, positionX: 2230, positionY: 20, width: 5, height: 8 },
@@ -82,10 +87,12 @@ const levelNine: Level = {
     { id: 66, type: "spike", note: "A", string: "A", fret: 4, positionX: 2550, positionY: 59, width: 5, height: 8 },
     { id: 67, type: "spike", note: "D", string: "D", fret: 4, positionX: 2590, positionY: 59, width: 5, height: 8 },
     { id: 68, type: "spike", note: "A", string: "A", fret: 4, positionX: 2630, positionY: 59, width: 5, height: 8 },
+    { id: 105, type: "coin", positionX: 2665, positionY: 79, width: 8, height: 8 },
     { id: 69, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 2670, positionY: 53, width: 60, height: 14 },
     { id: 70, type: "spike", note: "D", string: "D", fret: 6, positionX: 2690, positionY: 67, width: 5, height: 8 },
     { id: 71, type: "spike", note: "D", string: "D", fret: 4, positionX: 2710, positionY: 67, width: 5, height: 8 },
     { id: 72, type: "obstacle", note: "A", string: "A", fret: 4, positionX: 2750, positionY: 20, width: 20, height: 55 },
+    { id: 106, type: "coin", positionX: 2800, positionY: 82, width: 8, height: 8 },
     { id: 73, type: "obstacle", note: "D", string: "D", fret: 4, positionX: 2790, positionY: 20, width: 20, height: 55 }
   ]
 }
