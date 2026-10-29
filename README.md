@@ -18,15 +18,10 @@ Once calibration is finished, play the notes required by the obstacles. The game
 If you do not want to use a guitar, you can select Arrow Key Mode in the settings(the small weel in the right corner)
 
 Controls:
-
-Key
-Action
-
-Arrow Up
-Jump
-
-Arrow Down
-Crouch
+| Key | Action |
+|---|---|
+| `Arrow Up` | Jump |
+| `Arrow Down` | Crouch |
 
 
 You will notice most of the levels are locked, but don't worry, they will automatically be unlocked when you finished the previous level. I sorted the levels into blocks. There are three of them and each one is about one song. The imortant thing: they are independend from each other so you can always play the first level of each block.
