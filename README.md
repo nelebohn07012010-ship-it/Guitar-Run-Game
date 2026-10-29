@@ -7,13 +7,16 @@ Searching for a cool project I could do for stardance, I knew I want to make a G
 
 
 ## 🎮 How to Play
+
 Guitar Run can be played in two different control modes:
+
 **🎸 Guitar Mode**
 In Guitar Mode, you control the player by playing the required notes on a real guitar.
 Before starting the level, the game performs a short microphone calibration. Do not play any guitar notes while the calibration is running. During calibration, the game measures the current background noise level and uses it to determine which sounds should be treated as guitar input. Playing notes during this phase can cause them to be treated as background noise and may prevent the game from detecting them correctly afterwards.
 For the best guitar detection, the guitar signal should be clearly louder than the surrounding background noise. So make sure you play loud enough, in a quiet room and avoid background noise as much as possible.
 
 Once calibration is finished, play the notes required by the obstacles. The game detects the played frequency and checks whether it matches the expected string and fret.
+
 **⌨️ Arrow Key Mode**
 If you do not want to use a guitar, you can select Arrow Key Mode in the settings(the small weel in the right corner)
 
