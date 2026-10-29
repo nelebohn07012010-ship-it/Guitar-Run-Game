@@ -118,16 +118,17 @@ The chord detection works in general excatly the same but a chord contains multi
 ## 🤖 AI Usage
 I used AI openly as a development assistant during the creation of Guitar Run.
 I used AI to help me with:
-• understanding React and TypeScript
-• learning programming concepts
-• debugging errors
-• analyzing technical problems
-• understanding the Web Audio API
-• developing gameplay systems
-• discussing implementation approaches
-• developing and refining UI ideas
-• structuring parts of the project
-• finding and fixing bugs
+- understanding React and TypeScript
+- learning programming concepts
+- debugging errors
+- analyzing technical problems
+- understanding the Web Audio API
+- developing gameplay systems
+- discussing implementation approaches
+- developing and refining UI ideas
+- structuring parts of the project
+- finding and fixing bugs
+
 AI was not used as a replacement for my own testing or decision-making. I implemented changes, tested them in the actual game, evaluated the results and decided which solutions to keep or change.
 The overall concept of Guitar Run, the game mechanics, the feature selection, the visual direction and the decisions about how the game should work were developed as part of my own project process.
 
