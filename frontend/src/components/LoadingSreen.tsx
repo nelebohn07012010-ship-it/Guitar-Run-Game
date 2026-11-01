@@ -1,14 +1,8 @@
 import "./LoadingScreen.css"
-import arcadeBackground from "../assets/arcade_bckgrnd_startscreen.png"
 
 const LoadingScreen = () => {
   return (
-    <section
-      id="loading-screen"
-      style={{
-        backgroundImage: `url(${arcadeBackground})`
-      }}
-    >
+    <section id="loading-screen">
       <div id="loading-area">
         <h1>GUITAR RUN</h1>
         <div id="loading-text">LOADING...</div>

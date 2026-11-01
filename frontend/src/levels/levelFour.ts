@@ -1,9 +1,7 @@
 import type { Level } from "./levelTypes"
-import backgroundImage from "../assets/level4_preview.png"
 import music from "../assets/Neon Run.mp3"
 
 const levelFour: Level = {
-  backgroundImage,
   music,
   name: "Country Roads (1)",
   style: "desert-theme",

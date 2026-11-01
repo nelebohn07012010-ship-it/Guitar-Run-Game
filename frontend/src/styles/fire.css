@@ -35,7 +35,7 @@
 
 #game-screen.fire-theme,
 #start-screen.fire-theme {
-  background-image: url("../assets/fire_background.png");
+  background: linear-gradient(#2a0c22, #a22b20 65%, #ed812b);
 }
 
 /* =========================
@@ -43,7 +43,7 @@
    ========================= */
 
 .fire-theme #background-layer {
-  background-image: url("../assets/fire_background.png");
+  background: linear-gradient(#2a0c22, #a22b20 65%, #ed812b);
 }
 
 /* =========================
@@ -100,7 +100,7 @@
    ========================= */
 
 .fire-theme #ground::before {
-  background-image: url("../assets/fire_floor.png");
+  background: linear-gradient(#70201d, #2d1017);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -117,7 +117,7 @@
    ========================= */
 
 .fire-theme .obstacle {
-  background-image: url("../assets/fire_platform.png");
+  background: #f07c2b;
   box-shadow:
     0 0.25cqw 0.5cqw rgba(30, 8, 5, 0.4),
     0 0 0.5cqw rgba(255, 87, 46, 0.15);
@@ -137,7 +137,7 @@
    ========================= */
 
 .fire-theme .crouch {
-  background-image: url("../assets/fire_crouch.png");
+  background: #961e20;
   box-shadow:
     0 0.2cqw 0.5cqw rgba(30, 8, 5, 0.4),
     0 0 0.4cqw rgba(255, 181, 46, 0.2);
@@ -157,7 +157,7 @@
    ========================= */
 
 .fire-theme .spike-shape {
-  background-image: url("../assets/fire_spike.png");
+  background: #ffd168;
 }
 
 .fire-theme .obstacle-note .spike {

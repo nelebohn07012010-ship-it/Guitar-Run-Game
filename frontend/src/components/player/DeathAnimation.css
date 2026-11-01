@@ -15,10 +15,10 @@
   position: absolute;
   width: 3vw;
   height: 3vw;
-  background: transparent;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 1.4vw;
+  height: 1.4vw;
+  background: #f8d66d;
+  border-radius: 30% 70% 55% 45%;
   transform-origin: center;
 }
 

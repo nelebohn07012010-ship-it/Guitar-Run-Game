@@ -82,19 +82,20 @@
 #pause-menu button {
   position: absolute;
 
-  border: none;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  border: 0.15vw solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  background: transparent;
 
   width: 40%;
   height: 40%;
 
   cursor: pointer;
 
-  color: transparent;
-  font-size: 0;
+  color: white;
+  font-size: 3vw;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 #pause-menu button:first-of-type {
@@ -103,10 +104,8 @@
 
   transform: translate(-50%, -50%);
 
-  width: 50%;
-  height: 50%;
-
-  background-image: url("../assets/continue_button.png");
+  width: 12%;
+  height: 24%;
 }
 
 #pause-menu button:nth-of-type(2) {
@@ -115,7 +114,8 @@
 
   transform: translate(-50%, -50%);
 
-  background-image: url("../assets/restar_button.png");
+  width: 10%;
+  height: 20%;
 }
 
 #pause-menu button:nth-of-type(3) {
@@ -124,5 +124,33 @@
 
   transform: translate(-50%, -50%);
 
-  background-image: url("../assets/home_button.png");
+  width: 10%;
+  height: 20%;
+}
+
+#pause-menu button:hover {
+  color: #78d7ff;
+  border-color: #78d7ff;
+}
+
+#pause-menu button:first-of-type:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* The pause controls inherit the active landscape's color language. */
+.neon-arcade #pause-menu { border-color: #00e5ff; background: rgba(7, 3, 24, 0.82); }
+.neon-arcade #pause-menu button { color: #00e5ff; border-color: #8a2be2; }
+.neon-arcade #pause-menu button:hover { color: #ff2bd6; border-color: #ff2bd6; }
+
+.snow-theme #pause-menu { border-color: #dff8ff; background: rgba(22, 62, 94, 0.82); }
+.snow-theme #pause-menu button { color: #e8fbff; border-color: #82c9ed; }
+.snow-theme #pause-menu button:hover { color: #9ff8f2; border-color: #9ff8f2; }
+
+.desert-theme #pause-menu { border-color: #ffd27a; background: rgba(77, 38, 22, 0.84); }
+.desert-theme #pause-menu button { color: #ffd27a; border-color: #d68a49; }
+.desert-theme #pause-menu button:hover { color: #37c6bd; border-color: #37c6bd; }
+
+#pause-menu button:nth-of-type(2):hover,
+#pause-menu button:nth-of-type(3):hover {
+  transform: translate(-50%, -50%) scale(1.08);
 }

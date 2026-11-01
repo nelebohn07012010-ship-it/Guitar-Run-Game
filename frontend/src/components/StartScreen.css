@@ -42,9 +42,7 @@
   width: 100%;
   height: 100%;
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: radial-gradient(circle at 50% 30%, #5636a8, #0d0a29 72%);
 
   z-index: 0;
 }
@@ -125,14 +123,18 @@
   z-index: 1;
 }
 
-#play-button img {
-  width: 14vw;
-  height: auto;
-  display: block;
+#play-button {
+  width: 8vw;
+  height: 8vw;
+  border: 0.2vw solid #fff;
+  border-radius: 50%;
+  background: #24a66a;
+  color: white;
+  font-size: 3vw;
 }
 
-#play-button img:hover {
-  transform: scale(1.1);
+#play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 #leaderboard-button {
@@ -151,14 +153,18 @@
   z-index: 1;
 }
 
-#leaderboard-button img {
-  width: 10vw;
-  height: auto;
-  display: block;
+#leaderboard-button {
+  width: 5vw;
+  height: 5vw;
+  border: 0.15vw solid #fff;
+  border-radius: 50%;
+  background: #335fbb;
+  color: white;
+  font-size: 2.2vw;
 }
 
-#leaderboard-button img:hover {
-  transform: scale(1.1)
+#leaderboard-button:hover {
+  transform: translateY(-50%) scale(1.1)
 }
 
 #achievements-button {
@@ -177,14 +183,18 @@
   z-index: 1;
 }
 
-#achievements-button img {
-  width: 10vw;
-  height: auto;
-  display: block;
+#achievements-button {
+  width: 5vw;
+  height: 5vw;
+  border: 0.15vw solid #fff;
+  border-radius: 50%;
+  background: #bb7a25;
+  color: white;
+  font-size: 2.2vw;
 }
 
-#achievements-button img:hover {
-  transform: scale(1.1);
+#achievements-button:hover {
+  transform: translateY(-50%) scale(1.1);
 }
 
 #settings-button {
@@ -200,15 +210,49 @@
   z-index: 10;
 }
 
-#settings-button img {
-  width: 8vw;
-  height: auto;
-  display: block;
+#settings-button {
+  width: 3.5vw;
+  height: 3.5vw;
+  color: white;
+  font-size: 2vw;
 }
 
-#settings-button:hover img {
+#settings-button:hover {
   transform: scale(1.1);
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.neon-arcade #start-area { border-color: #00e5ff; box-shadow: 0 0 0.5vw #00e5ff, 0 0 2vw #8a2be2; }
+.neon-arcade #play-button { background: #8a2be2; border-color: #00e5ff; }
+.neon-arcade #achievements-button { background: #ff2bd6; border-color: #ffd0f5; }
+.neon-arcade #leaderboard-button { background: #005f9f; border-color: #00e5ff; }
+
+.snow-theme #start-area { border-color: #dff8ff; box-shadow: 0 0 0.5vw #e9fbff, 0 0 2vw #82c9ed; }
+.snow-theme #level-background { background: linear-gradient(#2d5e91, #89cbe8 56%, #e2f8ff); }
+.snow-theme #play-button { background: #3f8fb6; border-color: #e8fbff; }
+.snow-theme #achievements-button { background: #5baeb9; border-color: #d2fffb; }
+.snow-theme #leaderboard-button { background: #5d7faa; border-color: #e8fbff; }
+
+.desert-theme #start-area { border-color: #ffd27a; box-shadow: 0 0 0.5vw #ffd27a, 0 0 2vw #b85c38; }
+.desert-theme #level-background { background: linear-gradient(#4ca7c6, #f1bd62 60%, #a94e27); }
+.desert-theme #play-button { background: #b85c38; border-color: #ffd27a; }
+.desert-theme #achievements-button { background: #d68a49; border-color: #fff0bf; }
+.desert-theme #leaderboard-button { background: #267f7a; border-color: #a3f0e8; }
+
+.jungle-theme #level-background { background: linear-gradient(#1f5b45, #8ccc66); }
+.fire-theme #level-background { background: linear-gradient(#2b0c21, #cc4924 65%, #ee8a2f); }
+.sky-theme #level-background { background: linear-gradient(#4db4e7, #d8f6ff); }
 
 #settings-menu {
   position: absolute;

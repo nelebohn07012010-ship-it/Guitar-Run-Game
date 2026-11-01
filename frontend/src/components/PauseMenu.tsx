@@ -30,13 +30,16 @@ const PauseMenu = ({
         <span>{levelProgress}%</span>
       </div>
 
-      <button onClick={onResume}>
+      <button type="button" className="pause-action pause-resume" onClick={onResume} aria-label="Spiel fortsetzen">
+        <span aria-hidden="true">▶</span>
       </button>
 
-      <button onClick={onRestart}>
+      <button type="button" className="pause-action" onClick={onRestart} aria-label="Level neu starten">
+        <span aria-hidden="true">↻</span>
       </button>
 
-      <button onClick={onHome}>
+      <button type="button" className="pause-action" onClick={onHome} aria-label="Zurück zum Hauptmenü">
+        <span aria-hidden="true">⌂</span>
       </button>
     </div>
   )

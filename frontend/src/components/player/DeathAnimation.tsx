@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
 import "./DeathAnimation.css"
 import { GAME_CONFIG } from "../../gameConfig"
-import fragment1 from "../../assets/fragment_1.png"
-import fragment2 from "../../assets/fragment_2.png"
-import fragment3 from "../../assets/fragment_3.png"
 import DeathParticles from "./DeathParticles"
 
 type Fragment = {
@@ -26,7 +23,7 @@ const DeathAnimation = ({ x, y, groundY }: DeathAnimationProps) => {
   const [fragments, setFragments] = useState<Fragment[]>([])
 
   useEffect(() => {
-    const initialFragments = Array.from({ length: fragmentImages.length }, () => ({
+    const initialFragments = Array.from({ length: 3 }, () => ({
       x,
       y,
       velocityX: -Math.random() * 90 - 40,
@@ -91,12 +88,6 @@ const DeathAnimation = ({ x, y, groundY }: DeathAnimationProps) => {
     }
   }, [])
 
-  const fragmentImages = [
-    fragment1,
-    fragment2,
-    fragment3
-  ]
-
   return (
     <div id="death-animation">
       {fragments.map((fragment, index) => (
@@ -106,10 +97,6 @@ const DeathAnimation = ({ x, y, groundY }: DeathAnimationProps) => {
           style={{
             left: `${x}%`,
             bottom: `${fragment.y}%`,
-            backgroundImage: `url(${fragmentImages[index]})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
             transform: `
         translateX(${fragment.x}px)
         rotate(${fragment.rotation}deg)

@@ -21,7 +21,7 @@
   /* Background */
 
   --background-scroll-speed: 30s;
-  --background-image: url("../assets/arcade_backgrnd.png");
+  --background-image: linear-gradient(135deg, #12002b, #041b38 55%, #18002f);
 
   background-color: var(--ground);
 }
@@ -36,7 +36,7 @@
 
 #game-screen.neon-arcade,
 #start-screen.neon-arcade {
-  background-image: url("../assets/arcade_bckgrnd_startscreen.png");
+  background: radial-gradient(circle at 50% 35%, #4d1599, #090018 68%);
 }
 
 /* BACKGROUND IMAGE */
@@ -115,7 +115,7 @@
 /* GROUND DESING */
 
 .neon-arcade #ground::before {
-  background-image: url("../assets/arcade_floor.png");
+  background: linear-gradient(#25124e, #10051f);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -131,7 +131,7 @@
 /* OBSTACLE DESIGN */
 
 .neon-arcade .obstacle {
-  background-image: url("../assets/arcade_platform.png");
+  background: linear-gradient(135deg, #00e5ff, #8a2be2);
   box-shadow: var(--glow-medium);
 }
 
@@ -147,7 +147,7 @@
 /* CROUCH DESIGN */
 
 .neon-arcade .crouch {
-  background-image: url("../assets/arcade_crouch.png");
+  background: linear-gradient(135deg, #ff00cc, #7d1aff);
   box-shadow: var(--glow-medium);
 }
 
@@ -165,7 +165,7 @@
 
 
 .neon-arcade .spike-shape {
-  background-image: url("../assets/arcade_spike.jpeg");
+  background: #ff3aa7;
 }
 
 .neon-arcade .obstacle-note.spike {

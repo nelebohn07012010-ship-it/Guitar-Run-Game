@@ -35,7 +35,7 @@
 
 #game-screen.sky-theme,
 #start-screen.sky-theme {
-  background-image: url("../assets/sky_background.png");
+  background: linear-gradient(#58b8e9, #d9f7ff);
 }
 
 /* =========================
@@ -43,7 +43,7 @@
    ========================= */
 
 .sky-theme #background-layer {
-  background-image: url("../assets/sky_background.png");
+  background: linear-gradient(#58b8e9, #d9f7ff);
 }
 
 /* =========================
@@ -95,7 +95,7 @@
    ========================= */
 
 .sky-theme #ground::before {
-  background-image: url("../assets/sky_floor.png");
+  background: linear-gradient(#7acc64, #367b41);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -112,7 +112,7 @@
    ========================= */
 
 .sky-theme .obstacle {
-  background-image: url("../assets/sky_platform.png");
+  background: #f7fbff;
   box-shadow: 0 0.25cqw 0.5cqw rgba(25, 86, 130, 0.25);
 }
 
@@ -130,7 +130,7 @@
    ========================= */
 
 .sky-theme .crouch {
-  background-image: url("../assets/sky_crouch.png");
+  background: #85c4d7;
   box-shadow: 0 0.2cqw 0.5cqw rgba(25, 86, 130, 0.3);
 }
 
@@ -148,7 +148,7 @@
    ========================= */
 
 .sky-theme .spike-shape {
-  background-image: url("../assets/sky_spike.png");
+  background: #fefefe;
 }
 
 .sky-theme .obstacle-note .spike {

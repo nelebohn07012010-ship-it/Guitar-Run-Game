@@ -1,10 +1,6 @@
 import "./StartScreen.css"
 import levelOne from "../levels/levelOne"
 import { useState, useRef, useEffect } from "react"
-import playButton from "../assets/play_button.png"
-import rankingButton from "../assets/ranking_button.png"
-import achievmentButton from "../assets/achievement_button.png"
-import Settings from "../assets/setting.png"
 import {
   getLevelStats,
   clearLevelStats,
@@ -12,8 +8,24 @@ import {
 } from "../levels/levelStats"
 import Achievements from "./Achievements.tsx"
 import { isLevelUnlocked } from "../levels/levelUnlock.ts"
-
-
+import A from "../assets/A.png"
+import Am from "../assets/Am.png"
+import B from "../assets/B.png"
+import Bm from "../assets/Bm.png"
+import C from "../assets/C.png"
+import CSharp from "../assets/C-sharp.png"
+import Cm from "../assets/Cm.png"
+import D from "../assets/D.png"
+import Dm from "../assets/Dm.png"
+import E from "../assets/E.png"
+import Em from "../assets/Em.png"
+import F from "../assets/F.png"
+import Fm from "../assets/Fm.png"
+import G from "../assets/G.png"
+import Gm from "../assets/Gm.png"
+const chordImages: Record<string, string> = {
+  A, Am, B, Bm, C, "C#": CSharp, Cm, D, Dm, E, Em, F, Fm, G, Gm,
+}
 
 const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setControlMode }: {
   startGame: (level: typeof levelOne) => void
@@ -187,7 +199,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
 
                       <div className="music-guide-image-placeholder">
                         <img
-                          src={`src/assets/${chord}.png`}
+                          src={chordImages[chord]}
                           alt={`Chord ${chord}`}
                         />
                       </div>
@@ -221,7 +233,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
 
                 <div className="expanded-chord-image">
                   <img
-                    src={`src/assets/${expandedChord}.png`}
+                    src={chordImages[expandedChord]}
                     alt={`Chord ${expandedChord}`}
                   />
                 </div>
@@ -262,12 +274,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
         </div>
       )}
 
-      <div
-        id="level-background"
-        style={{
-          backgroundImage: `url(${currentLevel.backgroundImage})`
-        }}
-      />
+      <div id="level-background" />
 
       <div
         id="level-arrow-left"
@@ -290,7 +297,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
         Level Preview
       </div>
       <button id="settings-button" onClick={() => setShowSettings(true)}>
-        <img src={Settings} alt="⚙" />
+        <span aria-hidden="true">⚙</span><span className="sr-only">Einstellungen</span>
       </button>
       {showControlHint && (
         <div id="settings-highlight">
@@ -351,7 +358,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
           id="achievements-button"
           onClick={() => setShowAchievements(true)}
         >
-          <img src={achievmentButton} alt="Achievments" />
+          <span aria-hidden="true">★</span><span className="sr-only">Achievements</span>
         </button>
 
         <button
@@ -363,14 +370,14 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
             }
           }}
         >
-          <img src={playButton} alt="Play" />
+          <span aria-hidden="true">▶</span><span className="sr-only">Spiel starten</span>
         </button>
 
         <button
           id="leaderboard-button"
           onClick={() => setShowLeaderboard(true)}
         >
-          <img src={rankingButton} alt="Leaderboard" />
+          <span aria-hidden="true">♜</span><span className="sr-only">Bestenliste</span>
         </button>
 
       </div>

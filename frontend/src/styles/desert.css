@@ -38,7 +38,7 @@
 
 #game-screen.desert-theme,
 #start-screen.desert-theme {
-  background-image: url("../assets/desert_background_startscreen.png");
+  background: linear-gradient(#f6bd60, #d96c31);
 }
 
 /* =========================
@@ -46,7 +46,7 @@
    ========================= */
 
 .desert-theme #background-layer {
-  background-image: url("../assets/desert_background.png");
+  background: linear-gradient(#58b8d6, #f6bd60 62%, #b85426);
 }
 
 /* =========================
@@ -98,7 +98,7 @@
    ========================= */
 
 .desert-theme #ground::before {
-  background-image: url("../assets/desert_floor.png");
+  background: linear-gradient(#d86f2f, #813817);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -115,7 +115,7 @@
    ========================= */
 
 .desert-theme .obstacle {
-  background-image: url("../assets/desert_platform.png");
+  background: #b85426;
   box-shadow: 0 0.25cqw 0.5cqw rgba(65, 30, 12, 0.25);
 }
 
@@ -133,7 +133,7 @@
    ========================= */
 
 .desert-theme .crouch {
-  background-image: url("../assets/desert_crouch.png");
+  background: #71401f;
   box-shadow: 0 0.2cqw 0.5cqw rgba(48, 78, 35, 0.3);
 }
 
@@ -144,7 +144,7 @@
    ========================= */
 
 .desert-theme .spike-shape {
-  background-image: url("../assets/desert_spike.png");
+  background: #ffe29a;
 }
 
 

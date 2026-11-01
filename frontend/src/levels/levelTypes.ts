@@ -19,7 +19,6 @@ export type LevelNote = {
 
 export type Level = {
   name: string
-  backgroundImage: string
   group?: number
   style: string
   speed?: PlayerSize;

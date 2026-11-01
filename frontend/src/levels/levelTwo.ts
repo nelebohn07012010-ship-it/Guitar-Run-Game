@@ -1,9 +1,7 @@
 import type { Level } from "./levelTypes"
-import backgroundImage from "../assets/level2_preview.png"
 import music from "../assets/Neon Run.mp3"
 
 const levelTwo: Level = {
-  backgroundImage,
   music,
   difficulty: "Intermediate",
   name: "7 Nation Army (2)",

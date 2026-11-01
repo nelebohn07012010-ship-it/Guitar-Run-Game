@@ -35,7 +35,7 @@
 
 #game-screen.jungle-theme,
 #start-screen.jungle-theme {
-  background-image: url("../assets/jungle_background.png");
+  background: linear-gradient(#205c47, #86cb65);
 }
 
 /* =========================
@@ -43,7 +43,7 @@
    ========================= */
 
 .jungle-theme #background-layer {
-  background-image: url("../assets/jungle_background.png");
+  background: linear-gradient(#205c47, #86cb65);
 }
 
 /* =========================
@@ -100,7 +100,7 @@
    ========================= */
 
 .jungle-theme #ground::before {
-  background-image: url("../assets/jungle_floor.png");
+  background: linear-gradient(#396d32, #153b26);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -117,7 +117,7 @@
    ========================= */
 
 .jungle-theme .obstacle {
-  background-image: url("../assets/jungle_platform.png");
+  background: #8acb51;
   box-shadow:
     0 0.25cqw 0.5cqw rgba(5, 28, 15, 0.35),
     0 0 0.4cqw rgba(90, 200, 100, 0.15);
@@ -137,7 +137,7 @@
    ========================= */
 
 .jungle-theme .crouch {
-  background-image: url("../assets/jungle_crouch.png");
+  background: #34744d;
   box-shadow:
     0 0.2cqw 0.5cqw rgba(5, 28, 15, 0.35),
     0 0 0.4cqw rgba(69, 224, 178, 0.2);
@@ -157,7 +157,7 @@
    ========================= */
 
 .jungle-theme .spike-shape {
-  background-image: url("../assets/jungle_spike.png");
+  background: #d5f59a;
 }
 
 .jungle-theme .obstacle-note .spike {

@@ -37,7 +37,7 @@
 
 #game-screen.snow-theme,
 #start-screen.snow-theme {
-  background-image: url("../assets/snow_background_starscreen.png");
+  background: linear-gradient(#123d68, #8dd6f7);
 }
 
 /* =========================
@@ -45,7 +45,7 @@
    ========================= */
 
 .snow-theme #background-layer {
-  background-image: url("../assets/snow_background.png");
+  background: linear-gradient(#315d91, #bceeff 70%);
 }
 
 
@@ -54,7 +54,7 @@
    ========================= */
 
 .snow-theme #ground::before {
-  background-image: url("/src/assets/snow_floor.png");
+  background: linear-gradient(#eafaff, #82bddb);
   background-size: auto 100%;
   background-repeat: repeat-x;
 }
@@ -71,7 +71,7 @@
    ========================= */
 
 .snow-theme .obstacle {
-  background-image: url("/src/assets/snow_platform.png");
+  background: #dff7ff;
   box-shadow: 0 0.25cqw 0.5cqw rgba(18, 48, 78, 0.3);
 }
 
@@ -89,7 +89,7 @@
    ========================= */
 
 .snow-theme .crouch {
-  background-image: url("/src/assets/snow_crouch.png");
+  background: #5d8fb2;
   box-shadow: 0 0.2cqw 0.5cqw rgba(40, 100, 140, 0.35);
 }
 
@@ -107,7 +107,7 @@
    ========================= */
 
 .snow-theme .spike-shape {
-  background-image: url("/src/assets/snow_spike.png");
+  background: #f8fdff;
 }
 
 .snow-theme .obstacle-note .spike {

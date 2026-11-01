@@ -1,10 +1,8 @@
 import type { Level } from "./levelTypes";
-import backgroundImage from "../assets/tutorial_preview.png"
 import music from "../assets/Arcade Tutorial.mp3"
 
 const tutorialArr: Level = {
   music,
-  backgroundImage,
   name: "Tutorial (Arrows)",
   difficulty: "Absolute Beginner",
   style: "neon-arcade",
