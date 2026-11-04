@@ -75,7 +75,6 @@
   white-space: nowrap;
 }
 
-/* Aktive Karte */
 .note-catalog-item.active {
   color: #fff;
   background: rgba(8, 10, 28, 0.92);
@@ -85,7 +84,6 @@
   transform: scale(1.06);
 }
 
-/* Bereits gespielte Karte */
 .note-catalog-item.played {
   color: #8affc1;
   background: rgba(8, 10, 28, 0.92);
@@ -93,7 +91,6 @@
   opacity: 0.85;
 }
 
-/* Einzelnoten */
 .note-catalog-item.single-note-item {
   flex: 0 0 20%;
   min-width: 20%;
@@ -101,7 +98,6 @@
   font-size: 400%;
 }
 
-/* Details einer Einzelnote */
 .note-details {
   display: flex;
   flex-direction: column;
@@ -109,7 +105,6 @@
   gap: 4%;
 }
 
-/* Akkordkarten: gleiche Größe wie Einzelnoten */
 .note-catalog-item.chord-item {
   flex: 0 0 20%;
   min-width: 20%;
@@ -121,7 +116,6 @@
   font-size: 100%;
 }
 
-/* Akkordname und CHORD-Label */
 .note-catalog-item.chord-item .chord-label {
   display: flex;
   flex-direction: column;
@@ -142,12 +136,9 @@
   white-space: nowrap;
 }
 
-/* Aktive Akkordkarte etwas weniger vergrößern */
 .note-catalog-item.chord-item.active {
   transform: scale(1.03);
 }
-
-
 
 @media (max-width: 600px) {
   .note-catalog-track {

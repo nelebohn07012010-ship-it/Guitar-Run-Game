@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import "./DeathAnimation.css"
-import { GAME_CONFIG } from "../../gameConfig"
 import DeathParticles from "./DeathParticles"
 
 type Fragment = {
@@ -19,22 +18,21 @@ type DeathAnimationProps = {
   groundY: number
 }
 
+const createFragments = (x: number, y: number): Fragment[] =>
+  Array.from({ length: 3 }, () => ({
+    x,
+    y,
+    velocityX: -Math.random() * 90 - 40,
+    velocityY: Math.random() * 30 + 25,
+    rotation: 0,
+    rotationSpeed: (Math.random() - 0.5) * 120,
+    life: 1,
+  }))
+
 const DeathAnimation = ({ x, y, groundY }: DeathAnimationProps) => {
-  const [fragments, setFragments] = useState<Fragment[]>([])
+  const [fragments, setFragments] = useState(() => createFragments(x, y))
 
   useEffect(() => {
-    const initialFragments = Array.from({ length: 3 }, () => ({
-      x,
-      y,
-      velocityX: -Math.random() * 90 - 40,
-      velocityY: Math.random() * 30 + 25,
-      rotation: 0,
-      rotationSpeed: (Math.random() - 0.5) * 120,
-      life: 1
-    }))
-
-    setFragments(initialFragments)
-
     let lastTime = performance.now()
     let animationFrame: number
 
@@ -86,7 +84,7 @@ const DeathAnimation = ({ x, y, groundY }: DeathAnimationProps) => {
     return () => {
       cancelAnimationFrame(animationFrame)
     }
-  }, [])
+  }, [groundY])
 
   return (
     <div id="death-animation">

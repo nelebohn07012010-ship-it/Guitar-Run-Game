@@ -4,7 +4,6 @@ type GuitarChord = {
 }
 
 const guitarChords: GuitarChord[] = [
-  // Dur
   { name: "C", notes: ["C", "E", "G"] },
   { name: "C#", notes: ["C#", "F", "G#"] },
   { name: "D", notes: ["D", "F#", "A"] },
@@ -18,7 +17,6 @@ const guitarChords: GuitarChord[] = [
   { name: "A#", notes: ["A#", "D", "F"] },
   { name: "B", notes: ["B", "D#", "F#"] },
 
-  // Moll
   { name: "Cm", notes: ["C", "D#", "G"] },
   { name: "C#m", notes: ["C#", "E", "G#"] },
   { name: "Dm", notes: ["D", "F", "A"] },
@@ -32,7 +30,6 @@ const guitarChords: GuitarChord[] = [
   { name: "A#m", notes: ["A#", "C#", "F"] },
   { name: "Bm", notes: ["B", "D", "F#"] },
 
-  // Vermindert
   { name: "Cdim", notes: ["C", "D#", "F#"] },
   { name: "Ddim", notes: ["D", "F", "G#"] },
   { name: "Edim", notes: ["E", "G", "A#"] },
@@ -41,7 +38,6 @@ const guitarChords: GuitarChord[] = [
   { name: "Adim", notes: ["A", "C", "D#"] },
   { name: "Bdim", notes: ["B", "D", "F"] },
 
-  // Sus2
   { name: "Csus2", notes: ["C", "D", "G"] },
   { name: "Dsus2", notes: ["D", "E", "A"] },
   { name: "Esus2", notes: ["E", "F#", "B"] },
@@ -50,7 +46,6 @@ const guitarChords: GuitarChord[] = [
   { name: "Asus2", notes: ["A", "B", "E"] },
   { name: "Bsus2", notes: ["B", "C#", "F#"] },
 
-  // Sus4
   { name: "Csus4", notes: ["C", "F", "G"] },
   { name: "Dsus4", notes: ["D", "G", "A"] },
   { name: "Esus4", notes: ["E", "A", "B"] },
@@ -59,7 +54,6 @@ const guitarChords: GuitarChord[] = [
   { name: "Asus4", notes: ["A", "D", "E"] },
   { name: "Bsus4", notes: ["B", "E", "F#"] },
 
-  // Powerchords
   { name: "C5", notes: ["C", "G"] },
   { name: "D5", notes: ["D", "A"] },
   { name: "E5", notes: ["E", "B"] },
@@ -471,29 +465,6 @@ class GuitarAudioService {
           )
 
         if (differenceInSemitones <= 0.5) {
-          const noteNames = [
-            "C",
-            "C#",
-            "D",
-            "D#",
-            "E",
-            "F",
-            "F#",
-            "G",
-            "G#",
-            "A",
-            "A#",
-            "B"
-          ]
-
-          const midi =
-            Math.round(
-              69 +
-              12 *
-              Math.log2(targetFrequency / 440)
-            )
-
-
           matches.push({
             name: string.name,
             fret,
@@ -547,7 +518,6 @@ class GuitarAudioService {
 
   getDetectedChord() {
     const detectedNotes = this.getDetectedChordNotes()
-    console.log("Erkannte Akkordtöne:", detectedNotes)
     for (const chord of guitarChords) {
       const matchesAllNotes =
         chord.notes.every(note =>
@@ -608,8 +578,6 @@ class GuitarAudioService {
         : samples[middle]
 
     this.noiseFloor = noiseFloor
-
-    console.log("Score Noise Floor:", noiseFloor)
 
     return noiseFloor
   }

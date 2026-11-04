@@ -28,7 +28,6 @@
 
   border: 0.25vw solid rgba(255, 255, 255, 0.8);
 
-
   box-sizing: border-box;
 }
 
@@ -130,7 +129,6 @@
   animation:
     confetti-fall 3s linear 0.9s forwards;
 }
-
 
 @keyframes confetti-fall {
   0% {

@@ -65,7 +65,7 @@ const Text = forwardRef<GameObjectHandle, TextProps>(
         element.style.transform =
           `translate3d(${positionPx}px, 0, 0)`
 
-        element.style.opacity = "1"
+        element.style.opacity = String(opacity)
       },
     }))
 

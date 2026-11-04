@@ -1,9 +1,7 @@
-/* =========================
-   DESERT RUNNER - WÜSTEN THEME
-   ========================= */
+
 
 .desert-theme {
-  /* COLORS */
+
   --background: #e8a65b;
   --background-glow: rgba(255, 204, 128, 0.25);
   --ground: #9b542e;
@@ -13,21 +11,16 @@
   --accent: #37c6bd;
   --text: #fff3d6;
 
-  /* GLOW - warm statt Neon */
+
   --glow-small: 0 0 0.4cqw var(--primary);
   --glow-medium: 0 0 0.8cqw var(--secondary);
   --glow-large: 0 0 1.5cqw var(--secondary-glow);
 
-  /* BACKGROUND */
-  --background-scroll-speed: 45s;
 
+  --background-scroll-speed: 45s;
 
   background-color: var(--ground);
 }
-
-/* =========================
-   GAME AREA
-   ========================= */
 
 .desert-theme #game-area {
   border: 0.1cqw solid #d68a49;
@@ -41,17 +34,9 @@
   background: linear-gradient(#f6bd60, #d96c31);
 }
 
-/* =========================
-   BACKGROUND IMAGE
-   ========================= */
-
 .desert-theme #background-layer {
   background: linear-gradient(#58b8d6, #f6bd60 62%, #b85426);
 }
-
-/* =========================
-   SUNSET COLOR ANIMATION
-   ========================= */
 
 #game-srceen.desert-theme::before {
   content: "";
@@ -93,10 +78,6 @@
   animation: none;
 }
 
-/* =========================
-   GROUND DESIGN
-   ========================= */
-
 .desert-theme #ground::before {
   background: linear-gradient(#d86f2f, #813817);
   background-size: auto 100%;
@@ -109,10 +90,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(65, 30, 12, 0.35),
     inset 0 -5cqw 6cqw -2.5cqw rgba(65, 30, 12, 0.45);
 }
-
-/* =========================
-   OBSTACLE DESIGN
-   ========================= */
 
 .desert-theme .obstacle {
   background: #b85426;
@@ -128,30 +105,14 @@
   color: var(--text);
 }
 
-/* =========================
-   CROUCH DESIGN
-   ========================= */
-
 .desert-theme .crouch {
   background: #71401f;
   box-shadow: 0 0.2cqw 0.5cqw rgba(48, 78, 35, 0.3);
 }
 
-
-
-/* =========================
-   SPIKE DESIGN
-   ========================= */
-
 .desert-theme .spike-shape {
   background: #ffe29a;
 }
-
-
-
-/* =========================
-   NOTE DESIGN
-   ========================= */
 
 .desert-theme .obstacle-note {
   background: rgba(75, 38, 22, 0.92);
@@ -173,12 +134,6 @@
     0 0 0.3vw rgba(255, 210, 122, 0.25);
 }
 
-/* =========================
-   PLAYER DESIGN
-   ========================= */
-
-
-
 .desert-theme #player.crouching::after {
   background: linear-gradient(to top,
       rgba(55, 198, 189, 0.8),
@@ -188,10 +143,6 @@
   box-shadow:
     0 0 1cqw rgba(55, 198, 189, 0.25);
 }
-
-/* =========================
-   CALIBRATION & HUD
-   ========================= */
 
 .desert-theme #calibration-overlay {
   background: rgba(55, 29, 17, 0.82);
@@ -213,8 +164,6 @@
     -0.08vw 0.08vw 0 #4b2616;
 }
 
-/* NOTE CATALOG DESIGN */
-
 .desert-theme .note-catalog-item {
   background: #030509;
   border: 0.08cqw solid #657080;
@@ -231,7 +180,6 @@
   opacity: 0.7;
 }
 
-/* ACTIVE OBSTACLE */
 .desert-theme .note-catalog-item.active {
   background: #02090d;
   border: 0.12cqw solid #00f0ff;
@@ -251,7 +199,6 @@
   transform: scale(1.06);
 }
 
-/* PLAYED OBSTACLES */
 .desert-theme .note-catalog-item.played {
   background: #020805;
   border-color: #39ff88;

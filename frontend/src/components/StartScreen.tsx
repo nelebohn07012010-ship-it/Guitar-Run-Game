@@ -1,6 +1,6 @@
 import "./StartScreen.css"
 import levelOne from "../levels/levelOne"
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import {
   getLevelStats,
   clearLevelStats,
@@ -50,7 +50,7 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   const [expandedChord, setExpandedChord] = useState<string | null>(null)
   const [showChordGuide, setShowChordGuide] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const [levelStats, setLevelStats] = useState<LevelStat[]>([])
+  const [levelStats, setLevelStats] = useState<LevelStat[]>(getLevelStats)
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [showAchievements, setShowAchievements] = useState(false)
   const [showControlHint, setShowControlHint] = useState(() => {
@@ -94,10 +94,6 @@ const StartScreen = ({ startGame, levels, previewAudioRef, controlMode, setContr
   const nextLevel = () => {
     setSelectedLevel(current => current === levels.length - 1 ? 0 : current + 1)
   }
-
-  useEffect(() => {
-    setLevelStats(getLevelStats())
-  }, [])
 
   const currentLevel = levels[selectedLevel]
   const currentLevelUnlocked = isLevelUnlocked(

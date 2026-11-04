@@ -1,7 +1,7 @@
-/*NOT USED!!!!!*/
+
 
 .jungle-theme {
-  /* COLORS */
+
   --background: #1d593b;
   --background-glow: rgba(100, 220, 130, 0.25);
   --ground: #173c2b;
@@ -11,20 +11,16 @@
   --accent: #45e0b2;
   --text: #efffe8;
 
-  /* GLOW - biolumineszentes Dschungellicht */
+
   --glow-small: 0 0 0.4cqw var(--primary);
   --glow-medium: 0 0 0.8cqw var(--secondary);
   --glow-large: 0 0 1.5cqw var(--secondary-glow);
 
-  /* BACKGROUND */
+
   --background-scroll-speed: 45s;
 
   background-color: var(--ground);
 }
-
-/* =========================
-   GAME AREA
-   ========================= */
 
 .jungle-theme #game-area {
   border: 0.1cqw solid #65bd70;
@@ -38,17 +34,9 @@
   background: linear-gradient(#205c47, #86cb65);
 }
 
-/* =========================
-   BACKGROUND IMAGE
-   ========================= */
-
 .jungle-theme #background-layer {
   background: linear-gradient(#205c47, #86cb65);
 }
-
-/* =========================
-   JUNGLE LIGHT ANIMATION
-   ========================= */
 
 #game-screen.jungle-theme::before {
   content: "";
@@ -95,10 +83,6 @@
   animation: none;
 }
 
-/* =========================
-   GROUND DESIGN
-   ========================= */
-
 .jungle-theme #ground::before {
   background: linear-gradient(#396d32, #153b26);
   background-size: auto 100%;
@@ -111,10 +95,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(5, 28, 15, 0.4),
     inset 0 -5cqw 6cqw -2.5cqw rgba(5, 28, 15, 0.5);
 }
-
-/* =========================
-   OBSTACLE DESIGN
-   ========================= */
 
 .jungle-theme .obstacle {
   background: #8acb51;
@@ -132,10 +112,6 @@
   color: var(--text);
 }
 
-/* =========================
-   CROUCH DESIGN
-   ========================= */
-
 .jungle-theme .crouch {
   background: #34744d;
   box-shadow:
@@ -151,10 +127,6 @@
 .jungle-theme .crouch-note span {
   color: var(--text);
 }
-
-/* =========================
-   SPIKE DESIGN
-   ========================= */
 
 .jungle-theme .spike-shape {
   background: #d5f59a;
@@ -176,10 +148,6 @@
   color: var(--text);
 }
 
-/* =========================
-   NOTE DESIGN
-   ========================= */
-
 .jungle-theme .obstacle-note {
   background: rgba(13, 45, 29, 0.93);
   border: 0.05cqw solid currentColor;
@@ -200,10 +168,6 @@
     0 0 0.3vw rgba(100, 220, 130, 0.25);
 }
 
-/* =========================
-   PLAYER DESIGN
-   ========================= */
-
 .jungle-theme #player.crouching::after {
   background: linear-gradient(to top,
       rgba(69, 224, 178, 0.8),
@@ -213,10 +177,6 @@
   box-shadow:
     0 0 1cqw rgba(69, 224, 178, 0.3);
 }
-
-/* =========================
-   CALIBRATION & HUD
-   ========================= */
 
 .jungle-theme #calibration-overlay {
   background: rgba(10, 38, 24, 0.87);
@@ -238,10 +198,6 @@
     -0.08vw 0.08vw 0 #0d2d1d;
 }
 
-/* =========================
-   NOTE CATALOG DESIGN
-   ========================= */
-
 .jungle-theme .note-catalog-item {
   background: #0b2117;
   border: 0.08cqw solid #477e56;
@@ -257,10 +213,6 @@
 
   opacity: 0.7;
 }
-
-/* =========================
-   ACTIVE OBSTACLE
-   ========================= */
 
 .jungle-theme .note-catalog-item.active {
   background: #102d1d;
@@ -280,10 +232,6 @@
   opacity: 1;
   transform: scale(1.06);
 }
-
-/* =========================
-   PLAYED OBSTACLES
-   ========================= */
 
 .jungle-theme .note-catalog-item.played {
   background: #10251a;

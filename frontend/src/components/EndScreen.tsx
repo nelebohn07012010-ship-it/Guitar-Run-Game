@@ -1,5 +1,11 @@
 import "./EndScreen.css"
 
+const confetti = Array.from({ length: 40 }, (_, index) => ({
+  delay: `${(index % 5) * 0.04}s`,
+  x: `${(index * 47) % 160 - 80}vw`,
+  y: `${(index * 29) % 100 - 70}vh`,
+}))
+
 type EndScreenProps = {
   attempts: number
   coins: number
@@ -17,17 +23,16 @@ const EndScreen = ({
   onHome,
   controlMode
 }: EndScreenProps) => {
-  const confetti = Array.from({ length: 40 })
   return (
     <div id="end-screen">
       <div id="confetti">
-        {confetti.map((_, index) => (
+        {confetti.map((piece, index) => (
           <span
             key={index}
             style={{
-              "--x": `${Math.random() * 160 - 80}vw`,
-              "--y": `${Math.random() * 100 - 70}vh`,
-              animationDelay: `${Math.random() * 0.2}s`
+              "--x": piece.x,
+              "--y": piece.y,
+              animationDelay: piece.delay,
             } as React.CSSProperties}
           />
         ))}

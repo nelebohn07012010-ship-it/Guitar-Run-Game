@@ -1,7 +1,7 @@
-/*NOT USED!!!!!*/
+
 
 .sky-theme {
-  /* COLORS */
+
   --background: #78c9f5;
   --background-glow: rgba(210, 242, 255, 0.3);
   --ground: #367eae;
@@ -11,20 +11,16 @@
   --accent: #75f0e8;
   --text: #f4fcff;
 
-  /* GLOW - sanftes Himmelsleuchten */
+
   --glow-small: 0 0 0.4cqw var(--primary);
   --glow-medium: 0 0 0.8cqw var(--secondary);
   --glow-large: 0 0 1.5cqw var(--secondary-glow);
 
-  /* BACKGROUND */
+
   --background-scroll-speed: 45s;
 
   background-color: var(--ground);
 }
-
-/* =========================
-   GAME AREA
-   ========================= */
 
 .sky-theme #game-area {
   border: 0.1cqw solid #a9e6ff;
@@ -38,17 +34,9 @@
   background: linear-gradient(#58b8e9, #d9f7ff);
 }
 
-/* =========================
-   BACKGROUND IMAGE
-   ========================= */
-
 .sky-theme #background-layer {
   background: linear-gradient(#58b8e9, #d9f7ff);
 }
-
-/* =========================
-   SKY COLOR ANIMATION
-   ========================= */
 
 #game-screen.sky-theme::before {
   content: "";
@@ -90,10 +78,6 @@
   animation: none;
 }
 
-/* =========================
-   GROUND DESIGN
-   ========================= */
-
 .sky-theme #ground::before {
   background: linear-gradient(#7acc64, #367b41);
   background-size: auto 100%;
@@ -106,10 +90,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(22, 70, 115, 0.25),
     inset 0 -5cqw 6cqw -2.5cqw rgba(22, 70, 115, 0.35);
 }
-
-/* =========================
-   OBSTACLE DESIGN
-   ========================= */
 
 .sky-theme .obstacle {
   background: #f7fbff;
@@ -125,10 +105,6 @@
   color: var(--text);
 }
 
-/* =========================
-   CROUCH DESIGN
-   ========================= */
-
 .sky-theme .crouch {
   background: #85c4d7;
   box-shadow: 0 0.2cqw 0.5cqw rgba(25, 86, 130, 0.3);
@@ -142,10 +118,6 @@
 .sky-theme .crouch-note span {
   color: var(--text);
 }
-
-/* =========================
-   SPIKE DESIGN
-   ========================= */
 
 .sky-theme .spike-shape {
   background: #fefefe;
@@ -167,10 +139,6 @@
   color: var(--text);
 }
 
-/* =========================
-   NOTE DESIGN
-   ========================= */
-
 .sky-theme .obstacle-note {
   background: rgba(22, 66, 105, 0.9);
   border: 0.05cqw solid currentColor;
@@ -191,10 +159,6 @@
     0 0 0.3vw rgba(174, 231, 255, 0.3);
 }
 
-/* =========================
-   PLAYER DESIGN
-   ========================= */
-
 .sky-theme #player.crouching::after {
   background: linear-gradient(to top,
       rgba(117, 240, 232, 0.8),
@@ -204,10 +168,6 @@
   box-shadow:
     0 0 1cqw rgba(117, 240, 232, 0.3);
 }
-
-/* =========================
-   CALIBRATION & HUD
-   ========================= */
 
 .sky-theme #calibration-overlay {
   background: rgba(18, 54, 88, 0.84);
@@ -229,10 +189,6 @@
     -0.08vw 0.08vw 0 #164269;
 }
 
-/* =========================
-   NOTE CATALOG DESIGN
-   ========================= */
-
 .sky-theme .note-catalog-item {
   background: #10283c;
   border: 0.08cqw solid #83b9d6;
@@ -248,10 +204,6 @@
 
   opacity: 0.7;
 }
-
-/* =========================
-   ACTIVE OBSTACLE
-   ========================= */
 
 .sky-theme .note-catalog-item.active {
   background: #102c42;
@@ -271,10 +223,6 @@
   opacity: 1;
   transform: scale(1.06);
 }
-
-/* =========================
-   PLAYED OBSTACLES
-   ========================= */
 
 .sky-theme .note-catalog-item.played {
   background: #102b2e;

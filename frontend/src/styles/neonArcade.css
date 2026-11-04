@@ -1,9 +1,7 @@
-/* =========================
-   NEON ARCADE - LEVEL 1
-   ========================= */
+
 
 .neon-arcade {
-  /* Colors */
+
   --background: #0a0014;
   --background-glow: rgba(0, 229, 255, 0.5);
   --ground: #18002e;
@@ -13,12 +11,12 @@
   --accent: #ff2bd6;
   --text: #ffffff;
 
-  /* Glow */
+
   --glow-small: 0 0 0.75cqw var(--primary);
   --glow-medium: 0 0 1.4cqw var(--primary);
   --glow-large: 0 0 2.8cqw var(--primary);
 
-  /* Background */
+
 
   --background-scroll-speed: 30s;
   --background-image: linear-gradient(135deg, #12002b, #041b38 55%, #18002f);
@@ -26,9 +24,6 @@
   background-color: var(--ground);
 }
 
-
-
-/* Theme-only visuals. Layout and dimensions stay in the component styles. */
 .neon-arcade#game-area {
   border: 0.1cqw solid var(--secondary);
   box-shadow: 0 0 3cqw var(--secondary), 0 0 5cqw var(--secondary-glow);
@@ -39,13 +34,9 @@
   background: radial-gradient(circle at 50% 35%, #4d1599, #090018 68%);
 }
 
-/* BACKGROUND IMAGE */
-
 .neon-arcade #background-layer {
   background-image: var(--background-image);
 }
-
-/* BACKGROUND COLOR ANIMATION */
 
 #game-screen.neon-arcade::before {
   content: "";
@@ -60,7 +51,6 @@
   pointer-events: none;
   z-index: 1;
 }
-
 
 @keyframes glass-color-shift {
   0% {
@@ -112,8 +102,6 @@
   animation: glass-color-shift 155s lineaar infinite;
 }
 
-/* GROUND DESING */
-
 .neon-arcade #ground::before {
   background: linear-gradient(#25124e, #10051f);
   background-size: auto 100%;
@@ -126,9 +114,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(0, 0, 0, 0.8),
     inset 0 -5cqw 6cqw -2.5cqw rgba(0, 0, 0, 0.7);
 }
-
-
-/* OBSTACLE DESIGN */
 
 .neon-arcade .obstacle {
   background: linear-gradient(135deg, #00e5ff, #8a2be2);
@@ -144,8 +129,6 @@
   color: var(--text);
 }
 
-/* CROUCH DESIGN */
-
 .neon-arcade .crouch {
   background: linear-gradient(135deg, #ff00cc, #7d1aff);
   box-shadow: var(--glow-medium);
@@ -159,10 +142,6 @@
 .neon-arcade .crouch-note span {
   color: var(--text);
 }
-
-/* SPIKE DESIGN */
-
-
 
 .neon-arcade .spike-shape {
   background: #ff3aa7;
@@ -184,8 +163,6 @@
   color: var(--text);
 }
 
-/* NOTE DESIGN */
-
 .neon-arcade .obstacle-note {
   background: rgba(5, 10, 20, 0.9);
   border: 0.05cqw solid currentColor;
@@ -204,8 +181,6 @@
   color: white;
   box-shadow: 0 0 0.3vw rgba(255, 255, 255, 0.8), 0 0 0.8vw rgba(255, 0, 204, 0.5);
 }
-
-
 
 .neon-arcade #player.crouching::after {
   background: linear-gradient(to top, rgba(255, 0, 204, 1), rgba(255, 77, 232, 0.55), transparent);
@@ -229,10 +204,6 @@
     0.08vw -0.08vw 0 #000, -0.08vw 0.08vw 0 #000;
 }
 
-
-
-/* NOTE CATALOG DESIGN */
-
 .neon-arcade .note-catalog-item {
   background: #030509;
   border: 0.08cqw solid #657080;
@@ -249,7 +220,6 @@
   opacity: 0.7;
 }
 
-/* ACTIVE OBSTACLE */
 .neon-arcade .note-catalog-item.active {
   background: #02090d;
   border: 0.12cqw solid #00f0ff;
@@ -269,7 +239,6 @@
   transform: scale(1.06);
 }
 
-/* PLAYED OBSTACLES */
 .neon-arcade .note-catalog-item.played {
   background: #020805;
   border-color: #39ff88;

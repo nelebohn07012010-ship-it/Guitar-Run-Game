@@ -8,7 +8,6 @@ const levelFive: Level = {
   style: "desert-theme",
   group: 2,
   obstacles: [
-    // Wiederholung 1
     { id: 1, type: "crouch", chord: "G", positionX: 100, positionY: 30, width: 110, height: 8 },
     { id: 2, type: "crouch", chord: "D", positionX: 230, positionY: 30, width: 80, height: 8 },
     { id: 3, type: "crouch", chord: "Em", positionX: 330, positionY: 30, width: 80, height: 8 },
@@ -19,7 +18,6 @@ const levelFive: Level = {
     { id: 7, type: "crouch", chord: "C", positionX: 730, positionY: 30, width: 80, height: 8 },
     { id: 8, type: "crouch", chord: "G", positionX: 830, positionY: 30, width: 80, height: 8 },
 
-    // Wiederholung 2
     { id: 9, type: "crouch", chord: "G", positionX: 930, positionY: 30, width: 110, height: 8 },
     { id: 10, type: "crouch", chord: "D", positionX: 1060, positionY: 30, width: 80, height: 8 },
     { id: 11, type: "crouch", chord: "Em", positionX: 1160, positionY: 30, width: 80, height: 8 },
@@ -30,7 +28,6 @@ const levelFive: Level = {
     { id: 16, type: "crouch", chord: "G", positionX: 1660, positionY: 30, width: 80, height: 8 },
     { id: 101, type: "coin", positionX: 1745, positionY: 25, width: 8, height: 8 },
 
-    // Wiederholung 3
     { id: 17, type: "crouch", chord: "G", positionX: 1760, positionY: 30, width: 110, height: 8 },
     { id: 18, type: "crouch", chord: "D", positionX: 1890, positionY: 30, width: 80, height: 8 },
     { id: 19, type: "crouch", chord: "Em", positionX: 1990, positionY: 30, width: 80, height: 8 },
@@ -41,7 +38,6 @@ const levelFive: Level = {
     { id: 23, type: "crouch", chord: "C", positionX: 2390, positionY: 30, width: 80, height: 8 },
     { id: 24, type: "crouch", chord: "G", positionX: 2490, positionY: 30, width: 80, height: 8 },
 
-    // Wiederholung 4
     { id: 25, type: "crouch", chord: "G", positionX: 2590, positionY: 30, width: 110, height: 8 },
     { id: 103, type: "coin", positionX: 1705, positionY: 25, width: 8, height: 8 },
     { id: 26, type: "crouch", chord: "D", positionX: 2720, positionY: 30, width: 80, height: 8 },
@@ -52,7 +48,6 @@ const levelFive: Level = {
     { id: 31, type: "crouch", chord: "C", positionX: 3220, positionY: 30, width: 80, height: 8 },
     { id: 32, type: "crouch", chord: "G", positionX: 3320, positionY: 30, width: 80, height: 8 },
 
-    // Wiederholung 5
     { id: 33, type: "crouch", chord: "G", positionX: 3420, positionY: 30, width: 110, height: 8 },
     { id: 34, type: "crouch", chord: "D", positionX: 3550, positionY: 30, width: 80, height: 8 },
     { id: 35, type: "crouch", chord: "Em", positionX: 3650, positionY: 30, width: 80, height: 8 },

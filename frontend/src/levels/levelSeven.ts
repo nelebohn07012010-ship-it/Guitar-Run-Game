@@ -8,7 +8,6 @@ const levelSeven: Level = {
   style: "desert-theme",
   group: 2,
   obstacles: [
-    // Verse 1
     { id: 1, type: "crouch", chord: "G", positionX: 100, positionY: 30, width: 60, height: 8 },
     { id: 2, type: "crouch", chord: "Em", positionX: 180, positionY: 30, width: 60, height: 8 },
     { id: 3, type: "crouch", chord: "D", positionX: 260, positionY: 30, width: 60, height: 8 },
@@ -21,7 +20,6 @@ const levelSeven: Level = {
     { id: 9, type: "crouch", chord: "C", positionX: 765, positionY: 30, width: 40, height: 8 },
     { id: 10, type: "crouch", chord: "G", positionX: 820, positionY: 30, width: 30, height: 8 },
 
-    // Chorus 1
     { id: 11, type: "crouch", chord: "G", positionX: 870, positionY: 30, width: 110, height: 8 },
     { id: 12, type: "crouch", chord: "D", positionX: 1000, positionY: 30, width: 80, height: 8 },
     { id: 13, type: "crouch", chord: "Em", positionX: 1100, positionY: 30, width: 80, height: 8 },
@@ -32,7 +30,6 @@ const levelSeven: Level = {
     { id: 17, type: "crouch", chord: "C", positionX: 1500, positionY: 30, width: 80, height: 8 },
     { id: 18, type: "crouch", chord: "G", positionX: 1600, positionY: 30, width: 80, height: 8 },
 
-    // Verse 2
     { id: 19, type: "crouch", chord: "G", positionX: 1700, positionY: 30, width: 60, height: 8 },
     { id: 20, type: "crouch", chord: "Em", positionX: 1780, positionY: 30, width: 60, height: 8 },
     { id: 102, type: "coin", positionX: 1850, positionY: 25, width: 8, height: 8 },
@@ -46,7 +43,6 @@ const levelSeven: Level = {
     { id: 27, type: "crouch", chord: "C", positionX: 2365, positionY: 30, width: 40, height: 8 },
     { id: 28, type: "crouch", chord: "G", positionX: 2420, positionY: 30, width: 30, height: 8 },
 
-    // Chorus 2
     { id: 29, type: "crouch", chord: "G", positionX: 2470, positionY: 30, width: 110, height: 8 },
     { id: 30, type: "crouch", chord: "D", positionX: 2600, positionY: 30, width: 80, height: 8 },
     { id: 104, type: "coin", positionX: 2690, positionY: 25, width: 8, height: 8 },
@@ -58,7 +54,6 @@ const levelSeven: Level = {
     { id: 35, type: "crouch", chord: "C", positionX: 3100, positionY: 30, width: 80, height: 8 },
     { id: 36, type: "crouch", chord: "G", positionX: 3200, positionY: 30, width: 80, height: 8 },
 
-    // Bridge 
     { id: 37, type: "crouch", chord: "Em", positionX: 3300, positionY: 30, width: 60, height: 8 },
     { id: 38, type: "crouch", chord: "D", positionX: 3380, positionY: 30, width: 60, height: 8 },
     { id: 39, type: "crouch", chord: "G", positionX: 3460, positionY: 30, width: 60, height: 8 },
@@ -73,7 +68,6 @@ const levelSeven: Level = {
     { id: 107, type: "coin", positionX: 4095, positionY: 25, width: 8, height: 8 },
     { id: 47, type: "crouch", chord: "D", positionX: 4100, positionY: 30, width: 60, height: 8 },
 
-    // Chorus 3
     { id: 48, type: "crouch", chord: "G", positionX: 4180, positionY: 30, width: 110, height: 8 },
     { id: 49, type: "crouch", chord: "D", positionX: 4310, positionY: 30, width: 80, height: 8 },
     { id: 50, type: "crouch", chord: "Em", positionX: 4410, positionY: 30, width: 80, height: 8 },
@@ -84,7 +78,6 @@ const levelSeven: Level = {
     { id: 54, type: "crouch", chord: "C", positionX: 4810, positionY: 30, width: 80, height: 8 },
     { id: 55, type: "crouch", chord: "G", positionX: 4910, positionY: 30, width: 80, height: 8 },
 
-    // Chorus 4
     { id: 56, type: "crouch", chord: "G", positionX: 5010, positionY: 30, width: 110, height: 8 },
     { id: 57, type: "crouch", chord: "D", positionX: 5140, positionY: 30, width: 80, height: 8 },
     { id: 58, type: "crouch", chord: "Em", positionX: 5240, positionY: 30, width: 80, height: 8 },
@@ -95,7 +88,6 @@ const levelSeven: Level = {
     { id: 62, type: "crouch", chord: "C", positionX: 5640, positionY: 30, width: 80, height: 8 },
     { id: 63, type: "crouch", chord: "G", positionX: 5740, positionY: 30, width: 80, height: 8 },
 
-    // Outro – vorläufig
     { id: 64, type: "crouch", chord: "G", positionX: 5840, positionY: 30, width: 60, height: 8 },
     { id: 65, type: "crouch", chord: "D", positionX: 5920, positionY: 30, width: 60, height: 8 },
     { id: 110, type: "coin", positionX: 5990, positionY: 25, width: 8, height: 8 },

@@ -29,14 +29,12 @@ export const getLevelStats = (): LevelStat[] => {
 export const saveLevelStat = (newStat: LevelStat) => {
   const stats = getLevelStats()
 
-  // Nur Ergebnisse desselben Levels und Steuerungsmodus vergleichen.
   const previousStats = stats.filter(
     stat =>
       stat.levelName === newStat.levelName &&
       stat.controlMode === newStat.controlMode
   )
 
-  // Prüfen, ob das neue Ergebnis besser als alle bisherigen ist.
   const isBetter = previousStats.every(
     stat =>
       newStat.progress > stat.progress ||
@@ -46,12 +44,10 @@ export const saveLevelStat = (newStat: LevelStat) => {
       )
   )
 
-  // Wenn es nicht besser ist, nichts speichern.
   if (!isBetter) {
     return
   }
 
-  // Besseres Ergebnis hinzufügen, alte Einträge bleiben erhalten.
   stats.push(newStat)
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(stats))

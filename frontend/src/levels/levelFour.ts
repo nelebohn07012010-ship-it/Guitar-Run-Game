@@ -8,7 +8,6 @@ const levelFour: Level = {
   difficulty: "Advanced Beginner",
   group: 2,
   obstacles: [
-    // Verse 1
     { id: 1, type: "spike", chord: "G", positionX: 100, positionY: 20, width: 5, height: 8 },
     { id: 2, type: "obstacle", chord: "Em", positionX: 250, positionY: 20, width: 140, height: 8 },
     { id: 100, type: "coin", positionX: 300, positionY: 48, width: 8, height: 8 },
@@ -16,7 +15,6 @@ const levelFour: Level = {
     { id: 4, type: "obstacle", chord: "C", positionX: 550, positionY: 20, width: 180, height: 8 },
     { id: 5, type: "crouch", chord: "G", positionX: 700, positionY: 38, width: 30, height: 8 },
 
-    // Chorus
     { id: 6, type: "obstacle", chord: "G", positionX: 850, positionY: 20, width: 590, height: 8 },
     { id: 7, type: "spike", chord: "D", positionX: 1000, positionY: 28, width: 5, height: 8 },
     { id: 8, type: "spike", chord: "Em", positionX: 1150, positionY: 28, width: 5, height: 8 },
@@ -27,7 +25,6 @@ const levelFour: Level = {
     { id: 101, type: "coin", positionX: 1775, positionY: 70, width: 8, height: 8 },
     { id: 13, type: "crouch", chord: "G", positionX: 1900, positionY: 62, width: 20, height: 8 },
 
-    // Verse 2
     { id: 14, type: "spike", chord: "G", positionX: 2050, positionY: 20, width: 5, height: 8 },
     { id: 102, type: "coin", positionX: 2055, positionY: 40, width: 8, height: 8 },
     { id: 15, type: "obstacle", chord: "Em", positionX: 2200, positionY: 20, width: 140, height: 8 },
@@ -35,7 +32,6 @@ const levelFour: Level = {
     { id: 17, type: "obstacle", chord: "C", positionX: 2500, positionY: 20, width: 180, height: 8 },
     { id: 18, type: "crouch", chord: "G", positionX: 2650, positionY: 38, width: 20, height: 8 },
 
-    // Chorus
     { id: 19, type: "obstacle", chord: "G", positionX: 2800, positionY: 20, width: 590, height: 8 },
     { id: 20, type: "spike", chord: "D", positionX: 2950, positionY: 28, width: 5, height: 8 },
     { id: 21, type: "spike", chord: "Em", positionX: 3100, positionY: 28, width: 5, height: 8 },
@@ -46,7 +42,6 @@ const levelFour: Level = {
     { id: 25, type: "obstacle", chord: "C", positionX: 3700, positionY: 44, width: 170, height: 8 },
     { id: 26, type: "crouch", chord: "G", positionX: 3850, positionY: 62, width: 20, height: 8 },
 
-    // Bridge
     { id: 27, type: "obstacle", chord: "Em", positionX: 4000, positionY: 20, width: 140, height: 8 },
     { id: 104, type: "coin", positionX: 4050, positionY: 48, width: 8, height: 8 },
     { id: 28, type: "obstacle", chord: "D", positionX: 4150, positionY: 28, width: 140, height: 8 },
@@ -61,7 +56,6 @@ const levelFour: Level = {
     { id: 36, type: "obstacle", chord: "G", positionX: 5350, positionY: 44, width: 165, height: 8 },
     { id: 37, type: "spike", chord: "D", positionX: 5500, positionY: 52, width: 5, height: 8 },
 
-    // Final Chorus – Durchlauf 1
     { id: 38, type: "obstacle", chord: "G", positionX: 5650, positionY: 20, width: 590, height: 8 },
     { id: 39, type: "spike", chord: "D", positionX: 5800, positionY: 28, width: 5, height: 8 },
     { id: 40, type: "spike", chord: "Em", positionX: 5950, positionY: 28, width: 5, height: 8 },
@@ -72,7 +66,6 @@ const levelFour: Level = {
     { id: 44, type: "obstacle", chord: "C", positionX: 6550, positionY: 44, width: 170, height: 8 },
     { id: 45, type: "crouch", chord: "G", positionX: 6700, positionY: 62, width: 20, height: 8 },
 
-    // Final Chorus – Durchlauf 2
     { id: 46, type: "obstacle", chord: "G", positionX: 6850, positionY: 20, width: 590, height: 8 },
     { id: 47, type: "spike", chord: "D", positionX: 7000, positionY: 28, width: 5, height: 8 },
     { id: 48, type: "spike", chord: "Em", positionX: 7150, positionY: 28, width: 5, height: 8 },
@@ -83,7 +76,6 @@ const levelFour: Level = {
     { id: 52, type: "obstacle", chord: "C", positionX: 7750, positionY: 44, width: 170, height: 8 },
     { id: 53, type: "crouch", chord: "G", positionX: 7900, positionY: 62, width: 20, height: 8 },
 
-    // Outro
     { id: 54, type: "obstacle", chord: "G", positionX: 8050, positionY: 20, width: 140, height: 8 },
     { id: 55, type: "obstacle", chord: "D", positionX: 8200, positionY: 28, width: 140, height: 8 },
     { id: 56, type: "obstacle", chord: "C", positionX: 8350, positionY: 36, width: 160, height: 8 },

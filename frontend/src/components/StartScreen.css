@@ -13,7 +13,6 @@
 
   border: 0.1vw solid #ffffff;
 
-
   box-shadow:
     0 0 0.5vw #ffffff,
     0 0 1.5vw #ffffff,
@@ -101,7 +100,6 @@
 #level-arrow-right:hover {
   color: rgba(120, 120, 120, 0.9);
 }
-
 
 #level-actions {
   z-index: 1;
@@ -268,7 +266,6 @@
 
   border: 0.1vw solid rgba(120, 180, 255, 0.8);
 
-
   box-shadow:
     0 0 0.5vw rgba(80, 160, 255, 0.8),
     0 0 1.5vw rgba(80, 160, 255, 0.2);
@@ -376,7 +373,6 @@
   background: rgba(5, 15, 45, 0.95);
 
   border: 0.1vw solid rgba(120, 180, 255, 0.8);
-
 
   box-shadow:
     0 0 0.5vw rgba(80, 160, 255, 0.8),
@@ -678,10 +674,6 @@
   transform: scale(1.04);
 }
 
-/* =========================
-   Musik-Button
-========================= */
-
 #music-guide-button {
   position: absolute;
   top: 18px;
@@ -701,10 +693,6 @@
 #music-guide-button:hover {
   background: rgba(0, 240, 255, 0.15);
 }
-
-/* =========================
-   Akkordübersicht
-========================= */
 
 #music-guide-overlay {
   position: absolute;
@@ -766,10 +754,6 @@
   gap: 16px;
   margin-top: 24px;
 }
-
-/* =========================
-   Akkordkarten
-========================= */
 
 .music-guide-card {
   position: relative;
@@ -833,10 +817,6 @@
   object-fit: contain;
 }
 
-/* =========================
-   Vergrößerte Akkordkarte
-========================= */
-
 #expanded-chord-overlay {
   position: absolute;
   inset: 0;
@@ -894,10 +874,6 @@
   box-sizing: border-box;
 }
 
-/* =========================
-   Animation
-========================= */
-
 @keyframes chord-zoom-in {
   from {
     opacity: 0;
@@ -909,10 +885,6 @@
     transform: scale(1);
   }
 }
-
-/* =========================
-   Mobile
-========================= */
 
 @media (max-width: 600px) {
   #music-guide-button {
@@ -980,13 +952,11 @@
   filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.5));
 }
 
-
 #level-difficulty {
   position: absolute;
   left: 50%;
   top: 25%;
   transform: translateX(-50%);
-
 
   font-size: 2.3vw;
   font-weight: 900;
@@ -994,11 +964,8 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-
   z-index: 2;
 }
-
-
 
 .difficulty-absolute-beginner {
   color: #5ffff5;
@@ -1009,7 +976,6 @@
     0 0 35px #00a99d;
 }
 
-
 .difficulty-advanced-beginner {
   color: #7dff8a;
   text-shadow:
@@ -1018,7 +984,6 @@
     0 0 20px #16c934,
     0 0 35px #008f20;
 }
-
 
 .difficulty-intermediate {
   color: #fff36b;
@@ -1037,7 +1002,6 @@
     0 0 20px #f00000,
     0 0 35px #b80000;
 }
-
 
 .difficulty-master {
   color: #ff4545;

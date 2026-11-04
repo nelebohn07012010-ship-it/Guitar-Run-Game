@@ -22,7 +22,6 @@ const NoteCatalog = memo(function NoteCatalog({
 }: NoteCatalogProps) {
   const activeItemRef = useRef<HTMLDivElement>(null)
 
-  // Nur spielbare Noten und Akkorde anzeigen, keine Münzen.
   const notes = obstacles.filter(
     (obstacle) =>
       obstacle.chord !== undefined ||

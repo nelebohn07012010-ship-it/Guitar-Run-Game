@@ -24,9 +24,6 @@ const GameObject = forwardRef<GameObjectHandle, GameObjectProps>(({
   positionY,
   width,
   height,
-  string,
-  fret,
-  chord,
   className,
   children,
 }, ref) => {

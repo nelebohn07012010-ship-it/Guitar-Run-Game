@@ -16,24 +16,20 @@ type DeathParticlesProps = {
 
 }
 
+const createParticles = (): Particle[] =>
+  Array.from({ length: 20 }, () => ({
+    x: 0,
+    y: 0,
+    velocityX: (Math.random() - 0.5) * 8,
+    velocityY: Math.random() * 8 + 2,
+    life: 1,
+    size: Math.random() * 0.35 + 0.15,
+  }))
+
 const DeathParticles = ({ x, y }: DeathParticlesProps) => {
-  const [particles, setParticles] = useState<Particle[]>([])
+  const [particles, setParticles] = useState(createParticles)
 
   useEffect(() => {
-    const initialParticles: Particle[] = Array.from(
-      { length: 20 },
-      () => ({
-        x: 0,
-        y: 0,
-        velocityX: (Math.random() - 0.5) * 8,
-        velocityY: Math.random() * 8 + 2,
-        life: 1,
-        size: Math.random() * 0.35 + 0.15
-      })
-    )
-
-    setParticles(initialParticles)
-
     let animationFrame: number
     let lastTime = performance.now()
 

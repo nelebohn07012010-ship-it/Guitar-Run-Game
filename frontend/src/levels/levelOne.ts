@@ -8,7 +8,6 @@ const levelOne: Level = {
   style: "neon-arcade",
   group: 1,
   obstacles: [
-    // RIFF 1: A-Saite – 7 7 10 7 5 3 2
     { id: 1, type: "spike", note: "E", string: "A", fret: 7, positionX: 100, positionY: 20, width: 5, height: 8 },
     { id: 2, type: "obstacle", note: "E", string: "A", fret: 7, positionX: 220, positionY: 20, width: 230, height: 8 },
     { id: 3, type: "spike", note: "G", string: "A", fret: 10, positionX: 340, positionY: 28, width: 5, height: 8 },

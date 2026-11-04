@@ -7,17 +7,16 @@ type LandingScreenProps = {
 const LandingScreen = ({ onStart }: LandingScreenProps) => {
   const handleStart = async () => {
     try {
-      // Vollbildmodus anfordern
       if (document.documentElement.requestFullscreen) {
         await document.documentElement.requestFullscreen()
       }
 
-      // Querformat anfordern
       if (screen.orientation?.lock) {
         await screen.orientation.lock("landscape")
       }
-    } catch (error) {
-      console.log("Landscape mode is not supported:", error)
+    } catch {
+      onStart()
+      return
     }
 
     onStart()

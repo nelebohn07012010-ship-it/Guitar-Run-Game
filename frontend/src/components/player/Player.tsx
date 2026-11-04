@@ -21,6 +21,7 @@ type PlayerProps = {
   isPaused: boolean
   controlMode: "guitar" | "arrows"
   playerSize: "fast" | "slow"
+  onCrouchChange?: (crouching: boolean) => void
 }
 
 const Player = memo(
@@ -32,11 +33,9 @@ const Player = memo(
   isPaused,
   controlMode,
   playerSize: playerSizeName,
+  onCrouchChange,
 }, ref) => {
 
-  // ====================
-  // STATE & REFS
-  // ====================
 
   const [yPosition, setYPosition] = useState(groundY)
   const [isCrouching, setIsCrouching] = useState(false)
@@ -49,9 +48,6 @@ const Player = memo(
   const lastTime = useRef(0)
   const animationRef = useRef<number | null>(null)
   const currentGroundYRef = useRef(groundY)
-  // ====================
-  // JUMP LOGIC
-  // ====================
   const jump = () => {
     if (yPositionRef.current <= currentGroundYRef.current + 0.5) {
       verticalSpeedRef.current = playerSizeName === "slow" ? 70 : 240
@@ -65,17 +61,17 @@ const Player = memo(
     }
   }, [jumpTrigger])
 
-  // ===================
-  // CROUCH LOGIC
-  // ===================
 
   const crouch = () => {
     setIsCrouching(true)
+    onCrouchChange?.(true)
   }
 
-  // ===================
-  // LANDING LOGIC
-  // ===================
+  const setCrouching = (crouching: boolean) => {
+    setIsCrouching(crouching)
+    onCrouchChange?.(crouching)
+  }
+
 
   const landOn = (newGroundY: number) => {
     currentGroundYRef.current = newGroundY
@@ -91,7 +87,7 @@ const Player = memo(
     landOn,
     fallToGround,
     isCrouching: () => isCrouching,
-    setIsCrouching: (crouching) => { setIsCrouching(crouching) },
+    setIsCrouching: setCrouching,
     crouch,
     getYPosition: () => yPositionRef.current,
     getScreenRect: () => {
@@ -100,20 +96,11 @@ const Player = memo(
 
   }))
 
-  // ====================
-  // FALLING LOGIC
-  // ====================
 
   const fallToGround = () => {
-    console.log("FALL TO GROUND AUSGEFÜHRT")
-    console.log("Vorheriger Ground:", currentGroundYRef.current)
-    console.log("Normaler Ground:", groundY)
     currentGroundYRef.current = groundY
   }
 
-  // ====================
-  // PLAYER ANIMATION
-  // ====================
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -122,16 +109,14 @@ const Player = memo(
         jump()
       }
       if (event.key === "ArrowDown" && !isPaused && !gameOver) {
-        console.log("ARROW DOWN")
-        setIsCrouching(true)
+        setCrouching(true)
       }
     }
 
     const handleKeyUp = (event: KeyboardEvent) => {
       if (controlMode !== "arrows") return
       if (event.key === "ArrowDown") {
-        console.log("ARROW DOWN LOSGELASSEN")
-        setIsCrouching(false)
+        setCrouching(false)
       }
     }
 
@@ -206,9 +191,6 @@ const Player = memo(
   }, [gameOver, onPositionChange, controlMode, isPaused, isJumping, playerSizeName])
 
 
-  // ====================
-  // RENDER
-  // ====================
 
 
   const playerSize = GAME_CONFIG.player

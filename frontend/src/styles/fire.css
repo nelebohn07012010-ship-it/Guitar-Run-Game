@@ -1,7 +1,7 @@
-/*NOT USED!!!!!*/
+
 
 .fire-theme {
-  /* COLORS */
+
   --background: #451512;
   --background-glow: rgba(255, 91, 31, 0.3);
   --ground: #261718;
@@ -11,20 +11,16 @@
   --accent: #ffb52e;
   --text: #fff0dc;
 
-  /* GLOW - glühende Lava */
+
   --glow-small: 0 0 0.4cqw var(--primary);
   --glow-medium: 0 0 0.8cqw var(--secondary);
   --glow-large: 0 0 1.5cqw var(--secondary-glow);
 
-  /* BACKGROUND */
+
   --background-scroll-speed: 45s;
 
   background-color: var(--ground);
 }
-
-/* =========================
-   GAME AREA
-   ========================= */
 
 .fire-theme #game-area {
   border: 0.1cqw solid #ff713d;
@@ -38,17 +34,9 @@
   background: linear-gradient(#2a0c22, #a22b20 65%, #ed812b);
 }
 
-/* =========================
-   BACKGROUND IMAGE
-   ========================= */
-
 .fire-theme #background-layer {
   background: linear-gradient(#2a0c22, #a22b20 65%, #ed812b);
 }
-
-/* =========================
-   FIRE COLOR ANIMATION
-   ========================= */
 
 #game-screen.fire-theme::before {
   content: "";
@@ -95,10 +83,6 @@
   animation: none;
 }
 
-/* =========================
-   GROUND DESIGN
-   ========================= */
-
 .fire-theme #ground::before {
   background: linear-gradient(#70201d, #2d1017);
   background-size: auto 100%;
@@ -111,10 +95,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(25, 8, 5, 0.5),
     inset 0 -5cqw 6cqw -2.5cqw rgba(25, 8, 5, 0.6);
 }
-
-/* =========================
-   OBSTACLE DESIGN
-   ========================= */
 
 .fire-theme .obstacle {
   background: #f07c2b;
@@ -132,10 +112,6 @@
   color: var(--text);
 }
 
-/* =========================
-   CROUCH DESIGN
-   ========================= */
-
 .fire-theme .crouch {
   background: #961e20;
   box-shadow:
@@ -151,10 +127,6 @@
 .fire-theme .crouch-note span {
   color: var(--text);
 }
-
-/* =========================
-   SPIKE DESIGN
-   ========================= */
 
 .fire-theme .spike-shape {
   background: #ffd168;
@@ -176,10 +148,6 @@
   color: var(--text);
 }
 
-/* =========================
-   NOTE DESIGN
-   ========================= */
-
 .fire-theme .obstacle-note {
   background: rgba(48, 16, 13, 0.93);
   border: 0.05cqw solid currentColor;
@@ -200,10 +168,6 @@
     0 0 0.3vw rgba(255, 120, 45, 0.3);
 }
 
-/* =========================
-   PLAYER DESIGN
-   ========================= */
-
 .fire-theme #player.crouching::after {
   background: linear-gradient(to top,
       rgba(255, 87, 46, 0.85),
@@ -213,10 +177,6 @@
   box-shadow:
     0 0 1cqw rgba(255, 87, 46, 0.35);
 }
-
-/* =========================
-   CALIBRATION & HUD
-   ========================= */
 
 .fire-theme #calibration-overlay {
   background: rgba(39, 13, 12, 0.88);
@@ -238,10 +198,6 @@
     -0.08vw 0.08vw 0 #30100d;
 }
 
-/* =========================
-   NOTE CATALOG DESIGN
-   ========================= */
-
 .fire-theme .note-catalog-item {
   background: #1c0d0d;
   border: 0.08cqw solid #8d5140;
@@ -257,10 +213,6 @@
 
   opacity: 0.7;
 }
-
-/* =========================
-   ACTIVE OBSTACLE
-   ========================= */
 
 .fire-theme .note-catalog-item.active {
   background: #2b100d;
@@ -280,10 +232,6 @@
   opacity: 1;
   transform: scale(1.06);
 }
-
-/* =========================
-   PLAYED OBSTACLES
-   ========================= */
 
 .fire-theme .note-catalog-item.played {
   background: #21120d;

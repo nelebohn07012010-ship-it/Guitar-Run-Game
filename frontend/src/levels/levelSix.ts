@@ -8,7 +8,6 @@ const levelSix: Level = {
   difficulty: "Intermediate",
   group: 2,
   obstacles: [
-    // Wiederholung 1
     { id: 1, type: "crouch", chord: "G", positionX: 100, positionY: 30, width: 60, height: 8 },
     { id: 2, type: "crouch", chord: "Em", positionX: 180, positionY: 30, width: 60, height: 8 },
     { id: 3, type: "crouch", chord: "D", positionX: 260, positionY: 30, width: 60, height: 8 },
@@ -21,7 +20,6 @@ const levelSix: Level = {
     { id: 9, type: "crouch", chord: "C", positionX: 760, positionY: 30, width: 40, height: 8 },
     { id: 10, type: "crouch", chord: "G", positionX: 810, positionY: 30, width: 30, height: 8 },
 
-    // Wiederholung 2
     { id: 11, type: "crouch", chord: "G", positionX: 860, positionY: 30, width: 60, height: 8 },
     { id: 12, type: "crouch", chord: "Em", positionX: 940, positionY: 30, width: 60, height: 8 },
     { id: 101, type: "coin", positionX: 1010, positionY: 25, width: 8, height: 8 },
@@ -34,7 +32,6 @@ const levelSix: Level = {
     { id: 19, type: "crouch", chord: "C", positionX: 1520, positionY: 30, width: 40, height: 8 },
     { id: 20, type: "crouch", chord: "G", positionX: 1570, positionY: 30, width: 30, height: 8 },
 
-    // Wiederholung 3
     { id: 21, type: "crouch", chord: "G", positionX: 1620, positionY: 30, width: 60, height: 8 },
     { id: 22, type: "crouch", chord: "Em", positionX: 1700, positionY: 30, width: 60, height: 8 },
     { id: 23, type: "crouch", chord: "D", positionX: 1780, positionY: 30, width: 60, height: 8 },
@@ -47,7 +44,6 @@ const levelSix: Level = {
     { id: 29, type: "crouch", chord: "C", positionX: 2280, positionY: 30, width: 40, height: 8 },
     { id: 30, type: "crouch", chord: "G", positionX: 2330, positionY: 30, width: 30, height: 8 },
 
-    // Wiederholung 4
     { id: 31, type: "crouch", chord: "G", positionX: 2380, positionY: 30, width: 60, height: 8 },
     { id: 32, type: "crouch", chord: "Em", positionX: 2460, positionY: 30, width: 60, height: 8 },
     { id: 33, type: "crouch", chord: "D", positionX: 2540, positionY: 30, width: 60, height: 8 },
@@ -61,7 +57,6 @@ const levelSix: Level = {
     { id: 39, type: "crouch", chord: "C", positionX: 3040, positionY: 30, width: 40, height: 8 },
     { id: 40, type: "crouch", chord: "G", positionX: 3090, positionY: 30, width: 30, height: 8 },
 
-    // Wiederholung 5
     { id: 41, type: "crouch", chord: "G", positionX: 3140, positionY: 30, width: 60, height: 8 },
     { id: 105, type: "coin", positionX: 3210, positionY: 25, width: 8, height: 8 },
     { id: 42, type: "crouch", chord: "Em", positionX: 3220, positionY: 30, width: 60, height: 8 },

@@ -13,6 +13,40 @@ type ObstacleLayerProps = {
   gameObjRef: MutableRefObject<Record<number, GameObjectHandle | null>>
 }
 
+type RenderedObstacleProps = {
+  obstacle: LevelNote
+  objectRef: (handle: GameObjectHandle | null) => void
+}
+
+const RenderedObstacle = ({ obstacle, objectRef }: RenderedObstacleProps) => {
+  const geometry = {
+    height: obstacle.height,
+    positionX: obstacle.positionX,
+    positionY: obstacle.positionY,
+    width: obstacle.width,
+  }
+
+  const noteData = {
+    chord: obstacle.chord,
+    fret: obstacle.fret,
+    note: obstacle.note,
+    string: obstacle.string,
+  }
+
+  switch (obstacle.type) {
+    case "spike":
+      return <Spike ref={objectRef} {...geometry} {...noteData} />
+    case "crouch":
+      return <Crouch ref={objectRef} {...geometry} {...noteData} />
+    case "coin":
+      return <Coin ref={objectRef} {...geometry} />
+    case "text":
+      return <Text ref={objectRef} {...geometry} text={obstacle.text} />
+    default:
+      return <Platform ref={objectRef} {...geometry} {...noteData} />
+  }
+}
+
 const ObstacleLayer = memo(function ObstacleLayer({
   obstacles,
   gameObjRef,
@@ -24,23 +58,13 @@ const ObstacleLayer = memo(function ObstacleLayer({
           gameObjRef.current[obstacle.id] = handle
         }
 
-        if (obstacle.type === "spike") {
-          return <Spike key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
-        }
-
-        if (obstacle.type === "crouch") {
-          return <Crouch key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
-        }
-
-        if (obstacle.type === "coin") {
-          return <Coin key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} />
-        }
-
-        if (obstacle.type === "text") {
-          return <Text key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} text={obstacle.text} />
-        }
-
-        return <Platform key={obstacle.id} ref={ref} positionX={obstacle.positionX} positionY={obstacle.positionY} width={obstacle.width} height={obstacle.height} note={obstacle.note} chord={obstacle.chord} string={obstacle.string} fret={obstacle.fret} />
+        return (
+          <RenderedObstacle
+            key={obstacle.id}
+            obstacle={obstacle}
+            objectRef={ref}
+          />
+        )
       })}
     </div>
   )

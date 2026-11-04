@@ -33,17 +33,14 @@ export function isLevelUnlocked(
   level: UnlockableLevel,
   levels: UnlockableLevel[]
 ): boolean {
-  // Alle Level derselben Gruppe finden
   const groupLevels = levels.filter(
     (item) => item.group === level.group
   )
 
-  // Das erste Level jeder Gruppe ist immer freigeschaltet
   if (groupLevels[0]?.name === level.name) {
     return true
   }
 
-  // Das vorherige Level innerhalb dieser Gruppe finden
   const levelIndex = groupLevels.findIndex(
     (item) => item.name === level.name
   )

@@ -1,9 +1,7 @@
-/* =========================
-   SNOW RUNNER - SCHNEE THEME
-   ========================= */
+
 
 .snow-theme {
-  /* COLORS */
+
   --background: #cceeff;
   --background-glow: rgba(240, 250, 255, 0.35);
   --ground: #426d91;
@@ -13,20 +11,16 @@
   --accent: #8ff5f0;
   --text: #f5fbff;
 
-  /* GLOW - frostiges Eisleuchten */
+
   --glow-small: 0 0 0.4cqw var(--primary);
   --glow-medium: 0 0 0.8cqw var(--secondary);
   --glow-large: 0 0 1.5cqw var(--secondary-glow);
 
-  /* BACKGROUND */
+
   --background-scroll-speed: 45s;
 
   background-color: var(--ground);
 }
-
-/* =========================
-   GAME AREA
-   ========================= */
 
 .snow-theme #game-area {
   border: 0.1cqw solid #d9f5ff;
@@ -40,18 +34,9 @@
   background: linear-gradient(#123d68, #8dd6f7);
 }
 
-/* =========================
-   BACKGROUND IMAGE
-   ========================= */
-
 .snow-theme #background-layer {
   background: linear-gradient(#315d91, #bceeff 70%);
 }
-
-
-/* =========================
-   GROUND DESIGN
-   ========================= */
 
 .snow-theme #ground::before {
   background: linear-gradient(#eafaff, #82bddb);
@@ -65,10 +50,6 @@
     inset -10cqw 0 8cqw -4cqw rgba(18, 48, 78, 0.3),
     inset 0 -5cqw 6cqw -2.5cqw rgba(18, 48, 78, 0.4);
 }
-
-/* =========================
-   OBSTACLE DESIGN
-   ========================= */
 
 .snow-theme .obstacle {
   background: #dff7ff;
@@ -84,10 +65,6 @@
   color: var(--text);
 }
 
-/* =========================
-   CROUCH DESIGN
-   ========================= */
-
 .snow-theme .crouch {
   background: #5d8fb2;
   box-shadow: 0 0.2cqw 0.5cqw rgba(40, 100, 140, 0.35);
@@ -101,10 +78,6 @@
 .snow-theme .crouch-note span {
   color: var(--text);
 }
-
-/* =========================
-   SPIKE DESIGN
-   ========================= */
 
 .snow-theme .spike-shape {
   background: #f8fdff;
@@ -126,10 +99,6 @@
   color: var(--text);
 }
 
-/* =========================
-   NOTE DESIGN
-   ========================= */
-
 .snow-theme .obstacle-note {
   background: rgba(24, 53, 79, 0.92);
   border: 0.05cqw solid currentColor;
@@ -150,10 +119,6 @@
     0 0 0.3vw rgba(190, 235, 255, 0.3);
 }
 
-/* =========================
-   PLAYER DESIGN
-   ========================= */
-
 .snow-theme #player.crouching::after {
   background: linear-gradient(to top,
       rgba(143, 245, 240, 0.8),
@@ -163,10 +128,6 @@
   box-shadow:
     0 0 1cqw rgba(143, 245, 240, 0.35);
 }
-
-/* =========================
-   CALIBRATION & HUD
-   ========================= */
 
 .snow-theme #calibration-overlay {
   background: rgba(19, 43, 66, 0.86);
@@ -188,10 +149,6 @@
     -0.08vw 0.08vw 0 #18354f;
 }
 
-/* =========================
-   NOTE CATALOG DESIGN
-   ========================= */
-
 .snow-theme .note-catalog-item {
   background: #102536;
   border: 0.08cqw solid #7faac5;
@@ -207,10 +164,6 @@
 
   opacity: 0.7;
 }
-
-/* =========================
-   ACTIVE OBSTACLE
-   ========================= */
 
 .snow-theme .note-catalog-item.active {
   background: #102b40;
@@ -231,10 +184,6 @@
   transform: scale(1.06);
 }
 
-/* =========================
-   PLAYED OBSTACLES
-   ========================= */
-
 .snow-theme .note-catalog-item.played {
   background: #102c2e;
   border-color: #8af5c5;
@@ -250,11 +199,6 @@
 
   opacity: 0.45;
 }
-
-
-/* =========================
-   SNOWFALL ANIMATION
-   ========================= */
 
 .snow-theme#game-area {
   position: relative;
